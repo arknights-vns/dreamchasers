@@ -102,7 +102,7 @@ export default function TicketOverviewPage() {
                     <PageTitle title={"Mua vé"} favorText={""} dark />
                 </div>
             </div>
-            <div className={"flex flex-col items-center justify-center pb-10"}>
+            <div className={"flex flex-col items-center justify-center pb-10 lg:pb-0"}>
                 <div className={"flex w-full flex-col items-center justify-center lg:flex-row"}>
                     <TicketCard
                         tier={"Dolphin"}

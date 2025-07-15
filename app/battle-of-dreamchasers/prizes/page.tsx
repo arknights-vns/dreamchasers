@@ -37,17 +37,17 @@ export default function PrizePage() {
         <div className={"h-visible vns-background flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
-                    <PageTitle title={"Tournament"} favorText={"Giải thưởng"} dark />
+                    <PageTitle title={"Giải thưởng"} favorText={""} dark />
                 </div>
             </div>
             <div
-                className={"mt-8 flex flex-col items-center justify-center space-y-12"}
+                className={"mt-4 flex flex-col items-center justify-center"}
                 data-theme={"dark"}
             >
                 <div className={"relative mx-auto w-full max-w-[720px] px-4"}>
                     {/* Pages indicator */}
-                    <div className={"mb-8 flex flex-row gap-1"}>
-                        {Array.from<number>({ length: 3 }).map((page, index) => {
+                    <div className={"mb-4 flex flex-row gap-1"}>
+                        {[0, 1, 2].map((page, index) => {
                             return (
                                 <div
                                     key={page}
@@ -63,7 +63,7 @@ export default function PrizePage() {
                         <div className={"embla__container"}>
                             {/* Slide 1 */}
                             <div
-                                className={"embla__slide flex h-96 flex-col justify-center gap-4 px-4"}
+                                className={"embla__slide flex h-96 flex-col justify-center space-y-4 px-4"}
                             >
                                 <div
                                     className={"text-center text-4xl font-extrabold text-green-400"}

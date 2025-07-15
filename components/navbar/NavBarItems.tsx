@@ -137,7 +137,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
     const links = [
         { name: "Tổ chức", href: "/crew" },
         { name: "Kỷ niệm", href: "/retro" },
-        { name: "Tournament", href: "/keocontranhba" },
+        { name: "Tournament", href: "/battle-of-dreamchasers" },
     ];
 
     const eventItems = [
@@ -172,11 +172,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                         </Link>
                     </li>
                 ))}
-                {/* <MobileDropdownSection
-                    title={"Tournament"}
-                    items={tournamentItems}
-                    pathname={pathname}
-                /> */}
             </>
         );
     }
@@ -200,13 +195,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                     </NavLink>
                 </Fragment>
             ))}
-            {/* <NavDivider />
-            <DesktopDropdown
-                title={"Tournament"}
-                items={tournamentItems}
-                pathname={pathname}
-                pathPrefix={"/tournament"}
-            /> */}
             <NavDivider width={"w-32"} />
         </div>
     );

@@ -28,16 +28,14 @@ export default antfu(
     // Custom rules.
     {
         rules: {
-            "curly": "off",
             "no-console": ["error", { allow: ["warn", "error", "info"] }],
-            "antfu/no-top-level-await": "off",
             "style/brace-style": ["error", "1tbs"],
             "ts/consistent-type-definitions": ["error", "type"],
-            "react/prefer-destructuring-assignment": "off",
-            "node/prefer-global/process": "off",
+            "node/prefer-global/process": ["error", "always"],
             "react-hooks-extra/no-direct-set-state-in-use-effect": "off",
             "@eslint-react/prefer-shorthand-fragment": "error",
             "@eslint-react/prefer-shorthand-boolean": "error",
+            // "@stylistic/max-len": ["error", { code: 100 }],
             "@stylistic/jsx-curly-brace-presence": [
                 "warn",
                 {

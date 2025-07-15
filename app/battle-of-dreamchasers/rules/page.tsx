@@ -37,7 +37,7 @@ export default function RulePage() {
         <div className={"h-visible vns-background flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
-                    <PageTitle title={"Tournament"} favorText={"Luật chơi"} dark />
+                    <PageTitle title={"Luật chơi"} favorText={""} dark />
                 </div>
             </div>
             <div
@@ -46,7 +46,7 @@ export default function RulePage() {
             >
                 <div className={"relative mx-auto w-full max-w-[720px] px-4"}>
                     <div className={"mb-12 flex w-full flex-row gap-1"}>
-                        {Array.from<number>({ length: 8 }).map((page, index) => {
+                        {[0, 1, 2, 3, 4, 5, 6, 7].map((page, index) => {
                             return (
                                 <div
                                     key={page}
@@ -64,7 +64,7 @@ export default function RulePage() {
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
                             >
                                 <Image
-                                    src={"/tournament/tournament-rule-1.png"}
+                                    src={"/tournament/regulations/tournament-rule-1.png"}
                                     alt={"Rule 1"}
                                     width={1600}
                                     height={1000}
@@ -84,28 +84,28 @@ export default function RulePage() {
                             >
                                 <div className={"flex max-w-[420px] flex-row flex-wrap"}>
                                     <Image
-                                        src={"/tournament/amiya-char.png"}
+                                        src={"/tournament/regulations/amiya-char.png"}
                                         alt={"Amiya Medic"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
@@ -113,7 +113,7 @@ export default function RulePage() {
                                     />
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -127,7 +127,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -140,28 +140,28 @@ export default function RulePage() {
                                         </div>
                                     </div>
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Rule 2"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
@@ -169,7 +169,7 @@ export default function RulePage() {
                                     />
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -183,7 +183,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -220,7 +220,7 @@ export default function RulePage() {
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-1.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-1.png"}
                                             alt={"Leak địch"}
                                             width={320}
                                             height={640}
@@ -234,7 +234,7 @@ export default function RulePage() {
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-2.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-2.png"}
                                             alt={"Pause / Pause trick"}
                                             width={320}
                                             height={640}
@@ -248,7 +248,7 @@ export default function RulePage() {
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-3.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-3.png"}
                                             alt={"Điều chỉnh tốc độ"}
                                             width={320}
                                             height={640}
@@ -336,7 +336,7 @@ export default function RulePage() {
                                     >
                                         <div className={"flex items-center"}>
                                             <Image
-                                                src={"/tournament/tournament-rule-5-1.png"}
+                                                src={"/tournament/regulations/tournament-rule-5-1.png"}
                                                 alt={"Roadblock"}
                                                 width={122}
                                                 height={122}
@@ -348,7 +348,7 @@ export default function RulePage() {
                                         </div>
                                         <div className={"relative"}>
                                             <Image
-                                                src={"/tournament/tournament-rule-5-2.png"}
+                                                src={"/tournament/regulations/tournament-rule-5-2.png"}
                                                 alt={"Specialist"}
                                                 width={122}
                                                 height={122}
@@ -377,7 +377,7 @@ export default function RulePage() {
                                 <div className={"flex flex-wrap items-center justify-center gap-2"}>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-1.png"}
+                                            src={"/tournament/regulations/tournament-char-1.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
@@ -389,7 +389,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-2.png"}
+                                            src={"/tournament/regulations/tournament-char-2.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
@@ -401,7 +401,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-3.png"}
+                                            src={"/tournament/regulations/tournament-char-3.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
@@ -413,7 +413,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-4.png"}
+                                            src={"/tournament/regulations/tournament-char-4.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
@@ -425,7 +425,7 @@ export default function RulePage() {
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-5.png"}
+                                            src={"/tournament/regulations/tournament-char-5.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
@@ -500,8 +500,7 @@ export default function RulePage() {
                                         7. Tính điểm
                                     </Text>
                                     <Text type={"body-1"} color={"white"}>
-                                        BTC sẽ áp dụng cách tính Score Attack, theo các hạng mục sau
-                                        đây
+                                        BTC sẽ áp dụng cách tính Score Attack, theo các hạng mục như trên
                                     </Text>
                                 </div>
                             </div>
@@ -516,21 +515,21 @@ export default function RulePage() {
                                         >
                                             <div className={"flex max-w-[240px] gap-2"}>
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
                                                     className={"w-1/3 object-contain"}
                                                 />
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
                                                     className={"w-1/3 object-contain"}
                                                 />
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
