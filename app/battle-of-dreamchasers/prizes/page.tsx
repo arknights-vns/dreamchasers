@@ -4,8 +4,8 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import PageTitle from "@/components/PageTitle";
-import ArrowIcon from "@/components/svg/ArrowIcon";
 import AmiyiRazer from "@/public/tournament/prizes/AmiyiRazer.png";
 import Artbook from "@/public/tournament/prizes/Artbook.png";
 import Ines from "@/public/tournament/prizes/Ines.png";
@@ -181,18 +181,20 @@ export default function PrizePage() {
                     </div>
                     <div
                         onClick={() => emblaApi?.scrollNext()}
-                        className={"absolute top-1/2 -right-[2.5%] hidden rotate-180 md:block lg:-right-24"}
+                        className={"absolute top-1/2 -right-[2.5%] hidden md:block lg:-right-24"}
                     >
-                        <ArrowIcon
-                            className={"h-12 w-12 cursor-pointer fill-white lg:h-20 lg:w-20"}
+                        <IoIosArrowDropright
+                            className={"h-12 w-12 cursor-pointer lg:h-20 lg:w-20"}
+                            fill={"#ffffff"}
                         />
                     </div>
                     <div
                         onClick={() => emblaApi?.scrollPrev()}
                         className={"absolute top-1/2 -left-[2.5%] hidden md:block lg:-left-24"}
                     >
-                        <ArrowIcon
-                            className={"h-12 w-12 cursor-pointer fill-white lg:h-20 lg:w-20"}
+                        <IoIosArrowDropleft
+                            className={"h-12 w-12 cursor-pointer lg:h-20 lg:w-20"}
+                            fill={"#ffffff"}
                         />
                     </div>
                 </div>
