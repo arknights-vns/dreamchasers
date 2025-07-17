@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
+import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
 import PageTitle from "@/components/PageTitle";
-import Arrow from "@/public/Arrow.svg";
 
 type Event = {
     date: string;
@@ -175,16 +175,16 @@ export default function TimelinePage() {
                 </div>
                 {/* Arrows */}
                 <div className={"absolute top-[calc(35svh)] left-1/5"}>
-                    <Image src={Arrow} width={23} height={23} alt={"arrow"} />
+                    <FaArrowUp fill={"#ffffff"} size={28} />
                 </div>
                 <div className={"absolute top-[calc(35svh)] right-1/5"}>
-                    <Image src={Arrow} width={23} height={23} alt={"arrow"} />
+                    <FaArrowUp fill={"#ffffff"} size={28} />
                 </div>
-                <div className={"absolute bottom-[calc(15svh)] left-1/5 rotate-180"}>
-                    <Image src={Arrow} width={23} height={23} alt={"arrow"} />
+                <div className={"absolute bottom-[calc(15svh)] left-1/5"}>
+                    <FaArrowDown fill={"#ffffff"} size={28} />
                 </div>
-                <div className={"absolute right-1/5 bottom-[calc(15svh)] rotate-180"}>
-                    <Image src={Arrow} width={23} height={23} alt={"arrow"} />
+                <div className={"absolute right-1/5 bottom-[calc(15svh)]"}>
+                    <FaArrowDown fill={"#ffffff"} size={28} />
                 </div>
             </div>
         </div>

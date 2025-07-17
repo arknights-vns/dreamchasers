@@ -1,33 +1,32 @@
 "use client";
 
-import type { StaticImageData } from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import Image from "next/image";
 import { Fragment, useCallback, useEffect, useState } from "react";
+import { FaGun, FaPersonMilitaryRifle } from "react-icons/fa6";
+import { GiSwordsPower } from "react-icons/gi";
+import { IoBag } from "react-icons/io5";
+import {
+    LiaBalanceScaleSolid,
+    LiaBroomSolid,
+    LiaChildSolid,
+    LiaCommentDotsSolid,
+    LiaDogSolid,
+    LiaHammerSolid,
+    LiaStoreAltSolid,
+    LiaSyringeSolid,
+    LiaTshirtSolid,
+    LiaUserFriendsSolid,
+} from "react-icons/lia";
+import { MdDoNotTouch } from "react-icons/md";
 import PageTitle from "@/components/PageTitle";
-import Bag from "@/public/rules/bag.svg";
-import Broom from "@/public/rules/broom.svg";
-import Chat from "@/public/rules/chat.svg";
-import Children from "@/public/rules/children.svg";
-import Clothes from "@/public/rules/clothes.svg";
-import Hammer from "@/public/rules/hammer.svg";
-import Military from "@/public/rules/military.svg";
-import MoreClothes from "@/public/rules/moreClothes.svg";
-import Nope from "@/public/rules/nope.svg";
-import NoWeapon from "@/public/rules/noWeapon.svg";
-import People from "@/public/rules/people.svg";
-import Pet from "@/public/rules/pet.svg";
-import Scale from "@/public/rules/scale.svg";
-import Shop from "@/public/rules/shop.svg";
-import Stop from "@/public/rules/stop.svg";
-import Syringe from "@/public/rules/syringe.svg";
-import Weapon from "@/public/rules/weapon.svg";
+
+type IconType = React.ComponentType<{ className?: string }>;
 
 type RuleType = {
     title: string;
     titleColor: "red" | "green" | "yellow";
     description: string;
-    icon: StaticImageData;
+    icon: IconType;
 };
 
 function VerticalLine({ height }: { height: number }) {
@@ -101,24 +100,7 @@ function RulesList({ rules }: { rules: RuleType[] }) {
                                 key={rule.title}
                             >
                                 <div className={"relative h-3/4 w-3/4"}>
-                                    <Image
-                                        src={rule.icon}
-                                        alt={"icon"}
-                                        fill
-                                        className={"object-contain"}
-                                        style={{
-                                            ...(rule.icon === Hammer
-                                                ? { paddingBottom: "16px" }
-                                                : {}),
-                                            ...(rule.icon === MoreClothes
-                                                ? { paddingBottom: "20px" }
-                                                : {}),
-                                            ...(rule.icon === Military
-                                                ? { marginLeft: "10px" }
-                                                : {}),
-                                            // unless someone can update the icons so they dont require this shit
-                                        }}
-                                    />
+                                    <rule.icon className={"h-full w-full text-white"} />
                                 </div>
                             </div>
                             {index !== rules.length - 1 ? <VerticalLine height={100} /> : <></>}
@@ -152,91 +134,91 @@ const rules: RuleType[] = [
         titleColor: "red",
         description:
             "Tất cả các hình thức quấy rối, xâm phạm đến tài sản và quyền riêng tư cá nhân.",
-        icon: Stop,
+        icon: MdDoNotTouch,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description:
             "Mang vũ khí quân sự (s.ú.n.g, d.a.o,...) và các vật dụng nguy hiểm vào trong khu vực sự kiện.",
-        icon: Weapon,
+        icon: GiSwordsPower,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description: "Tất cả các loại chất kích thích, cấm các hành vi gây mất trật tự công cộng.",
-        icon: Syringe,
+        icon: LiaSyringeSolid,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description: "Bàn về chính trị, phân biệt vùng miền, gây mâu thuẫn, và bạo lực.",
-        icon: Scale,
+        icon: LiaBalanceScaleSolid,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description:
             "Cấm các trang phục phản cảm, trang phục thuộc quân phục, cảnh phục... không phù hợp với thuần phong mỹ tục hay tính chất của sự kiện.",
-        icon: Clothes,
+        icon: LiaTshirtSolid,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description: "Cấm mang vật nuôi, thú vật vào sự kiện.",
-        icon: Pet,
+        icon: LiaDogSolid,
     },
     {
         title: "CẤM",
         titleColor: "red",
         description:
             "Những hành vi gây tổn hại đến cơ sở vật chất của khuôn viên sự kiện sẽ phải chịu trách nhiệm và đền bù.",
-        icon: Hammer,
+        icon: LiaHammerSolid,
     },
     {
         title: "BẮT BUỘC",
         titleColor: "red",
         description: "Trẻ em dưới 13 tuổi cần có sự giám sát và quản lý của người lớn.",
-        icon: Children,
+        icon: LiaChildSolid,
     },
     {
         title: "HÃY",
         titleColor: "green",
         description: "Giữ gìn vệ sinh chung khuôn viên sự kiện",
-        icon: Broom,
+        icon: LiaBroomSolid,
     },
     {
         title: "VUI LÒNG",
         titleColor: "green",
         description: "Tự quản tư trang cá nhân. Mọi mất mát BTC sẽ không chịu trách nhiệm. ",
-        icon: Bag,
+        icon: IoBag,
     },
     {
         title: "NẾU",
         titleColor: "green",
         description: "Nhặt được đồ thất lạc vui lòng liên hệ BTC để nhận hỗ trợ.",
-        icon: Chat,
+        icon: LiaCommentDotsSolid,
     },
     {
         title: "KHI",
         titleColor: "green",
         description:
             "Xảy ra sự cố, xung đột hay tranh chấp... tại offline, quyết định của BTC là quyết định tiên quyết.",
-        icon: People,
+        icon: LiaUserFriendsSolid,
     },
     {
         title: "BTC",
         titleColor: "yellow",
         description:
             "Miễn trách nhiệm đối với các giao dịch cá nhân, ngoại trừ tại khu vực booth của nhà tài trợ.",
-        icon: Shop,
+        icon: LiaStoreAltSolid,
     },
     {
         title: "BTC",
         titleColor: "red",
         description:
             "Không chịu trách nhiệm với những vấn đề giữa các khách hàng với nhau.",
-        icon: Nope,
+        icon: MdDoNotTouch,
     },
 ];
 
@@ -246,20 +228,20 @@ const cosplayRules: RuleType[] = [
         titleColor: "green",
         description:
             "Mặc sẵn đồ cosplay và trang điểm trước. Vì bên trong quán chúng mình không có chỗ để sửa soạn",
-        icon: Clothes,
+        icon: LiaTshirtSolid,
     },
     {
         title: "NGHIÊM CẤM",
         titleColor: "red",
         description:
             "Hóa trang nhân vật có trang phục thuộc quân phục, cảnh phục, hoặc không phù hợp thuần phong mỹ tục.",
-        icon: Military,
+        icon: FaGun,
     },
     {
         title: "LƯU Ý",
         titleColor: "yellow",
         description: "Props & Weaps, mô hình vũ khí nhân vật các bạn được phép mang theo. Tuy nhiên vũ khí thật vẫn bị cấm.",
-        icon: NoWeapon,
+        icon: FaPersonMilitaryRifle,
     },
 ];
 

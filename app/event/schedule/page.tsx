@@ -1,7 +1,6 @@
-import Image from "next/image";
+import { RiHourglass2Fill } from "react-icons/ri";
 import PageTitle from "@/components/PageTitle";
 import TimelineItem from "@/components/TimelineItem";
-import Hourglass from "@/public/Hourglass.png";
 
 export default function SchedulePage() {
     return (
@@ -11,8 +10,8 @@ export default function SchedulePage() {
                     <PageTitle title={"Lịch trình"} favorText={""} dark />
                 </div>
             </div>
-            <div className={"flex flex-1/2 flex-col justify-center"} data-theme={"dark"}>
-                <ul className={"timeline timeline-vertical lg:timeline-horizontal flex w-full"}>
+            <div className={"flex flex-1/2 flex-col justify-center items-center"} data-theme={"dark"}>
+                <ul className={"timeline timeline-vertical md:timeline-horizontal flex w-full"}>
                     <TimelineItem date={"09:15"} data={"Mở Check-in\n&\nBắt đầu Offline"} head />
 
                     <TimelineItem date={"09:30"} data={"Mini-games"} right />
@@ -27,7 +26,7 @@ export default function SchedulePage() {
                         tail
                     />
                 </ul>
-                <Image src={Hourglass} alt={"time"} className={"self-center"} />
+                <RiHourglass2Fill fill={"white"} size={32} />
             </div>
         </div>
     );
