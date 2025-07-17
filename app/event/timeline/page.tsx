@@ -109,7 +109,7 @@ function Timeline({ events }: TimelineProps) {
     return (
         <div
             ref={containerRef}
-            className={"scrollbar-none relative flex h-[60vh] snap-y snap-mandatory flex-col items-center overflow-y-scroll py-[20vh]"}
+            className={"relative flex h-[60vh] snap-y snap-mandatory flex-col items-center overflow-y-scroll py-[20vh]"}
         >
             {events.map((ev, index) => {
                 return (

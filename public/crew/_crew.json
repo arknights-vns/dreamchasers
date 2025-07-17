@@ -2,7 +2,7 @@
     "members": [
         {
             "name": "shou.",
-            "role": ["Event_Director", "ALL"],
+            "role": ["Event-Director", "ALL"],
             "quote": "tao đa thê kệ tao"
         },
         {
@@ -69,22 +69,22 @@
     "partners": [
         {
             "name": "Tkieen",
-            "role": ["Graphic_Designer"],
+            "role": ["Graphic-Designer"],
             "quote": "Cợt nhả có lông"
         },
         {
             "name": "DuyBong",
-            "role": ["Graphic_Designer"],
+            "role": ["Graphic-Designer"],
             "quote": ""
         },
         {
             "name": "Zopu",
-            "role": ["Graphic_Designer"],
+            "role": ["Graphic-Designer"],
             "quote": ""
         },
         {
             "name": "Monoka",
-            "role": ["Illustration_Artist"],
+            "role": ["Illustration-Artist"],
             "quote": ""
         },
         {
@@ -139,42 +139,42 @@
         },
         {
             "name": "Moorce",
-            "role": ["Video_Editor"],
+            "role": ["Video-Editor"],
             "quote": ""
         },
         {
             "name": "Hoaq",
-            "role": ["VCL"],
+            "role": ["Vietnam-Community-League"],
             "quote": ""
         },
         {
             "name": "Orei",
-            "role": ["VCL"],
+            "role": ["Vietnam-Community-League"],
             "quote": ""
         },
         {
             "name": "HieuTrungMc",
-            "role": ["VCL"],
+            "role": ["Vietnam-Community-League"],
             "quote": ""
         },
         {
             "name": "Phoeni",
-            "role": ["VCL"],
+            "role": ["Vietnam-Community-League"],
             "quote": ""
         },
         {
             "name": "Syalis",
-            "role": ["Offline_2024_Leader"],
+            "role": ["Offline-2024-Leader"],
             "quote": ""
         },
         {
             "name": "Akihito",
-            "role": ["Offline_2024_Staff"],
+            "role": ["Offline-2024-Staff"],
             "quote": ""
         },
         {
             "name": "Ekkusu Hikari",
-            "role": ["Offline_2024_Staff"],
+            "role": ["Offline-2024-Staff"],
             "quote": ""
         }
     ]

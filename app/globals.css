@@ -4,23 +4,13 @@
     exclude: rootcolor;
 }
 
-/* https://stackoverflow.com/a/66436651 */
-@utility scrollbar-none {
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-@utility h-visible {
+.h-visible {
     /* Credit: Cerberose @ PR#5 */
     /* 70px is the height of NavBar */
     @apply min-h-[calc(100svh_-_70px)];
 }
 
-@utility crew-role-container {
+.crew-role-container {
     @apply rounded-2xl;
     @apply px-2;
     @apply py-1;
@@ -28,8 +18,8 @@
     @apply min-w-12;
 }
 
-@utility vns-background {
-    @apply bg-black/40;
+.vns-background {
+    @apply bg-black/50;
     @apply bg-[url(/BG_Black.png)];
     @apply bg-cover;
     @apply bg-fixed;
@@ -38,7 +28,7 @@
     @apply bg-blend-multiply;
 }
 
-.Event_Director {
+.Event-Director {
     @apply bg-red-500;
     @apply text-white;
 }
@@ -77,11 +67,10 @@
 }
 
 /* Partner roles */
-.VCL {
-    @apply bg-rose-500;
-    @apply text-white;
+.Vietnam-Community-League {
+    @apply bg-gradient-to-r from-red-400 to-orange-300;
 }
-.Illustration_Artist {
+.Illustration-Artist {
     @apply bg-purple-700;
     @apply text-white;
 }
@@ -92,24 +81,24 @@
 .Donator {
     @apply bg-emerald-200;
 }
-.Concept_Artist {
+.Concept-Artist {
     @apply bg-blue-200;
     @apply text-blue-600;
 }
-.Graphic_Designer {
+.Graphic-Designer {
     @apply bg-blue-200;
 }
 .Photographer {
     @apply bg-yellow-200;
 }
-.Video_Editor {
+.Video-Editor {
     @apply bg-red-300;
 }
-.Offline_2024_Leader {
+.Offline-2024-Leader {
     @apply bg-purple-500;
     @apply text-purple-100;
 }
-.Offline_2024_Staff {
+.Offline-2024-Staff {
     @apply bg-purple-300;
     @apply text-purple-900;
 }

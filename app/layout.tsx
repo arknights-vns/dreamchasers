@@ -12,14 +12,24 @@ const mainFont = VNS_Font({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://dreamchasers.akvns.org"),
-    title: "Dreamchasers @ 2025",
-    description: "For the Doctors, by the Doctors.",
     authors: [
         {
             name: "Trạm dừng chân chốn Terra",
-            url: "https://www.facebook.com/terrastationvn",
+            url: "https://facebook.com/terrastationvn",
+        },
+        {
+            name: "VNS Dev Squad",
+            url: "https://github.com/arknights-vns",
         },
     ],
+    openGraph: {
+        url: "https://dreamchasers.akvns.org",
+        title: "Dreamchasers @ 2025",
+        siteName: "Arknights VNS - Dreamchasers",
+        description: "For the Doctors, by the Doctors.",
+        countryName: "Vietnam",
+        locale: "vi-VN",
+    },
 };
 
 export const viewport: Viewport = {

@@ -3,33 +3,28 @@ import Image from "next/image";
 
 export default function MemberBox(props: CrewMember) {
     return (
-        <div className={"mb-4 flex max-h-64 min-w-64 flex-col gap-y-2"}>
+        <div className={"mb-4 flex max-h-64 min-w-64 flex-col gap-y-2 items-center"}>
             <Image
-                className={"self-center ring-1 ring-white rounded-full"}
+                className={"ring-1 ring-white/50 rounded-full"}
                 src={`/crew/${props.name}.png`}
                 width={100}
                 height={100}
                 alt={"VNS_Crew"}
             />
-            <div className={"text-center text-xl font-bold text-base-content"}>{props.name}</div>
+            <div className={"text-xl font-extrabold text-base-content"}>{props.name}</div>
             {/* {props.quote !=P= "" && ( */}
             {/*    <div className={"text-md text-base-content text-center font-extralight italic"}> */}
             {/*        &#34;{props.quote}&#34; */}
             {/*    </div> */}
             {/* )} */}
-            <div className={"space-x-2 self-center"}>
+            <div className={"space-x-2"}>
                 {Array.isArray(props.role)
                     && props.role.map((role: string) => (
                         <span
                             key={role}
-                            className={`
-                                font-extrabold
-                                crew-role-container
-                                ${role}
-                                px-3 py-1
-                            `}
+                            className={`font-extrabold crew-role-container ${role}`}
                         >
-                            {role.replaceAll("_", " ")}
+                            {role.replaceAll("-", " ")}
                         </span>
                     ))}
             </div>

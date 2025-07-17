@@ -18,7 +18,7 @@ export default function NotFoundPage() {
                 data-theme={"dark"}
             >
                 <div className={"text-base-content text-3xl font-bold"}>
-                    Không có gì ở đây hết á.
+                    Không có gì ở đây hết á, hoặc là chúng tôi đang trên đường nấu.
                 </div>
                 <div
                     className={"text-base-content text-lg font-extralight italic hover:underline"}
