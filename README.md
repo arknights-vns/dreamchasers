@@ -23,8 +23,7 @@
     - `[REDACTED]` cho backend.
     - [daisyUI](https://daisyui.com/) và [Embla Carousel](https://www.embla-carousel.com/) cũng được sử dụng ở vài chỗ trong quá trình code.
 
-- Trong mỗi iteration thì tụi mình dùng [Netlify](https://www.netlify.com/) để tạo preview web theo và gửi thông báo build về kênh Discord của team.
-    - Tại sao không dùng Vercel thì [_Vercel Pro charge khá chua cho project deploy từ organization_](https://vercel.com/pricing).
+- Trong mỗi iteration thì tụi mình dùng [Vercel](https://vercel.com/) để tạo preview web theo và gửi thông báo build về kênh Discord của team.
 
 ### 💀 Web có bug kìa...
 
