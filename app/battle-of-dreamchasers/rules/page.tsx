@@ -4,13 +4,12 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { FaRegClock } from "react-icons/fa";
+import { FaBan } from "react-icons/fa6";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import PageTitle from "@/components/PageTitle";
-import ArrowIcon from "@/components/svg/ArrowIcon";
-import BanIcon from "@/components/svg/BanIcon";
-import ClockIcon from "@/components/svg/ClockIcon";
-import ProgressBarIcon from "@/components/svg/ProgressBarIcon";
-import TargetIcon from "@/components/svg/TargetIcon";
-import Text from "@/components/Text/Text";
+import ProgressBar from "@/components/svg/ProgressBar";
+import Target from "@/components/svg/Target";
 
 export default function RulePage() {
     const [carouseRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })]);
@@ -37,75 +36,76 @@ export default function RulePage() {
         <div className={"h-visible vns-background flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
-                    <PageTitle title={"Tournament"} favorText={"Luật chơi"} dark />
+                    <PageTitle title={"Luật chơi"} favorText={""} dark />
                 </div>
             </div>
             <div
-                className={"mt-8 flex flex-col items-center justify-center space-y-12"}
+                className={"mt-4 flex flex-col items-center justify-center"}
                 data-theme={"dark"}
             >
                 <div className={"relative mx-auto w-full max-w-[720px] px-4"}>
-                    <div className={"mb-12 flex w-full flex-row gap-1"}>
-                        {Array.from<number>({ length: 8 }).map((page, index) => {
+                    {/* Pages indicator */}
+                    <div className={"mb-4 flex flex-row gap-1"}>
+                        {[0, 1, 2, 3, 4, 5, 6, 7].map((page, index) => {
                             return (
                                 <div
                                     key={page}
                                     onClick={() => emblaApi?.scrollTo(index)}
-                                    className={`h-1 w-[12.5%] cursor-pointer bg-white transition-all duration-300 ${
+                                    className={`h-1 w-full cursor-pointer bg-white transition-all duration-300 ${
                                         index === currentSlide ? "opacity-100" : "opacity-50"
                                     }`}
                                 />
                             );
                         })}
                     </div>
-                    <div ref={carouseRef} className={"embla w-full max-w-[720px]"}>
-                        <div className={"embla__container w-full max-w-[720px]"}>
+                    <div ref={carouseRef} className={"embla"}>
+                        <div className={"embla__container"}>
                             <div
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
                             >
                                 <Image
-                                    src={"/tournament/tournament-rule-1.png"}
+                                    src={"/tournament/regulations/tournament-rule-1.png"}
                                     alt={"Rule 1"}
                                     width={1600}
                                     height={1000}
                                     className={"w-full max-w-[480px] object-cover"}
                                 />
-                                <Text type={"headline-5"} weight={700} color={"white"}>
+                                <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                     1. Map
-                                </Text>
-                                <Text type={"body-1"} color={"white"}>
+                                </h5>
+                                <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                     Màn chơi sẽ được chọn là
                                     {" "}
                                     <span style={{ color: "#FFEF3C" }}>H14-4</span>
-                                </Text>
+                                </p>
                             </div>
                             <div
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
                             >
                                 <div className={"flex max-w-[420px] flex-row flex-wrap"}>
                                     <Image
-                                        src={"/tournament/amiya-char.png"}
+                                        src={"/tournament/regulations/amiya-char.png"}
                                         alt={"Amiya Medic"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
@@ -113,7 +113,7 @@ export default function RulePage() {
                                     />
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -122,12 +122,12 @@ export default function RulePage() {
                                         <div
                                             className={"absolute inset-0 flex items-center justify-center"}
                                         >
-                                            <BanIcon className={"h-18 w-20"} />
+                                            <FaBan className={"h-18 w-20"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -136,32 +136,32 @@ export default function RulePage() {
                                         <div
                                             className={"absolute inset-0 flex items-center justify-center"}
                                         >
-                                            <BanIcon className={"h-18 w-20"} />
+                                            <FaBan className={"h-18 w-20"} fill={"red"} />
                                         </div>
                                     </div>
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Rule 2"}
                                         width={320}
                                         height={640}
                                         className={"w-[16.666%] object-cover"}
                                     />
                                     <Image
-                                        src={"/tournament/tournament-rule-7.png"}
+                                        src={"/tournament/regulations/tournament-rule-7.png"}
                                         alt={"Operator Slot"}
                                         width={320}
                                         height={640}
@@ -169,7 +169,7 @@ export default function RulePage() {
                                     />
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -178,12 +178,12 @@ export default function RulePage() {
                                         <div
                                             className={"absolute inset-0 flex items-center justify-center"}
                                         >
-                                            <BanIcon className={"h-18 w-20"} />
+                                            <FaBan className={"h-18 w-20"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative w-[16.666%]"}>
                                         <Image
-                                            src={"/tournament/tournament-rule-7.png"}
+                                            src={"/tournament/regulations/tournament-rule-7.png"}
                                             alt={"Operator Slot"}
                                             width={320}
                                             height={640}
@@ -192,14 +192,14 @@ export default function RulePage() {
                                         <div
                                             className={"absolute inset-0 flex items-center justify-center"}
                                         >
-                                            <BanIcon className={"h-18 w-20"} />
+                                            <FaBan className={"h-18 w-20"} fill={"red"} />
                                         </div>
                                     </div>
                                 </div>
-                                <Text type={"headline-5"} weight={700} color={"white"}>
+                                <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                     2. Team build
-                                </Text>
-                                <Text type={"body-1"} color={"white"}>
+                                </h5>
+                                <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                     Squad của bạn tổng cộng chỉ có
                                     {" "}
                                     <span style={{ color: "#FFEF3C" }}>8 Operators</span>
@@ -208,7 +208,7 @@ export default function RulePage() {
                                     bao gồm 7 Operators tự chọn. Bắt buộc phải có
                                     {" "}
                                     <span style={{ fontWeight: "bold" }}>Amiya Medic</span>
-                                </Text>
+                                </p>
                             </div>
                             <div
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
@@ -220,49 +220,49 @@ export default function RulePage() {
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-1.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-1.png"}
                                             alt={"Leak địch"}
                                             width={320}
                                             height={640}
                                             className={"my-auto w-full object-contain"}
                                         />
-                                        <Text type={"body-1"} color={"white"} weight={700}>
+                                        <p className={"text-base lg:text-xl font-bold text-white leading-[125%]"}>
                                             Leak địch
-                                        </Text>
+                                        </p>
                                     </div>
                                     <div
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-2.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-2.png"}
                                             alt={"Pause / Pause trick"}
                                             width={320}
                                             height={640}
                                             className={"my-auto w-full object-contain"}
                                         />
-                                        <Text type={"body-1"} color={"white"} weight={700}>
+                                        <p className={"text-base lg:text-xl font-bold text-white leading-[125%]"}>
                                             Pause / Pause trick
-                                        </Text>
+                                        </p>
                                     </div>
                                     <div
                                         className={"flex h-full w-full max-w-[120px] flex-col justify-between gap-2 sm:w-1/3"}
                                     >
                                         <Image
-                                            src={"/tournament/tournament-rule-3-3.png"}
+                                            src={"/tournament/regulations/tournament-rule-3-3.png"}
                                             alt={"Điều chỉnh tốc độ"}
                                             width={320}
                                             height={640}
                                             className={"my-auto w-full object-contain"}
                                         />
-                                        <Text type={"body-1"} color={"white"} weight={700}>
+                                        <p className={"text-base lg:text-xl font-bold text-white leading-[125%]"}>
                                             Điều chỉnh tốc độ
-                                        </Text>
+                                        </p>
                                     </div>
                                 </div>
-                                <Text type={"headline-5"} weight={700} color={"white"}>
+                                <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                     3. Gameplay - Rules
-                                </Text>
-                                <Text type={"body-1"} color={"white"}>
+                                </h5>
+                                <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                     Bạn có thể
                                     {" "}
                                     <span style={{ color: "#FFEF3C", fontWeight: "bold" }}>
@@ -279,36 +279,31 @@ export default function RulePage() {
                                     <span style={{ color: "#FFEF3C", fontWeight: "bold" }}>
                                         điều chỉnh tốc độ
                                     </span>
-                                </Text>
+                                </p>
                             </div>
                             <div
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
                             >
                                 <div className={"flex items-center gap-3"}>
-                                    <ClockIcon />
+                                    <FaRegClock className={"h-20 w-20 mr-8"} fill={"#ffffff"} />
                                     <div>
-                                        <Text type={"headline-5"} color={"white"} weight={500}>
+                                        <h5 className={"text-xl lg:text-2xl font-medium text-white leading-[150%]"}>
                                             <span style={{ color: "#6CFF5E" }}>6 phút</span>
                                             {" "}
                                             Gameplay
-                                        </Text>
-                                        <Text
-                                            type={"headline-5"}
-                                            color={"white"}
-                                            weight={500}
-                                            className={"mt-2"}
-                                        >
+                                        </h5>
+                                        <h5 className={"text-xl lg:text-2xl font-medium text-white leading-[150%] mt-2"}>
                                             [
                                             <span style={{ color: "#53FFFF" }}>2 phút</span>
                                             {" "}
                                             Drafting]
-                                        </Text>
+                                        </h5>
                                     </div>
                                 </div>
-                                <Text type={"headline-5"} weight={700} color={"white"}>
+                                <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                     4. Time Limit
-                                </Text>
-                                <Text type={"body-1"} color={"white"}>
+                                </h5>
+                                <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                     Bạn sẽ có tối đa
                                     {" "}
                                     <span style={{ color: "#6CFF5E", fontWeight: "bold" }}>
@@ -325,7 +320,7 @@ export default function RulePage() {
                                     {" "}
                                     <span style={{ fontWeight: "bold" }}>vào drafting</span>
                                     .
-                                </Text>
+                                </p>
                             </div>
                             <div
                                 className={"embla__slide flex flex-col items-center justify-center gap-4 px-4"}
@@ -336,19 +331,19 @@ export default function RulePage() {
                                     >
                                         <div className={"flex items-center"}>
                                             <Image
-                                                src={"/tournament/tournament-rule-5-1.png"}
+                                                src={"/tournament/regulations/tournament-rule-5-1.png"}
                                                 alt={"Roadblock"}
                                                 width={122}
                                                 height={122}
                                                 className={"h-full w-full object-contain"}
                                             />
-                                            <Text type={"headline-3"} color={"white"} weight={700}>
+                                            <h3 className={"text-2xl md:text-3xl lg:text-5xl font-bold text-white leading-[150%]"}>
                                                 x4
-                                            </Text>
+                                            </h3>
                                         </div>
                                         <div className={"relative"}>
                                             <Image
-                                                src={"/tournament/tournament-rule-5-2.png"}
+                                                src={"/tournament/regulations/tournament-rule-5-2.png"}
                                                 alt={"Specialist"}
                                                 width={122}
                                                 height={122}
@@ -357,17 +352,17 @@ export default function RulePage() {
                                             <div
                                                 className={"absolute right-0 bottom-0 left-0 m-auto"}
                                             >
-                                                <BanIcon className={"m-auto h-12 w-14"} />
+                                                <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                             </div>
                                         </div>
                                     </div>
-                                    <Text type={"headline-5"} weight={700} color={"white"}>
+                                    <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                         5. Mechanical Ban
-                                    </Text>
-                                    <Text type={"body-1"} color={"white"}>
+                                    </h5>
+                                    <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                         Bạn chỉ được dùng tối đa 4 Roadblock và không được dùng
                                         Specialist.
-                                    </Text>
+                                    </p>
                                 </div>
                             </div>
 
@@ -377,83 +372,79 @@ export default function RulePage() {
                                 <div className={"flex flex-wrap items-center justify-center gap-2"}>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-1.png"}
+                                            src={"/tournament/regulations/tournament-char-1.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
                                             className={"h-full w-full object-contain"}
                                         />
                                         <div className={"absolute right-0 -bottom-4 left-0 m-auto"}>
-                                            <BanIcon className={"m-auto h-12 w-14"} />
+                                            <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-2.png"}
+                                            src={"/tournament/regulations/tournament-char-2.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
                                             className={"h-full w-full object-contain"}
                                         />
                                         <div className={"absolute right-0 -bottom-4 left-0 m-auto"}>
-                                            <BanIcon className={"m-auto h-12 w-14"} />
+                                            <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-3.png"}
+                                            src={"/tournament/regulations/tournament-char-3.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
                                             className={"h-full w-full object-contain"}
                                         />
                                         <div className={"absolute right-0 -bottom-4 left-0 m-auto"}>
-                                            <BanIcon className={"m-auto h-12 w-14"} />
+                                            <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-4.png"}
+                                            src={"/tournament/regulations/tournament-char-4.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
                                             className={"h-full w-full object-contain"}
                                         />
                                         <div className={"absolute right-0 -bottom-4 left-0 m-auto"}>
-                                            <BanIcon className={"m-auto h-12 w-14"} />
+                                            <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                         </div>
                                     </div>
                                     <div className={"relative"}>
                                         <Image
-                                            src={"/tournament/tournament-char-5.png"}
+                                            src={"/tournament/regulations/tournament-char-5.png"}
                                             alt={"Hard Ban"}
                                             width={122}
                                             height={122}
                                             className={"h-full w-full object-contain"}
                                         />
                                         <div className={"absolute right-0 -bottom-4 left-0 m-auto"}>
-                                            <BanIcon className={"m-auto h-12 w-14"} />
+                                            <FaBan className={"m-auto h-12 w-14"} fill={"red"} />
                                         </div>
                                     </div>
                                 </div>
                                 <div className={"flex flex-col gap-1"}>
-                                    <Text type={"headline-5"} weight={700} color={"white"}>
+                                    <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                         6. Hard Bans & Community Bans
-                                    </Text>
-                                    <Text
-                                        type={"body-1"}
-                                        style={{ fontStyle: "italic" }}
-                                        color={"#FF5757"}
-                                    >
+                                    </h5>
+                                    <p className={"text-base lg:text-xl text-[#FF5757] leading-[125%] italic"}>
                                         Những Operator phía trên sẽ bị cấm
-                                    </Text>
-                                    <Text type={"body-1"} color={"white"}>
+                                    </p>
+                                    <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                         Quý khán giả sẽ được đưa 6 operator khác vào danh sách, nâng
                                         tổng số ban lên
                                         {" "}
                                         <span style={{ fontWeight: "bold" }}>11 Operator</span>
                                         .
-                                    </Text>
+                                    </p>
                                 </div>
                             </div>
 
@@ -465,9 +456,9 @@ export default function RulePage() {
                                         className={"flex h-auto flex-col items-center justify-end gap-2"}
                                     >
                                         <div className={"flex flex-1 items-center"}>
-                                            <ClockIcon className={"h-20 w-20"} />
+                                            <FaRegClock className={"h-20 w-20"} fill={"#ffffff"} />
                                         </div>
-                                        <Text type={"title-3"} color={"white"}>
+                                        <div className={"text-base lg:text-lg font-medium text-white leading-[125%]"}>
                                             Thời gian
                                             {" "}
                                             <span style={{ fontWeight: "bold" }}>
@@ -477,32 +468,27 @@ export default function RulePage() {
                                             Thời gian
                                             {" "}
                                             <span style={{ fontWeight: "bold" }}>in-stage</span>
-                                        </Text>
+                                        </div>
                                     </div>
                                     <div className={"flex flex-col items-center justify-end gap-2"}>
-                                        <TargetIcon className={"h-32 w-32"} />
-                                        <Text type={"title-3"} color={"white"}>
+                                        <Target className={"h-32 w-32"} />
+                                        <div className={"text-base lg:text-lg font-medium text-white leading-[125%]"}>
                                             Số địch đánh được
                                             <br />
                                             (số lượng có hạn)
-                                        </Text>
+                                        </div>
                                     </div>
                                 </div>
-                                <Text
-                                    style={{ fontStyle: "italic" }}
-                                    type={"title-3"}
-                                    color={"#FF6161"}
-                                >
+                                <div className={"text-base lg:text-lg font-medium text-[#FF6161] leading-[125%] italic"}>
                                     *Trong mọi trường hợp, BTC sẽ là người chấm điểm cuối cùng
-                                </Text>
+                                </div>
                                 <div className={"flex max-w-[400px] flex-col gap-1"}>
-                                    <Text type={"headline-5"} weight={700} color={"white"}>
+                                    <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                         7. Tính điểm
-                                    </Text>
-                                    <Text type={"body-1"} color={"white"}>
-                                        BTC sẽ áp dụng cách tính Score Attack, theo các hạng mục sau
-                                        đây
-                                    </Text>
+                                    </h5>
+                                    <p className={"text-base lg:text-xl text-white leading-[125%]"}>
+                                        BTC sẽ áp dụng cách tính Score Attack, theo các hạng mục như trên
+                                    </p>
                                 </div>
                             </div>
 
@@ -516,93 +502,83 @@ export default function RulePage() {
                                         >
                                             <div className={"flex max-w-[240px] gap-2"}>
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
                                                     className={"w-1/3 object-contain"}
                                                 />
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
                                                     className={"w-1/3 object-contain"}
                                                 />
                                                 <Image
-                                                    src={"/tournament/tournament-rule-7.png"}
+                                                    src={"/tournament/regulations/tournament-rule-7.png"}
                                                     alt={"Tính điểm"}
                                                     width={122}
                                                     height={122}
                                                     className={"w-1/3 object-contain"}
                                                 />
                                             </div>
-                                            <Text
-                                                type={"title-3"}
-                                                className={"text-center"}
-                                                color={"white"}
-                                            >
+                                            <div className={"text-base lg:text-lg font-medium text-white leading-[125%] text-center"}>
                                                 <span style={{ fontWeight: "bold" }}>
                                                     Line up squad
                                                 </span>
                                                 <br />
                                                 của bạn đến đâu
-                                            </Text>
+                                            </div>
                                         </div>
                                         <div
                                             className={"flex w-full flex-col justify-end gap-2 sm:w-1/2"}
                                         >
                                             <div className={"flex flex-1 items-center"}>
-                                                <ProgressBarIcon className={"h-auto w-full"} />
+                                                <ProgressBar className={"h-auto w-full"} />
                                             </div>
-                                            <Text
-                                                type={"title-3"}
-                                                className={"text-center"}
-                                                color={"white"}
-                                            >
+                                            <div className={"text-base lg:text-lg font-medium text-white leading-[125%] text-center"}>
                                                 Bạn đánh
                                                 {" "}
                                                 <span style={{ fontWeight: "bold" }}>Theresa</span>
                                                 <br />
                                                 đến đâu
-                                            </Text>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <Text
-                                    style={{ fontStyle: "italic" }}
-                                    type={"title-3"}
-                                    color={"#FF6161"}
-                                >
+                                <div className={"text-base lg:text-lg font-medium text-[#FF6161] leading-[125%] italic"}>
                                     *Trong mọi trường hợp, BTC sẽ là người chấm điểm cuối cùng
-                                </Text>
+                                </div>
                                 <div className={"flex max-w-[400px] flex-col gap-1"}>
-                                    <Text type={"headline-5"} weight={700} color={"white"}>
+                                    <h5 className={"text-xl lg:text-2xl font-bold text-white leading-[150%]"}>
                                         8. Tính điểm
-                                    </Text>
-                                    <Text type={"body-1"} color={"white"}>
+                                    </h5>
+                                    <p className={"text-base lg:text-xl text-white leading-[125%]"}>
                                         BTC sẽ áp dụng cách tính Score Attack, theo các hạng mục như
                                         trên
-                                    </Text>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div
                         onClick={() => emblaApi?.scrollNext()}
-                        className={"absolute top-1/2 -right-[2.5%] hidden rotate-180 md:block lg:-right-24"}
+                        className={"absolute top-1/2 -right-[2.5%] hidden md:block lg:-right-24"}
                     >
-                        <ArrowIcon
-                            className={"h-12 w-12 cursor-pointer fill-white lg:h-20 lg:w-20"}
+                        <IoIosArrowDropright
+                            className={"h-12 w-12 cursor-pointer lg:h-20 lg:w-20"}
+                            fill={"#ffffff"}
                         />
                     </div>
                     <div
                         onClick={() => emblaApi?.scrollPrev()}
                         className={"absolute top-1/2 -left-[2.5%] hidden md:block lg:-left-24"}
                     >
-                        <ArrowIcon
-                            className={"h-12 w-12 cursor-pointer fill-white lg:h-20 lg:w-20"}
+                        <IoIosArrowDropleft
+                            className={"h-12 w-12 cursor-pointer lg:h-20 lg:w-20"}
+                            fill={"#ffffff"}
                         />
                     </div>
                 </div>

@@ -137,7 +137,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
     const links = [
         { name: "Tổ chức", href: "/crew" },
         { name: "Kỷ niệm", href: "/retro" },
-        { name: "Tournament", href: "/keocontranhba" },
+        { name: "Tournament", href: "#" },
     ];
 
     const eventItems = [
@@ -146,12 +146,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
         { href: "/event/location", label: "Địa điểm" },
         { href: "/event/rules", label: "Nội quy" },
     ];
-
-    // const tournamentItems = [
-    //     { href: "/tournament/overview", label: "Giới thiệu" },
-    //     { href: "/tournament/rules", label: "Luật chơi" },
-    //     { href: "/tournament/prizes", label: "Giải thưởng" },
-    // ];
 
     const pathname = usePathname();
 
@@ -172,11 +166,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                         </Link>
                     </li>
                 ))}
-                {/* <MobileDropdownSection
-                    title={"Tournament"}
-                    items={tournamentItems}
-                    pathname={pathname}
-                /> */}
             </>
         );
     }
@@ -200,13 +189,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                     </NavLink>
                 </Fragment>
             ))}
-            {/* <NavDivider />
-            <DesktopDropdown
-                title={"Tournament"}
-                items={tournamentItems}
-                pathname={pathname}
-                pathPrefix={"/tournament"}
-            /> */}
             <NavDivider width={"w-32"} />
         </div>
     );

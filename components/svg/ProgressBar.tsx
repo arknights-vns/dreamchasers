@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-const ProgressBarIcon: FC<{ className?: string }> = ({ className }) => {
+const ProgressBar: FC<{ className?: string }> = ({ className }) => {
     return (
         <svg
             width={"187"}
@@ -24,4 +24,4 @@ const ProgressBarIcon: FC<{ className?: string }> = ({ className }) => {
     );
 };
 
-export default ProgressBarIcon;
+export default ProgressBar;

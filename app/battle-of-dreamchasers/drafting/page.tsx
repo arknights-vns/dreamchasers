@@ -54,7 +54,7 @@ export default function DraftingPage() {
 
         return new Fuse(operators, {
             keys: ["name"],
-            threshold: 0.4,
+            threshold: 0.5,
             includeScore: true,
             minMatchCharLength: 1,
         });
