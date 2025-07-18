@@ -14,7 +14,7 @@ export default function NavBar() {
                     <GiHamburgerMenu tabIndex={0} className={"block lg:hidden"} size={24} />
                     <ul
                         tabIndex={0}
-                        className={"menu dropdown-content menu-lg rounded-box z-1 mt-8 w-52 bg-white p-2 shadow-lg"}
+                        className={"menu dropdown-content menu-md md:menu-lg rounded-box z-1 mt-8 w-52 bg-white p-2 shadow-lg"}
                     >
                         <NavBarItems isMobile />
                     </ul>
