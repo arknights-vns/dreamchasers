@@ -2,58 +2,14 @@
 
 import type { Terra } from "@/lib/supabase/terra";
 import type { OperatorClass, OperatorRarity } from "@/lib/vns";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle";
 import OperatorIcon from "@/components/tournament/OperatorIcon";
 import { useTimer } from "@/lib/hooks/useTimer";
 import { supabase } from "@/lib/supabase/client";
 
-type OperatorProps = {
-    char: string;
-    name: string;
-    profession: OperatorClass;
-};
-
 type Operator = Terra["public"]["Tables"]["operators_v2"]["Row"];
 type SelectedOperator = Pick<Operator, "name" | "rarity" | "profession" | "charid">;
-
-function BannedOperator(props: OperatorProps) {
-    const imgSrc = `/operator/portraits/${props.char}_2.png`;
-
-    return (
-        <div
-            className={"relative aspect-[1/2] flex-1 flex flex-col justify-start"}
-            style={{ background: "linear-gradient(to bottom, rgba(204, 204, 204,0.2) 0%, rgba(204, 204, 204,0) 10%)" }}
-        >
-            <Image src={imgSrc} fill alt={props.name} draggable={false} />
-            <div className={"absolute w-full flex flex-row bottom-[10%]"}>
-                <div className={"flex flex-col items-start"}>
-                    <div className={"relative w-10 h-10 min-w-10 min-h-10 bg-white p-0.5 mx-2"}>
-                        <Image
-                            src={`/operator/classes/${props.profession}.png`}
-                            width={36}
-                            height={36}
-                            alt={props.profession}
-                            className={"invert"}
-                            draggable={false}
-                        />
-                    </div>
-                </div>
-                <div className={"flex-1 min-w-0"}>
-                    <h1
-                        className={"text-xl text-white font-bold break-words"}
-                        style={{
-                            textShadow: "-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black",
-                        }}
-                    >
-                        {props.name}
-                    </h1>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 function EmptySlot() {
     return (

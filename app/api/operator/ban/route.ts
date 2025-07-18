@@ -32,7 +32,8 @@ export async function DELETE(request: NextRequest) {
             .from("member_vote")
             .select("id");
 
-        if (votes) await elevatedSupabase.from("old_member_vote").insert(votes);
+        if (votes)
+            await elevatedSupabase.from("old_member_vote").insert(votes);
 
         await elevatedSupabase
             .from("member_vote")

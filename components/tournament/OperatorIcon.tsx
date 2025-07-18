@@ -67,7 +67,7 @@ function OperatorIcon(props: OperatorIconProps) {
                     width={128}
                     height={props.isPortrait ? 256 : 48}
                     alt={props.operator.name}
-                    className={"object-cover"}  
+                    className={"object-cover"}
                 />
             </div>
             <div className={"flex flex-col space-x-0 mt-4 justify-center items-center"}>
