@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import PageTitle from "@/components/PageTitle";
+import { useTimer } from "@/lib/hooks/useTimer";
 
 const amiyi = "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/refs/heads/cn/assets/dyn/arts/charportraits/char_002_amiya_1.png";
 
@@ -45,7 +48,7 @@ function BannedOperator({ name, imgSrc, class: opClass }: OperatorProps) {
 }
 
 function EmptySlot() {
-        return (
+    return (
         <div
             className={"relative aspect-[1/2] flex-1 flex flex-col justify-start"}
             style={{ background: "radial-gradient(circle, rgba(204,204,204,0) 60%, rgba(204,204,204,0.2) 100%)" }}
@@ -55,17 +58,22 @@ function EmptySlot() {
 }
 
 export default function TournamentSlidePage() {
+    const { isTimerLoaded, timerData, getDisplayTime, formatTime, isRealtimeConnected } = useTimer();
+
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-[calc(100vh)] vns-background flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
                     <PageTitle
-                        title={"Mini Tournament Audience Banned Operator"}
+                        title={"Banned Operators"}
                         dark
                     />
                 </div>
             </div>
-            <div className={"flex w-full pt-10 px-[10%]"}>
+            <div
+                className={"flex flex-1/2 flex-col justify-center items-center w-full pt-10 px-[10%]"}
+                data-theme={"dark"}
+            >
                 <div className={"grid grid-cols-6 gap-20 w-full"}>
                     {Array.from({ length: 5 }, (_, i) => (
                         <BannedOperator
@@ -75,12 +83,33 @@ export default function TournamentSlidePage() {
                             class={"caster"}
                         />
                     ))}
-                    <EmptySlot/>
+                    <EmptySlot />
                 </div>
-                
-            </div>
-            <div className={"flex self-center mt-15"}>
-                <h1 className={"text-6xl text-white font-bold"}>01:00</h1>
+                <div className={"flex self-center mt-15"}>
+                    <div className={"text-xl text-white"}>
+                        Thời gian còn lại:
+                        {" "}
+                        <span className={`font-extrabold ${
+                            !isTimerLoaded
+                                ? "text-red-400"
+                                : timerData.state === "running"
+                                    ? "text-green-400"
+                                    : timerData.state === "paused"
+                                        ? "text-yellow-400"
+                                        : "text-red-400"
+                        }`}
+                        >
+                            {!isTimerLoaded ? "--:--" : formatTime(getDisplayTime())}
+                        </span>
+                    </div>
+                </div>
+                <div className={"text-base-content font-extrabold"}>
+                    Terra #1:
+                    {" "}
+                    <span className={`${isRealtimeConnected ? "text-green-300" : "text-red-300"}`}>
+                        {isRealtimeConnected ? "Online" : "Offline"}
+                    </span>
+                </div>
             </div>
         </div>
     );
