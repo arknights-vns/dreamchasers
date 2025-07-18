@@ -1,7 +1,7 @@
 "use client";
 
 import type { Terra } from "@/lib/supabase/terra";
-import type { OperatorClass } from "@/lib/vns";
+import type { OperatorClass, OperatorRarity } from "@/lib/vns";
 import Fuse from "fuse.js";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -14,12 +14,13 @@ import StarSelected from "@/public/tournament/drafting/star-selected.svg";
 import StarUnSelected from "@/public/tournament/drafting/star-unselected.svg";
 
 type Operator = Terra["public"]["Tables"]["operators_v2"]["Row"];
-type SelectedOperator = Pick<Operator, "name" | "rarity" | "archetype" | "profession" | "charid">;
+type SelectedOperator = Pick<Operator, "name" | "rarity" | "profession" | "charid">;
+type OperatorClassSelection = "ALL" | OperatorClass;
 
 export default function DraftingPage() {
     const [operatorNameSearch, setOperatorNameSearch] = useState("");
     const [selectedRarity, setSelectedRarity] = useState(6);
-    const [selectedClass, setSelectedClass] = useState<OperatorClass>("ALL");
+    const [selectedClass, setSelectedClass] = useState<OperatorClassSelection>("ALL");
     const [selectedOperators, setSelectedOperators] = useState<string[]>([]);
     const [bannedOperators, setBannedOperators] = useState<string[]>([]);
     const [operators, setOperators] = useState<SelectedOperator[]>([]);
@@ -345,16 +346,15 @@ export default function DraftingPage() {
                         <ClassIcon operatorClass={"defender"} active={selectedClass === "defender"} onClick={() => handleClassSelection("defender")} />
                         <ClassIcon operatorClass={"vanguard"} active={selectedClass === "vanguard"} onClick={() => handleClassSelection("vanguard")} />
                     </div>
-                    <div className={"grid grid-cols-5 space-x-2 space-y-4 h-[25vh] overflow-y-auto content-center"}>
+                    <div className={"grid grid-cols-5 space-x-2 space-y-4 h-[25vh] overflow-y-auto content-start"}>
                         {filteredOperators.map(operator => (
                             <OperatorIcon
                                 key={operator.charid}
                                 operator={{
                                     id: operator.charid,
                                     name: operator.name,
-                                    rarity: operator.rarity,
+                                    rarity: operator.rarity as OperatorRarity,
                                     class: operator.profession as OperatorClass,
-                                    subclass: operator.archetype,
                                 }}
                                 isSelected={selectedOperators.includes(operator.charid)}
                                 isBanned={bannedOperators.includes(operator.charid)}
@@ -385,9 +385,8 @@ export default function DraftingPage() {
                                                         operator={{
                                                             id: selectedOp.charid,
                                                             name: selectedOp.name,
-                                                            rarity: selectedOp.rarity,
+                                                            rarity: selectedOp.rarity as OperatorRarity,
                                                             class: selectedOp.profession as OperatorClass,
-                                                            subclass: selectedOp.archetype,
                                                         }}
                                                         isSelected={false}
                                                         onClickFn={() => removeSelectedOperator(selectedCharId)}

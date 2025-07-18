@@ -23,9 +23,10 @@ function getRarityColor(rarity: number) {
 
 type OperatorIconProps = {
     operator: Operator;
-    isSelected: boolean;
+    isSelected?: boolean;
     isBanned?: boolean;
-    onClickFn: () => void;
+    isPortrait?: boolean;
+    onClickFn?: () => void;
 };
 
 function OperatorIcon(props: OperatorIconProps) {
@@ -34,13 +35,21 @@ function OperatorIcon(props: OperatorIconProps) {
     // could make you fall from the dreamy skies
     const selectedColor = "#77DD77";
 
+    const imageSource = props.isPortrait
+        ? `/operator/portraits/${props.operator.id}_2.png`
+        : (props.operator.name === "Arene"
+                ? Arene
+                : `/operator/icons/${props.operator.id}.png`);
+
+    const width = props.isPortrait ? "" : "w-16";
+
     return (
         <div
-            className={`flex w-18 flex-col items-center ${props.isBanned ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}`}
+            className={`flex ${width} flex-col items-center ${props.isBanned ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}`}
             onClick={props.isBanned ? undefined : props.onClickFn}
         >
             <div
-                className={`flex w-14 items-center justify-center ${props.isBanned ? "grayscale" : ""}`}
+                className={`flex p-1 items-center justify-center ${props.isBanned ? "grayscale" : ""}`}
                 style={{
                     background: `linear-gradient(
                         to top,
@@ -53,17 +62,26 @@ function OperatorIcon(props: OperatorIconProps) {
             >
                 <Image
                     src={
-                        props.operator.name === "Arene"
-                            ? Arene
-                            : `/operator/icons/${props.operator.id}.png`
+                        imageSource
                     }
-                    width={48}
-                    height={48}
+                    width={128}
+                    height={props.isPortrait ? 256 : 48}
                     alt={props.operator.name}
-                    className={"object-contain"}
+                    className={"object-cover"}  
                 />
             </div>
-            <div className={`text-center text-xs ${props.isBanned ? "text-gray-500" : ""}`}>{props.operator.name}</div>
+            <div className={"flex flex-col space-x-0 mt-4 justify-center items-center"}>
+                {props.isPortrait && (
+                    <Image
+                        src={`/operator/classes/${props.operator.class}.png`}
+                        width={48}
+                        height={48}
+                        alt={"class"}
+                        className={"object-none"}
+                    />
+                )}
+                <div className={`text-center ${props.isPortrait ? "text-xl font-extrabold" : "text-xs font-light"} ${props.isBanned ? "text-gray-500" : "text-base-content"}`}>{props.operator.name}</div>
+            </div>
         </div>
     );
 }

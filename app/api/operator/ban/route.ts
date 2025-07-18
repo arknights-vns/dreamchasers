@@ -28,6 +28,17 @@ export async function DELETE(request: NextRequest) {
             throw banError;
         }
 
+        const { data: votes } = await elevatedSupabase
+            .from("member_vote")
+            .select("id");
+
+        if (votes) await elevatedSupabase.from("old_member_vote").insert(votes);
+
+        await elevatedSupabase
+            .from("member_vote")
+            .delete()
+            .neq("vote_number", 0);
+
         return NextResponse.json(bannedOperator, { status: 201 });
     } catch (error) {
         console.error("Operator ban API error:", error);
