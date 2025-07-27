@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogHeader,
@@ -13,18 +14,18 @@ export default function PreviewTicketButton() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className={"rounded-xl bg-black font-bold text-white"} size={"lg"}>
+                <Button className={"rounded-xl bg-black text-xl font-bold text-white"} size={"lg"}>
                     Mua vé
                 </Button>
             </DialogTrigger>
-            <DialogContent className={"space-y-1"}>
+            <DialogContent className={"space-y-3"}>
                 <DialogHeader>
                     <DialogTitle className={"text-center text-xl font-bold"}>
-                        Xin lỗi bạn nha, tụi mình soldout rồi...
+                        Xin lỗi bạn nha, tụi mình bán hết rồi...
                     </DialogTitle>
                 </DialogHeader>
                 <DialogDescription asChild>
-                    <div>
+                    <div className={"space-y-2 text-black!"}>
                         <p>
                             Bạn nhớ theo dõi thông tin mới nhất tại page
                             {" "}
@@ -34,11 +35,19 @@ export default function PreviewTicketButton() {
                                 rel={"noopener noreferrer"}
                                 target={"_blank"}
                             >
-                                Trạm dừng chân chốn Terra nhé.
+                                Trạm dừng chân chốn Terra
                             </Link>
+                            {" "}
+                            nhé.
+                            Tụi mình rất mong được gặp bạn tại Offline!
                         </p>
-                        <p>Tụi mình mong được gặp bạn tại Offline!</p>
-                        <p className={"py-4 text-center italic"}>(bấm ra bên ngoài để đóng)</p>
+                        <p className={"text-center italic"}>
+                            Nếu bạn vẫn muốn xem lại các hạng vé, hãy click vô
+                            {" "}
+                            <DialogClose asChild><Link className={"font-bold italic underline"} href={"/tickets"}>đây</Link></DialogClose>
+                            !
+                        </p>
+                        <p className={"text-center italic"}>(bấm ra bên ngoài hoặc dấu 'x' để đóng)</p>
                     </div>
                 </DialogDescription>
             </DialogContent>

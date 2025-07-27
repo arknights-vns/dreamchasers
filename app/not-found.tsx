@@ -8,9 +8,7 @@ export default function NotFoundPage() {
 
     return (
         <div className={"h-visible bg-vns flex flex-col"}>
-            <div className={"text-center"}>
-                <PageTitle favorText={"Có vẻ đây là đường cụt."} light title={"Well..."} />
-            </div>
+            <PageTitle favorText={"Có vẻ đây là đường cụt."} light title={"Well..."} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"}>
                 <div className={"mx-4 text-center text-3xl font-bold text-white"}>

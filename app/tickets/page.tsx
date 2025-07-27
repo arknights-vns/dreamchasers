@@ -96,10 +96,10 @@ function TicketCard(props: TicketCardProps) {
 
 export default function TicketOverviewPage() {
     return (
-        <div className={"h-visible bg-vns"}>
-            <PageTitle favorText={""} title={"Mua vé"} />
+        <div className={"h-visible bg-vns flex flex-col"}>
+            <PageTitle favorText={"(đã bán hết, dành cho các bạn muốn xem lại hạng vé của mình)"} title={"Mua vé"} />
 
-            <div className={"flex flex-col items-center justify-center pb-10 lg:pb-0"}>
+            <div className={"flex flex-col items-center justify-center"}>
                 <div className={"flex w-full flex-col items-center justify-center lg:flex-row"}>
                     <TicketCard
                         description={[

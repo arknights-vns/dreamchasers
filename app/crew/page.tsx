@@ -4,6 +4,7 @@ import type { CrewMember } from "@/lib/vns";
 import { useEffect, useRef, useState } from "react";
 import MemberBox from "@/components/MemberBox";
 import PageTitle from "@/components/PageTitle";
+import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CrewMembers from "@/public/crew/_crew.json";
 
@@ -151,6 +152,7 @@ export default function CrewPage() {
                         >
                             "Dreamchasers"
                         </TabsTrigger>
+                        <Separator orientation={"vertical"} />
                         <TabsTrigger
                             className={
                                 "w-1/2 rounded-none border-r py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"

@@ -22,7 +22,7 @@
 }
 
 .bg-vns {
-    @apply bg-black/50;
+    @apply bg-neutral-700/50;
     @apply bg-[url(/BG_Black.jpg)];
     @apply bg-cover;
     @apply bg-fixed;
@@ -31,6 +31,7 @@
     @apply bg-blend-multiply;
 }
 
+/* Crew roles */
 .Event-Director {
     @apply bg-red-500;
     @apply text-white;
@@ -119,7 +120,7 @@
     @apply to-red-400;
 }
 
-/* Stuffs */
+/* landing page */
 .embla {
     overflow: hidden;
 }
@@ -133,34 +134,7 @@
     min-width: 0;
 }
 
-.swipe-tabs {
-    touch-action: pan-y pinch-zoom;
-}
-
-.swipe-tabs .embla__container {
-    will-change: transform;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.swipe-tabs .embla__slide {
-    scroll-snap-align: start;
-}
-
-.tab-indicator {
-    transition: all 0.2s ease-in-out;
-}
-
-.tab-indicator:active {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Add visual feedback for touch */
-@media (hover: none) and (pointer: coarse) {
-    .tab-indicator:active {
-        transform: scale(0.98);
-    }
-}
-
+/* shadcn/ui */
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
