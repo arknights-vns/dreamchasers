@@ -232,7 +232,7 @@ export default function DraftingPage() {
     // #endregion data backup
 
     return (
-        <div className={"vns-background flex h-[100svh] flex-col"}>
+        <div className={"bg-vns flex h-[100vh] flex-col"}>
             <PageTitle favorText={""} title={"Ban pick"} />
 
             <div

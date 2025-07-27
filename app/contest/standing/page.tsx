@@ -23,7 +23,7 @@ export default function PodiumPage() {
     }, []);
 
     return (
-        <div className={"vns-background flex h-[100vh] flex-col"}>
+        <div className={"bg-vns flex h-[100vh] flex-col"}>
             <PageTitle favorText={""} title={"STANDING"} />
 
             <div

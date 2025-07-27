@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { FaGun, FaPersonMilitaryRifle } from "react-icons/fa6";
 import { GiSwordsPower } from "react-icons/gi";
 import { IoBag } from "react-icons/io5";
@@ -246,67 +246,61 @@ const cosplayRules: RuleType[] = [
 ];
 
 export default function RulePage() {
-    const [ruleTab, setRuleTab] = useState<string>("general");
+    const [tab, setTab] = useState<string>("general");
     const touchStartX = useRef<number | null>(null);
     const touchEndX = useRef<number | null>(null);
 
     useEffect(() => {
         const stored = localStorage.getItem("rule-tab");
         if (stored && stored !== "") {
-            setRuleTab(stored);
+            setTab(stored);
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("rule-tab", ruleTab);
-    }, [ruleTab]);
+        localStorage.setItem("rule-tab", tab);
+    }, [tab]);
 
-    // Swipe logic for all breakpoints
-    const handleTouchStart = (e: React.TouchEvent) => {
+    function handleTouchStart(e: React.TouchEvent) {
         touchStartX.current = e.touches[0].clientX;
     };
-    const handleTouchMove = (e: React.TouchEvent) => {
+
+    function handleTouchMove(e: React.TouchEvent) {
         touchEndX.current = e.touches[0].clientX;
     };
-    const handleTouchEnd = () => {
+
+    function handleTouchEnd() {
         if (touchStartX.current === null || touchEndX.current === null)
             return;
         const deltaX = touchEndX.current - touchStartX.current;
         if (Math.abs(deltaX) > 50) {
-            if (deltaX < 0 && ruleTab === "general") {
-                setRuleTab("cosplay");
-            } else if (deltaX > 0 && ruleTab === "cosplay") {
-                setRuleTab("general");
+            if (deltaX < 0 && tab === "general") {
+                setTab("cosplay");
+            } else if (deltaX > 0 && tab === "cosplay") {
+                setTab("general");
             }
         }
         touchStartX.current = null;
         touchEndX.current = null;
     };
 
-    // Animation: 0 for general, 1 for cosplay
-    const tabIndex = ruleTab === "general" ? 0 : 1;
-
     return (
-        <div className={"h-visible vns-background flex flex-col bg-neutral-950"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle
                 favorText={"Một số điều cần lưu ý khi tham gia offline"}
                 title={"NỘI QUY"}
             />
             <div
-                className={"sticky top-[70px] z-0 h-[calc(100vh-70px)] place-content-center-safe overflow-hidden rounded-none border border-neutral-800 bg-neutral-900"}
+                className={"sticky top-[80px] z-0 h-[calc(100vh-80px)] place-content-center-safe"}
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
                 onTouchStart={handleTouchStart}
             >
-                <Tabs className={"size-full"} value={ruleTab} onValueChange={setRuleTab}>
-                    <TabsList className={"flex w-full border-b border-neutral-800 bg-neutral-950"}>
+                <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
+                    <TabsList className={"h-12 w-full rounded-none border-b bg-neutral-950 p-1"}>
                         <TabsTrigger
                             className={
-                                `flex-1 py-3 text-lg font-semibold text-neutral-300
-                                transition-colors
-                                focus-visible:ring-2 focus-visible:ring-white
-                                focus-visible:outline-none
-                                data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60`
+                                "w-1/2 rounded-none py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"general"}
                         >
@@ -314,43 +308,21 @@ export default function RulePage() {
                         </TabsTrigger>
                         <TabsTrigger
                             className={
-                                `flex-1 py-3 text-lg font-semibold text-neutral-300
-                                transition-colors
-                                focus-visible:ring-2 focus-visible:ring-white
-                                focus-visible:outline-none
-                                data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60`
+                                "w-1/2 rounded-none border-r py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"cosplay"}
                         >
                             Dành cho cosplayer
                         </TabsTrigger>
                     </TabsList>
-                    {/* Animated content wrapper */}
-                    <div
-                        style={{
-                            display: "flex",
-                            width: "200%",
-                            transform: `translateX(-${tabIndex * 50}%)`,
-                            transition: "transform 0.4s cubic-bezier(.4,1,.4,1)",
-                            height: "100%",
-                            background: "#18181b", // Tailwind neutral-900
-                        }}
-                    >
-                        <div style={{ width: "50%", minWidth: 0 }}>
-                            <TabsContent className={"h-[calc(100vh-70px-48px)] overflow-y-auto border-r border-neutral-800 py-10"} value={"general"}>
-                                <div className={"h-full flex-1 px-5 text-neutral-100"}>
-                                    <RulesList rules={rules} />
-                                </div>
-                            </TabsContent>
-                        </div>
-                        <div style={{ width: "50%", minWidth: 0 }}>
-                            <TabsContent className={"h-[calc(100vh-70px-48px)] overflow-y-auto py-10"} value={"cosplay"}>
-                                <div className={"h-full flex-1 px-5 text-neutral-100"}>
-                                    <RulesList rules={cosplayRules} />
-                                </div>
-                            </TabsContent>
-                        </div>
-                    </div>
+
+                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"general"}>
+                        <RulesList rules={rules} />
+                    </TabsContent>
+
+                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"cosplay"}>
+                        <RulesList rules={cosplayRules} />
+                    </TabsContent>
                 </Tabs>
             </div>
         </div>

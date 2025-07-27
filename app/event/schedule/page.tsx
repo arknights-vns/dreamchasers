@@ -4,7 +4,7 @@ import TimelineItem from "@/components/TimelineItem";
 
 export default function SchedulePage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle favorText={"Các sự kiện sẽ diễn ra trong offline"} title={"Timeline sự kiện"} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"} data-theme={"dark"}>

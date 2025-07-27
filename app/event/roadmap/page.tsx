@@ -143,7 +143,7 @@ function Timeline({ events }: TimelineProps) {
 
 export default function TimelinePage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle favorText={"(bạn có thể scroll để đọc)"} title={"Roadmap"} />
 
             <div className={"flex flex-1/2 items-center justify-center"}>

@@ -1,10 +1,10 @@
 "use client";
 
 import type { CrewMember } from "@/lib/vns";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MemberBox from "@/components/MemberBox";
 import PageTitle from "@/components/PageTitle";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CrewMembers from "@/public/crew/_crew.json";
 
 type HRListProps = {
@@ -88,135 +88,87 @@ function PartnerList(props: HRListProps) {
 }
 
 export default function CrewPage() {
-    const [crewTab, setCrewTab] = useState<string>("dreamchasers");
+    const [tab, setTab] = useState<string>("dreamchasers");
+    const touchStartX = useRef<number | null>(null);
+    const touchEndX = useRef<number | null>(null);
 
     useEffect(() => {
         const stored = localStorage.getItem("crew-tab");
         if (stored && stored !== "") {
-            setCrewTab(stored);
+            setTab(stored);
         }
     }, []);
 
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        startIndex: 0,
-    });
-
     useEffect(() => {
-        localStorage.setItem("crew-tab", crewTab);
-
-        if (emblaApi) {
-            const targetIndex = crewTab === "dreamchasers" ? 0 : 1;
-            emblaApi.scrollTo(targetIndex);
-        }
-    }, [crewTab, emblaApi]);
-
-    const onSelect = useCallback(() => {
-        if (!emblaApi)
-            return;
-        const selectedIndex = emblaApi.selectedScrollSnap();
-        setCrewTab(selectedIndex === 0 ? "dreamchasers" : "partners");
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi)
-            return;
-        emblaApi.on("select", onSelect);
-        onSelect();
-
-        return () => {
-            emblaApi.off("select", onSelect);
-        };
-    }, [emblaApi, onSelect]);
-
-    const scrollTo = useCallback(
-        (index: number) => {
-            if (emblaApi)
-                emblaApi.scrollTo(index);
-        },
-        [emblaApi],
-    );
+        localStorage.setItem("crew-tab", tab);
+    }, [tab]);
 
     const members = CrewMembers.members;
     const partners = CrewMembers.partners;
 
+    function handleTouchStart(e: React.TouchEvent) {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    function handleTouchMove(e: React.TouchEvent) {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    function handleTouchEnd() {
+        if (touchStartX.current === null || touchEndX.current === null)
+            return;
+        const deltaX = touchEndX.current - touchStartX.current;
+        if (Math.abs(deltaX) > 50) {
+            if (deltaX < 0 && tab === "dreamchasers") {
+                setTab("dreamchasers");
+            } else if (deltaX > 0 && tab === "partners") {
+                setTab("partners");
+            }
+        }
+        touchStartX.current = null;
+        touchEndX.current = null;
+    };
+
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle
                 favorText={"Những người đã góp hết sức mình để mang đến cho các bạn những cái event cực cháy."}
                 title={"Tổ chức"}
             />
-
-            {/* Desktop tabs - original design */}
             <div
-                className={"tabs-border sticky top-[80px] z-0 tabs hidden h-[calc(100vh-80px)] place-content-center-safe overflow-hidden rounded-none lg:flex"}
-                data-theme={"dark"}
+                className={"sticky top-[80px] z-0 h-[calc(100vh-80px)] place-content-center-safe"}
+                onTouchEnd={handleTouchEnd}
+                onTouchMove={handleTouchMove}
+                onTouchStart={handleTouchStart}
             >
-                <input
-                    aria-label={"Dreamchasers"}
-                    checked={crewTab === "dreamchasers"}
-                    className={"text-md tab w-1/2 text-base-content md:text-lg lg:text-2xl"}
-                    name={"my_tabs_6"}
-                    type={"radio"}
-                    onChange={() => setCrewTab("dreamchasers")}
-                />
-                <div className={"tab-content overflow-y-auto border-t-gray-400 py-10"}>
-                    <CrewList members={members} />
-                </div>
-                <input
-                    aria-label={"Hợp tác phát triển"}
-                    checked={crewTab === "partners"}
-                    className={"text-md tab w-1/2 text-base-content md:text-lg lg:text-2xl"}
-                    name={"my_tabs_6"}
-                    type={"radio"}
-                    onChange={() => setCrewTab("partners")}
-                />
-                <div className={"tab-content overflow-y-auto border-t-gray-400 py-10"}>
-                    <PartnerList members={partners} />
-                </div>
-            </div>
+                <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
+                    <TabsList className={"h-12 w-full rounded-none border-b bg-neutral-950 p-1"}>
+                        <TabsTrigger
+                            className={
+                                "w-1/2 rounded-none py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                            }
+                            value={"dreamchasers"}
+                        >
+                            "Dreamchasers"
+                        </TabsTrigger>
+                        <TabsTrigger
+                            className={
+                                "w-1/2 rounded-none border-r py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                            }
+                            value={"partners"}
+                        >
+                            Hợp tác phát triển
+                        </TabsTrigger>
+                    </TabsList>
 
-            {/* Mobile swipable tabs */}
-            <div
-                className={"swipe-tabs sticky top-[80px] z-0 h-[calc(100vh-80px)] lg:hidden"}
-                data-theme={"dark"}
-            >
-                {/* Tab indicators */}
-                <div className={"flex w-full border-b border-gray-400"}>
-                    <button
-                        className={`flex-1 py-3 text-center text-base-content transition-colors ${
-                            crewTab === "dreamchasers"
-                                ? "border-b-2 border-white text-white"
-                                : "text-gray-400"
-                        }`}
-                        type={"button"}
-                        onClick={() => scrollTo(0)}
-                    >
-                        Dreamchasers
-                    </button>
-                    <button
-                        className={`flex-1 py-3 text-center text-base-content transition-colors ${
-                            crewTab === "partners"
-                                ? "border-b-2 border-white text-white"
-                                : "text-gray-400"
-                        }`}
-                        type={"button"}
-                        onClick={() => scrollTo(1)}
-                    >
-                        Hợp tác phát triển
-                    </button>
-                </div>
+                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"dreamchasers"}>
+                        <CrewList members={members} />
+                    </TabsContent>
 
-                {/* Swipable content */}
-                <div ref={emblaRef} className={"embla h-[calc(100%-48px)] overflow-hidden"}>
-                    <div className={"embla__container flex h-full"}>
-                        <div className={"embla__slide flex-[0_0_100%] overflow-y-auto py-10"}>
-                            <CrewList members={members} />
-                        </div>
-                        <div className={"embla__slide flex-[0_0_100%] overflow-y-auto py-10"}>
-                            <PartnerList members={partners} />
-                        </div>
-                    </div>
-                </div>
+                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"partners"}>
+                        <PartnerList members={partners} />
+                    </TabsContent>
+                </Tabs>
             </div>
         </div>
     );

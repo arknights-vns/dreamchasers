@@ -85,7 +85,7 @@ export default function TournamentSlidePage() {
     const unusedCount = 6 - bannedCount;
 
     return (
-        <div className={"vns-background flex h-[calc(100vh)] flex-col"}>
+        <div className={"bg-vns flex h-[100vh] flex-col"}>
             <PageTitle
                 title={"Banned Operators"}
             />

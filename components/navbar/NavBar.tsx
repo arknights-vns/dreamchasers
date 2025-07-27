@@ -28,7 +28,7 @@ export default function NavBar() {
     }
 
     return (
-        <header className={`sticky top-0 z-50 ${visualStyle} h-20 w-screen bg-white px-4`}>
+        <header className={`sticky top-0 z-50 ${visualStyle} h-20 w-full bg-white pl-4`}>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button className={"mr-4 self-center lg:hidden"} size={"icon"} variant={"outline"}>
@@ -50,7 +50,7 @@ export default function NavBar() {
             </nav>
             <div className={"ml-auto flex items-center space-x-2 lg:ml-0"}>
                 <PurchaseTicketButton />
-                <LuSparkle className={"hidden md:block"} fill={"#000000"} />
+                <LuSparkle className={"mr-2 hidden md:block"} fill={"#000000"} />
             </div>
         </header>
     );

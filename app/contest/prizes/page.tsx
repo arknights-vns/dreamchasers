@@ -34,7 +34,7 @@ export default function PrizePage() {
     // "ê tao không ngờ Tus muốn leak luôn quà trước offline luôn."
     //     Đụt, 2025
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
                     <PageTitle favorText={""} title={"Giải thưởng"} />

@@ -21,7 +21,7 @@
     @apply min-w-12;
 }
 
-.vns-background {
+.bg-vns {
     @apply bg-black/50;
     @apply bg-[url(/BG_Black.jpg)];
     @apply bg-cover;

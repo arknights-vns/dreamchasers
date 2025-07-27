@@ -152,7 +152,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
 
     return (
         <div
-            className={"relative mr-2 hidden cursor-pointer items-center gap-4 text-base font-semibold text-black lg:flex"}
+            className={"mr-2 hidden cursor-pointer items-center gap-4 font-semibold text-black lg:flex"}
         >
             <DesktopDropdown
                 items={eventItems}

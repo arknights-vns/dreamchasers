@@ -7,7 +7,7 @@ export default function NotFoundPage() {
     const navigation = useRouter();
 
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <div className={"text-center"}>
                 <PageTitle favorText={"Có vẻ đây là đường cụt."} light title={"Well..."} />
             </div>

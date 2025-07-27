@@ -33,7 +33,7 @@ export default function RulePage() {
     }, [emblaApi, onSelect]);
 
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle title={"Luật chơi"} />
 
             <div

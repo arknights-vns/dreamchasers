@@ -5,7 +5,7 @@ import TheShowMustGoOn from "@/public/retro/the-show-must-go-on/the-show-must-go
 
 export default function RetroPage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle
                 favorText={"Nơi lưu giữ album của những buổi Offline."}
                 title={"Kỷ niệm"}

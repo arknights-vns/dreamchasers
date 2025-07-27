@@ -5,7 +5,7 @@ import TournamentLogo from "@/public/tournament/regulations/tournament-logo.png"
 
 export default function OverviewPage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle favorText={""} title={"\"Battle of Dreamchasers\""} />
             <div
                 className={"flex flex-1/2 flex-col items-center justify-center space-y-4"}

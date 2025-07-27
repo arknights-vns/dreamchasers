@@ -3,7 +3,7 @@ import Meruko from "@/public/tournament/Meruko.png";
 
 export default function NotFoundPage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <div
                 className={"m-5 flex flex-col items-center justify-center"}
             >

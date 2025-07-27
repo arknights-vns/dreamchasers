@@ -5,7 +5,7 @@ import Mcafe from "@/public/MCafe_Entry.jpg";
 
 export default function LocationPage() {
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
+        <div className={"h-visible bg-vns flex flex-col"}>
             <PageTitle
                 favorText={"Một số thông tin hỗ trợ bạn trong quá trình di chuyển đến địa điểm offline."}
                 title={"Địa điểm"}
