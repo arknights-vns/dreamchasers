@@ -144,12 +144,9 @@ function Timeline({ events }: TimelineProps) {
 export default function TimelinePage() {
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={"(bạn có thể scroll để đọc)"} title={"Roadmap"} />
-                </div>
-            </div>
-            <div className={"flex flex-1/2 items-center justify-center overflow-y-hidden"}>
+            <PageTitle favorText={"(bạn có thể scroll để đọc)"} title={"Roadmap"} />
+
+            <div className={"flex flex-1/2 items-center justify-center"}>
                 <Timeline events={events} />
                 {/* Frames */}
                 <div

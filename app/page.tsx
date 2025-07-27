@@ -43,28 +43,27 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"h-visible hero"}>
-            {/* Embla Carousel Autoplay Section */}
-            <div ref={emblaRef} className={"embla absolute inset-0 z-0 size-full"}>
+        <div className={"h-visible flex bg-black/60"}>
+            {/* Image carousel. */}
+            <div ref={emblaRef} className={"embla absolute inset-0 -z-1 size-full"}>
                 <div className={"embla__container size-full"}>
                     {[1, 2, 3, 4, 5, 6].map(img => (
                         <div key={img} className={"embla__slide relative size-full"}>
                             <Image
                                 alt={`Banner ${img + 1}`}
+                                className={"object-cover"}
                                 fill
-                                priority={img === 0}
+                                priority
                                 src={`/landing-bg/BG_${img}.jpg`}
-                                style={{ objectFit: "cover" }}
                             />
                         </div>
                     ))}
                 </div>
             </div>
-            <div className={"z-0 hero-overlay"}></div>
-            <div className={"hero-content flex flex-col place-content-center-safe"}>
-                <Image alt={"DRCH"} height={185} src={DRCH_Banner} width={708} />
-
-                <div className={"px-4 text-center"}>
+            {/* The real shit. */}
+            <div className={"flex flex-1/2 flex-col items-center justify-center space-y-8"}>
+                <Image alt={"DRCH"} height={185} src={DRCH_Banner} width={727} />
+                <div className={"flex w-full max-w-lg flex-col items-center px-8"}>
                     <div className={"mb-2 text-xl font-extrabold text-white"}>Sự kiện sẽ bắt đầu trong</div>
                     <div className={"mx-auto flex max-w-md gap-2 text-white md:max-w-none md:gap-4"}>
                         {[
@@ -74,7 +73,7 @@ export default function Home() {
                             { value: timeLeft.seconds, label: "Giây" },
                         ].map(item => (
                             <div key={item.label} className={"flex flex-col items-center"}>
-                                <div className={"flex w-[3rem] items-center justify-center rounded-sm border-2 border-white bg-black/75 py-1 text-xl font-bold md:w-[4rem] md:py-2 md:text-3xl"}>
+                                <div className={"flex w-12 items-center justify-center rounded-sm border-2 border-white bg-black/75 py-1 text-xl font-bold md:w-[4rem] md:py-2 md:text-3xl"}>
                                     {item.value.toString().padStart(2, "0")}
                                 </div>
                                 <div className={"mt-1 text-xs font-bold md:text-sm"}>{item.label}</div>
@@ -82,7 +81,6 @@ export default function Home() {
                         ))}
                     </div>
                 </div>
-
                 <div className={"absolute bottom-5 flex flex-col gap-y-2 text-center"}>
                     <span className={"text-lg text-white"}>Được mang đến cho bạn bởi</span>
                     <div className={"flex items-center gap-x-8 gap-y-4 text-white"}>

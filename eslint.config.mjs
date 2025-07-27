@@ -18,6 +18,16 @@ export default antfu(
         react: true,
         imports: true,
     },
+    {
+        ignores: [
+            ".next",
+            "node_modules",
+            "components/ui/*.tsx",
+            "components/svg/*.tsx",
+            "lib/shadcn/utils.ts",
+            "lib/supabase/terra.d.ts",
+        ],
+    },
     // Next.js
     {
         plugins: {

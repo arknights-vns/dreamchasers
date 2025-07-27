@@ -4,31 +4,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-
-// Reusable component for individual dropdown items
-function DropdownItem({
-    href,
-    children,
-    pathname,
-}: {
-    href: string;
-    children: React.ReactNode;
-    pathname: string;
-}) {
-    return (
-        <li>
-            <Link
-                className={classNames({
-                    "bg-black text-white": pathname === href,
-                    "text-black": pathname !== href,
-                })}
-                href={href}
-            >
-                {children}
-            </Link>
-        </li>
-    );
-}
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 // Reusable component for mobile dropdown sections
 function MobileDropdownSection({
@@ -41,63 +17,68 @@ function MobileDropdownSection({
     pathname: string;
 }) {
     return (
-        <li>
-            <details>
-                <summary>{title}</summary>
-                <ul>
-                    {items.map(item => (
-                        <DropdownItem key={item.href} href={item.href} pathname={pathname}>
-                            {item.label}
-                        </DropdownItem>
-                    ))}
-                </ul>
-            </details>
-        </li>
+        <details className={"py-2"}>
+            <summary>{title}</summary>
+            <div className={"flex flex-col gap-1"}>
+                {items.map(item => (
+                    <Link
+                        key={item.href}
+                        className={classNames(
+                            "ml-8 px-3 py-2 rounded-md",
+                            pathname === item.href ? "bg-black text-white" : "text-black",
+                        )}
+                        href={item.href}
+                    >
+                        {item.label}
+                    </Link>
+                ))}
+            </div>
+        </details>
     );
 }
 
-// Reusable component for desktop dropdown menus
-function DesktopDropdown({
-    title,
-    items,
-    pathname,
-    pathPrefix,
-}: {
+// Desktop dropdown using shadcn/ui DropdownMenu
+type DesktopDropdownProps = {
     title: string;
     items: Array<{ href: string; label: string }>;
     pathname: string;
     pathPrefix: string;
-}) {
+};
+
+function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdownProps) {
+    const active = pathname.includes(pathPrefix);
     return (
-        <div className={"dropdown-hover group dropdown"}>
-            <div
-                className={classNames(
-                    "relative rounded-md py-2 text-lg font-bold transition-all duration-200 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:transform after:transition-transform after:duration-200 after:ease-in-out after:content-['']",
-                    {
-                        "font-bold text-black after:scale-x-100 after:bg-black":
-                            pathname.includes(pathPrefix),
-                        "text-black after:scale-x-0 after:bg-black hover:after:scale-x-100":
-                            !pathname.includes(pathPrefix),
-                    },
-                )}
-            >
-                {title}
-            </div>
-            <div
-                className={"invisible absolute top-full left-0 h-4 w-full group-hover:visible"}
-            >
-            </div>
-            <ul
-                className={"dropdown-content menu mt-4 w-52 rounded-box bg-white p-2 shadow-sm"}
-                tabIndex={0}
-            >
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <button
+                    className={classNames(
+                        "relative cursor-pointer rounded-md py-1 text-lg font-bold transition-all duration-200 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:transform after:transition-transform after:duration-200 after:ease-in-out after:content-['']",
+                        {
+                            "font-bold text-black after:scale-x-100 after:bg-black": active,
+                            "text-black after:scale-x-0 after:bg-black hover:after:scale-x-100": !active,
+                        },
+                    )}
+                    type={"button"}
+                >
+                    {title}
+                </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className={"mt-2 w-52 rounded-box bg-white p-2 shadow-sm"}>
                 {items.map(item => (
-                    <DropdownItem key={item.href} href={item.href} pathname={pathname}>
-                        {item.label}
-                    </DropdownItem>
+                    <DropdownMenuItem key={item.href} asChild>
+                        <Link
+                            className={classNames("block w-full px-2 my-1 rounded-md text-center cursor-pointer focus:bg-gray-300", {
+                                "bg-black text-white": pathname === item.href,
+                                "text-black": pathname !== item.href,
+                            })}
+                            href={item.href}
+                        >
+                            {item.label}
+                        </Link>
+                    </DropdownMenuItem>
                 ))}
-            </ul>
-        </div>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }
 
@@ -154,17 +135,16 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
             <>
                 <MobileDropdownSection items={eventItems} pathname={pathname} title={"Sự kiện"} />
                 {links.map(link => (
-                    <li key={link.name}>
-                        <Link
-                            className={classNames({
-                                "bg-black text-white": pathname === link.href,
-                                "text-black": pathname !== link.href,
-                            })}
-                            href={link.href}
-                        >
-                            {link.name}
-                        </Link>
-                    </li>
+                    <Link
+                        key={link.name}
+                        className={classNames(
+                            "px-3 py-2 rounded-md",
+                            pathname === link.href ? "bg-black text-white" : "text-black",
+                        )}
+                        href={link.href}
+                    >
+                        {link.name}
+                    </Link>
                 ))}
             </>
         );
@@ -172,7 +152,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
 
     return (
         <div
-            className={"relative hidden cursor-pointer items-center gap-4 text-base font-semibold text-black lg:flex"}
+            className={"relative mr-2 hidden cursor-pointer items-center gap-4 text-base font-semibold text-black lg:flex"}
         >
             <DesktopDropdown
                 items={eventItems}
@@ -189,7 +169,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                     </NavLink>
                 </Fragment>
             ))}
-            <NavDivider width={"w-32"} />
+            <NavDivider width={"w-28"} />
         </div>
     );
 }

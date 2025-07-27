@@ -6,14 +6,9 @@ import TournamentLogo from "@/public/tournament/regulations/tournament-logo.png"
 export default function OverviewPage() {
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"\"Battle of Dreamchasers\""} />
-                </div>
-            </div>
+            <PageTitle favorText={""} title={"\"Battle of Dreamchasers\""} />
             <div
                 className={"flex flex-1/2 flex-col items-center justify-center space-y-4"}
-                data-theme={"dark"}
             >
                 <div className={"mx-4 max-w-192 text-center text-2xl font-extralight text-white"}>
                     Đây là giải đấu được BTC thực hiện nhằm để thử thách giới hạn của các Doctor

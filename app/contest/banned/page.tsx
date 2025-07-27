@@ -86,17 +86,11 @@ export default function TournamentSlidePage() {
 
     return (
         <div className={"vns-background flex h-[calc(100vh)] flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle
-                        dark
-                        title={"Banned Operators"}
-                    />
-                </div>
-            </div>
+            <PageTitle
+                title={"Banned Operators"}
+            />
             <div
                 className={"flex w-full flex-1/2 flex-col items-center justify-evenly px-[10%]"}
-                data-theme={"dark"}
             >
                 <div className={"top-0 flex"}>
                     <div className={"text-xl text-white"}>
@@ -134,7 +128,7 @@ export default function TournamentSlidePage() {
                         <EmptySlot key={v} />
                     ))}
                 </div>
-                <div className={"font-extrabold text-base-content"}>
+                <div className={"font-extrabold text-white"}>
                     Terra #1:
                     {" "}
                     <span className={`${isRealtimeConnected ? "text-green-300" : "text-red-300"}`}>

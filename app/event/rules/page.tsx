@@ -1,7 +1,6 @@
 "use client";
 
-import useEmblaCarousel from "embla-carousel-react";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { FaGun, FaPersonMilitaryRifle } from "react-icons/fa6";
 import { GiSwordsPower } from "react-icons/gi";
 import { IoBag } from "react-icons/io5";
@@ -19,6 +18,7 @@ import {
 } from "react-icons/lia";
 import { MdDoNotTouch } from "react-icons/md";
 import PageTitle from "@/components/PageTitle";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type IconType = React.ComponentType<{ className?: string }>;
 
@@ -247,6 +247,8 @@ const cosplayRules: RuleType[] = [
 
 export default function RulePage() {
     const [ruleTab, setRuleTab] = useState<string>("general");
+    const touchStartX = useRef<number | null>(null);
+    const touchEndX = useRef<number | null>(null);
 
     useEffect(() => {
         const stored = localStorage.getItem("rule-tab");
@@ -255,135 +257,101 @@ export default function RulePage() {
         }
     }, []);
 
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        startIndex: 0,
-    });
-
     useEffect(() => {
         localStorage.setItem("rule-tab", ruleTab);
+    }, [ruleTab]);
 
-        if (emblaApi) {
-            const targetIndex = ruleTab === "general" ? 0 : 1;
-            emblaApi.scrollTo(targetIndex);
+    // Swipe logic for all breakpoints
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+    const handleTouchEnd = () => {
+        if (touchStartX.current === null || touchEndX.current === null)
+            return;
+        const deltaX = touchEndX.current - touchStartX.current;
+        if (Math.abs(deltaX) > 50) {
+            if (deltaX < 0 && ruleTab === "general") {
+                setRuleTab("cosplay");
+            } else if (deltaX > 0 && ruleTab === "cosplay") {
+                setRuleTab("general");
+            }
         }
-    }, [ruleTab, emblaApi]);
+        touchStartX.current = null;
+        touchEndX.current = null;
+    };
 
-    const onSelect = useCallback(() => {
-        if (!emblaApi)
-            return;
-        const selectedIndex = emblaApi.selectedScrollSnap();
-        setRuleTab(selectedIndex === 0 ? "general" : "cosplay");
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi)
-            return;
-        emblaApi.on("select", onSelect);
-        onSelect();
-
-        return () => {
-            emblaApi.off("select", onSelect);
-        };
-    }, [emblaApi, onSelect]);
-
-    const scrollTo = useCallback(
-        (index: number) => {
-            if (emblaApi)
-                emblaApi.scrollTo(index);
-        },
-        [emblaApi],
-    );
+    // Animation: 0 for general, 1 for cosplay
+    const tabIndex = ruleTab === "general" ? 0 : 1;
 
     return (
-        <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle
-                        dark
-                        favorText={"Một số điều cần lưu ý khi tham gia offline"}
-                        title={"NỘI QUY"}
-                    />
-                </div>
-            </div>
-            {/* Desktop tabs - original design */}
+        <div className={"h-visible vns-background flex flex-col bg-neutral-950"}>
+            <PageTitle
+                favorText={"Một số điều cần lưu ý khi tham gia offline"}
+                title={"NỘI QUY"}
+            />
             <div
-                className={"tabs-border sticky top-[70px] z-0 tabs hidden h-[calc(100vh-70px)] place-content-center-safe overflow-hidden rounded-none md:flex"}
-                data-theme={"dark"}
+                className={"sticky top-[70px] z-0 h-[calc(100vh-70px)] place-content-center-safe overflow-hidden rounded-none border border-neutral-800 bg-neutral-900"}
+                onTouchEnd={handleTouchEnd}
+                onTouchMove={handleTouchMove}
+                onTouchStart={handleTouchStart}
             >
-                <input
-                    aria-label={"Nội quy chung"}
-                    checked={ruleTab === "general"}
-                    className={"sm:text-md tab w-1/2 text-base-content md:text-lg lg:text-2xl"}
-                    name={"my_tabs_6"}
-                    type={"radio"}
-                    onChange={() => setRuleTab("general")}
-                />
-                <div className={"tab-content overflow-y-auto border-t-gray-400 py-10"}>
-                    <div className={"h-full flex-1 px-5"}>
-                        <RulesList rules={rules} />
-                    </div>
-                </div>
-                <input
-                    aria-label={"Dành cho cosplayer"}
-                    checked={ruleTab === "cosplay"}
-                    className={"sm:text-md tab w-1/2 text-base-content md:text-lg lg:text-2xl"}
-                    name={"my_tabs_6"}
-                    type={"radio"}
-                    onChange={() => setRuleTab("cosplay")}
-                />
-                <div className={"tab-content overflow-y-auto border-t-gray-400 py-10"}>
-                    <div className={"h-full flex-1 px-5"}>
-                        <RulesList rules={cosplayRules} />
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile swipable tabs */}
-            <div
-                className={"swipe-tabs sticky top-[70px] z-0 h-[calc(100vh-70px)] md:hidden"}
-                data-theme={"dark"}
-            >
-                {/* Tab indicators */}
-                <div className={"flex w-full border-b border-gray-400"}>
-                    <button
-                        className={`flex-1 py-3 text-center text-base-content transition-colors ${
-                            ruleTab === "general"
-                                ? "border-b-2 border-white text-white"
-                                : "text-gray-400"
-                        }`}
-                        type={"button"}
-                        onClick={() => scrollTo(0)}
+                <Tabs className={"size-full"} value={ruleTab} onValueChange={setRuleTab}>
+                    <TabsList className={"flex w-full border-b border-neutral-800 bg-neutral-950"}>
+                        <TabsTrigger
+                            className={
+                                `flex-1 py-3 text-lg font-semibold text-neutral-300
+                                transition-colors
+                                focus-visible:ring-2 focus-visible:ring-white
+                                focus-visible:outline-none
+                                data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60`
+                            }
+                            value={"general"}
+                        >
+                            Nội quy chung
+                        </TabsTrigger>
+                        <TabsTrigger
+                            className={
+                                `flex-1 py-3 text-lg font-semibold text-neutral-300
+                                transition-colors
+                                focus-visible:ring-2 focus-visible:ring-white
+                                focus-visible:outline-none
+                                data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60`
+                            }
+                            value={"cosplay"}
+                        >
+                            Dành cho cosplayer
+                        </TabsTrigger>
+                    </TabsList>
+                    {/* Animated content wrapper */}
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "200%",
+                            transform: `translateX(-${tabIndex * 50}%)`,
+                            transition: "transform 0.4s cubic-bezier(.4,1,.4,1)",
+                            height: "100%",
+                            background: "#18181b", // Tailwind neutral-900
+                        }}
                     >
-                        Nội quy chung
-                    </button>
-                    <button
-                        className={`flex-1 py-3 text-center text-base-content transition-colors ${
-                            ruleTab === "cosplay"
-                                ? "border-b-2 border-white text-white"
-                                : "text-gray-400"
-                        }`}
-                        type={"button"}
-                        onClick={() => scrollTo(1)}
-                    >
-                        Dành cho cosplayer
-                    </button>
-                </div>
-
-                {/* Swipable content */}
-                <div ref={emblaRef} className={"embla h-[calc(100%-48px)] overflow-hidden"}>
-                    <div className={"embla__container flex h-full"}>
-                        <div className={"embla__slide flex-[0_0_100%] overflow-y-auto py-10"}>
-                            <div className={"h-full flex-1 px-5"}>
-                                <RulesList rules={rules} />
-                            </div>
+                        <div style={{ width: "50%", minWidth: 0 }}>
+                            <TabsContent className={"h-[calc(100vh-70px-48px)] overflow-y-auto border-r border-neutral-800 py-10"} value={"general"}>
+                                <div className={"h-full flex-1 px-5 text-neutral-100"}>
+                                    <RulesList rules={rules} />
+                                </div>
+                            </TabsContent>
                         </div>
-                        <div className={"embla__slide flex-[0_0_100%] overflow-y-auto py-10"}>
-                            <div className={"h-full flex-1 px-5"}>
-                                <RulesList rules={cosplayRules} />
-                            </div>
+                        <div style={{ width: "50%", minWidth: 0 }}>
+                            <TabsContent className={"h-[calc(100vh-70px-48px)] overflow-y-auto py-10"} value={"cosplay"}>
+                                <div className={"h-full flex-1 px-5 text-neutral-100"}>
+                                    <RulesList rules={cosplayRules} />
+                                </div>
+                            </TabsContent>
                         </div>
                     </div>
-                </div>
+                </Tabs>
             </div>
         </div>
     );

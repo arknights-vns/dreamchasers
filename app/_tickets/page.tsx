@@ -99,7 +99,7 @@ export default function TicketOverviewPage() {
         <div className={"h-visible vns-background"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"Mua vé"} />
+                    <PageTitle light favorText={""} title={"Mua vé"} />
                 </div>
             </div>
             <div className={"flex flex-col items-center justify-center pb-10 lg:pb-0"}>

@@ -141,18 +141,14 @@ export default function CrewPage() {
 
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle
-                        dark
-                        favorText={"Những người đã góp hết sức mình để mang đến cho các bạn những cái event cực cháy."}
-                        title={"Tổ chức"}
-                    />
-                </div>
-            </div>
+            <PageTitle
+                favorText={"Những người đã góp hết sức mình để mang đến cho các bạn những cái event cực cháy."}
+                title={"Tổ chức"}
+            />
+
             {/* Desktop tabs - original design */}
             <div
-                className={"tabs-border sticky top-[70px] z-0 tabs hidden h-[calc(100vh-70px)] place-content-center-safe overflow-hidden rounded-none lg:flex"}
+                className={"tabs-border sticky top-[80px] z-0 tabs hidden h-[calc(100vh-80px)] place-content-center-safe overflow-hidden rounded-none lg:flex"}
                 data-theme={"dark"}
             >
                 <input
@@ -181,7 +177,7 @@ export default function CrewPage() {
 
             {/* Mobile swipable tabs */}
             <div
-                className={"swipe-tabs sticky top-[70px] z-0 h-[calc(100vh-70px)] lg:hidden"}
+                className={"swipe-tabs sticky top-[80px] z-0 h-[calc(100vh-80px)] lg:hidden"}
                 data-theme={"dark"}
             >
                 {/* Tab indicators */}

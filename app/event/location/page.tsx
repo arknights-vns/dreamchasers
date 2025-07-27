@@ -6,21 +6,16 @@ import Mcafe from "@/public/MCafe_Entry.jpg";
 export default function LocationPage() {
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle
-                        dark
-                        favorText={"Một số thông tin hỗ trợ bạn trong quá trình di chuyển đến địa điểm offline."}
-                        title={"Địa điểm"}
-                    />
-                </div>
-            </div>
+            <PageTitle
+                favorText={"Một số thông tin hỗ trợ bạn trong quá trình di chuyển đến địa điểm offline."}
+                title={"Địa điểm"}
+            />
             <div
-                className={"mx-4 mb-8 grid grid-cols-1 grid-rows-2 gap-8 lg:grid-cols-2 lg:grid-rows-1"}
+                className={"mx-4 mb-8 flex flex-col space-y-8 lg:flex-row"}
             >
-                <div className={"flex flex-col justify-between space-y-4"}>
+                <div className={"flex flex-col justify-between space-y-4 lg:w-1/2"}>
                     <div className={"text-center text-2xl font-extrabold text-white"}>
-                        Cửa chính sẽ nhìn giống thế này
+                        Cửa chính sẽ giống thế này
                     </div>
                     <div className={"flex flex-1 items-center justify-center"}>
                         <Image
@@ -37,16 +32,14 @@ export default function LocationPage() {
                         (Đi bằng Metro, xuống ga Thảo Điền, đi bộ khoảng 10 phút là tới)
                     </div>
                 </div>
-                <div
-                    className={"flex flex-col justify-between space-y-4"}
-                >
+                <div className={"flex flex-col justify-between space-y-4 lg:w-1/2"}>
                     <div className={"text-center text-2xl font-extrabold text-white"}>
                         Google Map
                     </div>
                     <div className={"flex flex-1 items-center justify-center"}>
                         <iframe
                             allowFullScreen
-                            className={"mx-8 h-64 w-full lg:h-80"}
+                            className={"mx-8 h-64 w-full object-cover lg:h-80"}
                             loading={"lazy"}
                             referrerPolicy={"no-referrer-when-downgrade"}
                             sandbox={"allow-scripts allow-popups allow-top-navigation allow-forms"}

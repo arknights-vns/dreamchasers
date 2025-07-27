@@ -34,11 +34,8 @@ export default function RulePage() {
 
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"Luật chơi"} />
-                </div>
-            </div>
+            <PageTitle title={"Luật chơi"} />
+
             <div
                 className={"mt-4 flex flex-col items-center justify-center"}
                 data-theme={"dark"}

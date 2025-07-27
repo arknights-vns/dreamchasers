@@ -37,12 +37,11 @@ export default function PrizePage() {
         <div className={"h-visible vns-background flex flex-col"}>
             <div className={"hero"}>
                 <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"Giải thưởng"} />
+                    <PageTitle favorText={""} title={"Giải thưởng"} />
                 </div>
             </div>
             <div
                 className={"mt-4 flex flex-col items-center justify-center"}
-                data-theme={"dark"}
             >
                 <div className={"relative mx-auto w-full max-w-[720px] px-4"}>
                     {/* Pages indicator */}
@@ -80,7 +79,7 @@ export default function PrizePage() {
                                             src={Artbook}
                                         />
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Arknights Artbook VOL 1, 4, 5
                                         </div>
@@ -89,12 +88,12 @@ export default function PrizePage() {
                                         className={"flex size-full flex-col justify-between gap-2"}
                                     >
                                         <div
-                                            className={"flex flex-1 items-center justify-center text-base-content italic"}
+                                            className={"flex flex-1 items-center justify-center text-white italic"}
                                         >
                                             [tới Offline là thấy á]
                                         </div>
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Giấy khen từ BTC
                                         </div>
@@ -118,7 +117,7 @@ export default function PrizePage() {
                                             src={AmiyiRazer}
                                         />
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Razer X Arknights - Chuột không dây - Amiya theme
                                         </div>
@@ -127,12 +126,12 @@ export default function PrizePage() {
                                         className={"flex size-full flex-col justify-between gap-2"}
                                     >
                                         <div
-                                            className={"flex flex-1 items-center justify-center text-base-content italic"}
+                                            className={"flex flex-1 items-center justify-center text-white italic"}
                                         >
                                             [tới Offline là thấy á]
                                         </div>
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Giấy khen từ BTC
                                         </div>
@@ -156,7 +155,7 @@ export default function PrizePage() {
                                             src={Ines}
                                         />
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Figure Ines - 1/7 scale
                                         </div>
@@ -165,12 +164,12 @@ export default function PrizePage() {
                                         className={"flex size-full flex-col justify-between gap-2"}
                                     >
                                         <div
-                                            className={"flex flex-1 items-center justify-center text-base-content italic"}
+                                            className={"flex flex-1 items-center justify-center text-white italic"}
                                         >
                                             [tới Offline là thấy á]
                                         </div>
                                         <div
-                                            className={"text-center text-lg font-light text-base-content"}
+                                            className={"text-center text-lg font-light text-white"}
                                         >
                                             Giấy khen từ BTC
                                         </div>

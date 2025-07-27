@@ -4,21 +4,15 @@ import Meruko from "@/public/tournament/Meruko.png";
 export default function NotFoundPage() {
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    {/* <PageTitle title={"Tính điểm"} favorText={"Các tiêu chí tính điểm của tụi mình cho \"Battle of Dreamchasers\""} dark /> */}
-                </div>
-            </div>
             <div
                 className={"m-5 flex flex-col items-center justify-center"}
-                data-theme={"dark"}
             >
                 {/* Participation Factors */}
                 <section className={"mx-5 mb-8"}>
-                    <h2 className={"mb-4 text-center text-4xl font-semibold text-base-content"}>
+                    <h2 className={"mb-4 text-center text-4xl font-semibold text-white"}>
                         Yếu tố tính điểm
                     </h2>
-                    <ul className={"list-disc space-y-2 text-lg text-base-content"}>
+                    <ul className={"list-disc space-y-2 text-lg text-white"}>
                         <li>Thời gian bạn chọn operator.</li>
                         <li>Thời gian 1 màn chạy.</li>
                         <li>Số địch đánh được - không bao gồm leak.</li>
@@ -30,7 +24,7 @@ export default function NotFoundPage() {
 
                 {/* Overview */}
                 <section className={"mb-8"}>
-                    <h2 className={"mb-4 text-center text-4xl font-semibold text-base-content"}>
+                    <h2 className={"mb-4 text-center text-4xl font-semibold text-white"}>
                         Tổng quan
                     </h2>
                     <div className={"space-y-6"}>
@@ -245,7 +239,7 @@ export default function NotFoundPage() {
 
                 {/* Example */}
                 <section className={"mb-8"}>
-                    <h2 className={"mb-4 text-center text-4xl font-semibold text-base-content"}>
+                    <h2 className={"mb-4 text-center text-4xl font-semibold text-white"}>
                         Ví dụ
                     </h2>
 

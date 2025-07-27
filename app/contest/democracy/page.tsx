@@ -233,14 +233,10 @@ export default function DraftingPage() {
 
     return (
         <div className={"vns-background flex h-[100svh] flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"Ban pick"} />
-                </div>
-            </div>
+            <PageTitle favorText={""} title={"Ban pick"} />
+
             <div
                 className={"mb-8 flex flex-col items-center justify-center gap-y-4 text-base-content"}
-                data-theme={"dark"}
             >
                 <div className={"flex text-sm font-bold"}>
                     <div>

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    colorScheme: "only light",
+    colorScheme: "dark",
     initialScale: 1.0,
 };
 
@@ -46,7 +46,7 @@ export default function RootLayout({
     children: ReactNode;
 }>) {
     return (
-        <html data-theme={"light"} lang={"en"}>
+        <html lang={"vn"}>
             <body className={`${mainFont.variable} font-[family-name:var(--font-vns)] antialiased`}>
                 <NavBar />
                 <div>{children}</div>

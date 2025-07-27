@@ -4,7 +4,7 @@ import type { ContestantInfo } from "@/lib/vns";
 import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle";
 
-export default function OverviewPage() {
+export default function PodiumPage() {
     const [data, setData] = useState<ContestantInfo[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -24,11 +24,8 @@ export default function OverviewPage() {
 
     return (
         <div className={"vns-background flex h-[100vh] flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={""} title={"STANDING"} />
-                </div>
-            </div>
+            <PageTitle favorText={""} title={"STANDING"} />
+
             <div
                 className={"flex flex-1/2 flex-col items-center justify-center space-y-4"}
                 data-theme={"dark"}
@@ -53,13 +50,13 @@ export default function OverviewPage() {
 
                                 switch (row.rank) {
                                     case 1:
-                                        style = "bg-teal-300/80 text-black";
+                                        style = "bg-teal-300 text-black";
                                         break;
                                     case 2:
                                         style = "bg-amber-300/90 text-black";
                                         break;
                                     case 3:
-                                        style = "bg-gray-300/80 text-black";
+                                        style = "bg-gray-300 text-black";
                                         break;
                                     default:
                                         style = "bg-amber-700/80";

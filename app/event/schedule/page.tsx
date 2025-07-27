@@ -5,11 +5,8 @@ import TimelineItem from "@/components/TimelineItem";
 export default function SchedulePage() {
     return (
         <div className={"h-visible vns-background flex flex-col"}>
-            <div className={"hero"}>
-                <div className={"hero-content text-center"}>
-                    <PageTitle dark favorText={"Các sự kiện sẽ diễn ra trong offline"} title={"Timeline sự kiện"} />
-                </div>
-            </div>
+            <PageTitle favorText={"Các sự kiện sẽ diễn ra trong offline"} title={"Timeline sự kiện"} />
+
             <div className={"flex flex-1/2 flex-col items-center justify-center"} data-theme={"dark"}>
                 <ul className={"timeline timeline-vertical flex w-full md:timeline-horizontal"}>
                     <TimelineItem data={"Mở Check-in\n&\nBắt đầu Offline"} date={"09:15"} head />
