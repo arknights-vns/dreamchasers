@@ -63,7 +63,7 @@ function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdown
                     {title}
                 </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className={"mt-2 w-52 rounded-box bg-white p-2 shadow-sm"}>
+            <DropdownMenuContent className={"rounded-box mt-2 w-52 bg-white p-2 shadow-sm"}>
                 {items.map(item => (
                     <DropdownMenuItem key={item.href} asChild>
                         <Link

@@ -13,7 +13,7 @@ export default function PageTitle(props: PageTitleProps) {
     const favorTextStyle = shouldWhite ? "text-black" : "text-white";
 
     return (
-        <div className={"m-4"}>
+        <div className={"mt-4 mb-2"}>
             <div
                 className={`mt-4 flex items-center justify-center ${invertStyle}`}
             >

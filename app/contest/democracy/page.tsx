@@ -236,7 +236,7 @@ export default function DraftingPage() {
             <PageTitle favorText={""} title={"Ban pick"} />
 
             <div
-                className={"mb-8 flex flex-col items-center justify-center gap-y-4 text-base-content"}
+                className={"text-base-content mb-8 flex flex-col items-center justify-center gap-y-4"}
             >
                 <div className={"flex text-sm font-bold"}>
                     <div>

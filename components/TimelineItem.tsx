@@ -29,11 +29,11 @@ export default function TimelineItem(props: TimelineItemProps) {
     const timelinePosition = props.right ? "timeline-end md:timeline-start!" : "timeline-start";
 
     return (
-        <li className={"flex-1 shrink text-base-content"}>
+        <li className={"text-base-content flex-1 shrink"}>
             {!props.head ? <hr className={"bg-white"} /> : <></>}
             <div
                 className={
-                    `${timelinePosition} flex flex-col px-4 py-2 text-center text-lg text-base-content lg:text-xl`
+                    `${timelinePosition} text-base-content flex flex-col px-4 py-2 text-center text-lg lg:text-xl`
                 }
             >
                 <div className={"mb-1 block font-bold md:hidden"}>{props.date}</div>

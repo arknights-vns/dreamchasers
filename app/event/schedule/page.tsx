@@ -8,7 +8,7 @@ export default function SchedulePage() {
             <PageTitle favorText={"Các sự kiện sẽ diễn ra trong offline"} title={"Timeline sự kiện"} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"} data-theme={"dark"}>
-                <ul className={"timeline timeline-vertical flex w-full md:timeline-horizontal"}>
+                <ul className={"timeline timeline-vertical md:timeline-horizontal flex w-full"}>
                     <TimelineItem data={"Mở Check-in\n&\nBắt đầu Offline"} date={"09:15"} head />
 
                     <TimelineItem data={"Mini-games"} date={"09:30"} right />

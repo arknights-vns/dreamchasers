@@ -11,7 +11,7 @@ export default function MemberBox(props: CrewMember) {
                 src={`/crew/${props.name}.jpg`}
                 width={100}
             />
-            <div className={"text-xl font-extrabold text-base-content"}>{props.name}</div>
+            <div className={"text-base-content text-xl font-extrabold"}>{props.name}</div>
             {/* {props.quote !=P= "" && ( */}
             {/*    <div className={"text-md text-base-content text-center font-extralight italic"}> */}
             {/*        &#34;{props.quote}&#34; */}

@@ -24,7 +24,7 @@ export default antfu(
             "node_modules",
             "components/ui/*.tsx",
             "components/svg/*.tsx",
-            "lib/shadcn/utils.ts",
+            "lib/utils.ts",
             "lib/supabase/terra.d.ts",
         ],
     },
