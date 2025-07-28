@@ -22,7 +22,7 @@
 }
 
 .bg-vns {
-    @apply bg-neutral-700/50;
+    @apply bg-neutral-700;
     @apply bg-[url(/BG_Black.jpg)];
     @apply bg-cover;
     @apply bg-fixed;

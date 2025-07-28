@@ -3,6 +3,7 @@
 import type { ContestantInfo } from "@/lib/vns";
 import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default function PodiumPage() {
     const [data, setData] = useState<ContestantInfo[]>([]);
@@ -23,60 +24,52 @@ export default function PodiumPage() {
     }, []);
 
     return (
-        <div className={"bg-vns flex h-[100vh] flex-col"}>
-            <PageTitle favorText={""} title={"STANDING"} />
+        <div className={"flex h-[100vh] flex-col"}>
+            <PageTitle favorText={"Khoan, chúng ta có podium cho tournament à?"} light title={"STANDING"} />
 
-            <div
-                className={"flex flex-1/2 flex-col items-center justify-center space-y-4"}
-                data-theme={"dark"}
-            >
+            <div className={"mx-16 flex flex-1/2 flex-col items-center justify-center"}>
                 {loading && <div>Loading...</div>}
                 {!loading && error && <div>{error}</div>}
                 {!loading && !error && (
-                    <table
-                        className={"table-auto border bg-black text-center text-white"}
-                    >
-                        <thead>
-                            <tr>
-                                <th className={"w-[300px] border p-8 text-6xl"}>Hạng</th>
-                                <th className={"w-[300px] border p-8 text-6xl"}>Tên</th>
-                                <th className={"w-[300px] border p-8 text-6xl"}>Mã vé</th>
-                                <th className={"w-[300px] border p-8 text-6xl"}>Điểm</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Table className={"w-full"}>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className={"w-[40px] py-4 text-center text-4xl font-extrabold"}>#</TableHead>
+                                <TableHead className={"w-[200px] py-4 text-center text-4xl font-extrabold"}>Tên</TableHead>
+                                <TableHead className={"w-[100px] py-4 text-center text-4xl font-extrabold"} id={"tu-tu-tu-du-max-verstappen"}>Mã vé</TableHead>
+                                <TableHead className={"w-[150px] py-4 text-center text-4xl font-extrabold"}>Điểm</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
                             {data.map((row) => {
                                 let style = "";
 
                                 switch (row.rank) {
                                     case 1:
-                                        style = "bg-teal-300 text-black";
-                                        break;
-                                    case 2:
                                         style = "bg-amber-300/90 text-black";
                                         break;
-                                    case 3:
-                                        style = "bg-gray-300 text-black";
+                                    case 2:
+                                        style = "bg-gray-300/80 text-black";
                                         break;
-                                    default:
-                                        style = "bg-amber-700/80";
+                                    case 3:
+                                        style = "bg-amber-700/80 text-white";
                                         break;
                                 }
 
                                 return (
-                                    <tr
+                                    <TableRow
                                         key={row.number}
                                         className={`${style}`}
                                     >
-                                        <td className={"border border-white p-1 text-5xl font-bold"}>{row.rank}</td>
-                                        <td className={"border border-white p-1 text-5xl"}>{row.name}</td>
-                                        <td className={"border border-white p-1 text-5xl"}>{row.number}</td>
-                                        <td className={"border border-white p-1 text-5xl font-bold"}>{row.score}</td>
-                                    </tr>
+                                        <TableCell className={"border border-white p-1 text-center text-3xl font-bold"}>{row.rank}</TableCell>
+                                        <TableCell className={"border border-white p-1 text-center text-3xl"}>{row.name}</TableCell>
+                                        <TableCell className={"border border-white p-1 text-center text-3xl"}>{row.number}</TableCell>
+                                        <TableCell className={"border border-white p-1 text-center text-3xl font-bold"}>{row.score}</TableCell>
+                                    </TableRow>
                                 );
                             })}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 )}
             </div>
         </div>

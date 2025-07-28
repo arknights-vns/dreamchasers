@@ -8,14 +8,14 @@ export default function NotFoundPage() {
 
     return (
         <div className={"h-visible bg-vns flex flex-col"}>
-            <PageTitle favorText={"Có vẻ đây là đường cụt."} light title={"Well..."} />
+            <PageTitle favorText={"Có vẻ đây là đường cụt."} title={"Well..."} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"}>
                 <div className={"mx-4 text-center text-3xl font-bold text-white"}>
                     Không có gì ở đây hết á, hoặc là tụi mình đang trên đường nấu.
                 </div>
                 <div
-                    className={"text-lg font-extralight text-white italic hover:underline"}
+                    className={"cursor-pointer text-lg font-extralight text-white italic hover:underline"}
                     onClick={() => navigation.back()}
                 >
                     (bấm vô đây để về trang trước)

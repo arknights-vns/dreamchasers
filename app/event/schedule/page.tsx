@@ -23,7 +23,7 @@ export default function SchedulePage() {
                         tail
                     />
                 </ul>
-                <RiHourglass2Fill fill={"white"} size={32} />
+                <RiHourglass2Fill className={"relative bottom-0 mb-4"} fill={"white"} size={32} />
             </div>
         </div>
     );

@@ -20,7 +20,7 @@ export default function PageTitle(props: PageTitleProps) {
                 <div className={"hidden pr-4 md:block"}>
                     <TitleDecorLeft height={24} width={115} />
                 </div>
-                <div className={"text-center text-3xl font-extrabold md:text-4xl lg:text-5xl"}>
+                <div className={"text-center text-5xl font-extrabold lg:text-6xl"}>
                     {props.title.toUpperCase()}
                 </div>
                 <div className={"hidden pl-4 md:block"}>

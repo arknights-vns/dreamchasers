@@ -7,7 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { LuSparkle } from "react-icons/lu";
 import PurchaseTicketButton from "@/components/PreviewTicketButton";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import DRCH_Logo from "@/public/DRCH_Logo.png";
 import NavBarItems from "./NavBarItems";
 
@@ -35,7 +35,9 @@ export default function NavBar() {
                         <GiHamburgerMenu />
                     </Button>
                 </SheetTrigger>
-                <SheetContent side={"left"}>
+                <SheetTitle />
+                <SheetDescription />
+                <SheetContent side={"bottom"}>
                     <div className={"mt-2 ml-4 grid gap-2 py-6"}>
                         <NavBarItems isMobile />
                     </div>

@@ -14,7 +14,7 @@ export default function PreviewTicketButton() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className={"rounded-xl bg-black text-xl font-bold text-white"} size={"lg"}>
+                <Button className={"rounded-xl bg-black text-xl font-bold text-white hover:invert"} size={"lg"}>
                     Mua vé
                 </Button>
             </DialogTrigger>
