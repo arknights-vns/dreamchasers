@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
                 source: "/api/:path*",
                 headers: [
                     { key: "Access-Control-Allow-Credentials", value: "false" },
-                    { key: "Access-Control-Allow-Origin", value: BASE_URL },
+                    { key: "Access-Control-Allow-Origin", value: "*" },
                     { key: "Access-Control-Allow-Methods", value: "*" },
                     { key: "Access-Control-Allow-Headers", value: "*" },
                 ],
