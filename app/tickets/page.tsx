@@ -33,12 +33,10 @@ function TicketCard(props: TicketCardProps) {
                         src={props.image}
                     />
                     <div
-                        className={"absolute top-0 left-0 flex h-[64px] w-full items-center justify-center text-center text-2xl font-bold md:text-3xl lg:text-4xl"}
+                        className={"absolute top-0 left-0 flex h-[64px] w-full items-center justify-center text-center text-2xl font-bold text-black md:text-3xl lg:text-4xl"}
                         style={{ textShadow: "0 2px 8px #fff, 0 1px 0 #ffe066" }}
                     >
                         {props.tier.toUpperCase()}
-                        {" "}
-                        TIER
                     </div>
                 </div>
                 <div className={"flex flex-col text-center text-white"}>

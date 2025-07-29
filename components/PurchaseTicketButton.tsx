@@ -8,6 +8,6 @@ export default function PurchaseTicketButton() {
         // >
         //     <div className={"font-bold"}>Còn chờ cái gì mà không mua nữa chat?</div>
         // </Link>
-        <div className={"text-xl font-bold text-red-300"}>ĐÃ BÁN HẾT VÉ!!!</div>
+        <></>
     );
 }

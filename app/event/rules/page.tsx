@@ -277,13 +277,13 @@ export default function RulePage() {
                 title={"NỘI QUY"}
             />
             <div
-                className={"sticky top-[80px] z-0 h-[calc(100vh-80px)] place-content-center-safe"}
+                className={"sticky top-[80px] h-[calc(100vh-80px)] place-content-center-safe"}
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
                 onTouchStart={handleTouchStart}
             >
                 <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
-                    <TabsList className={"h-12 w-full rounded-none border-b bg-background p-1"}>
+                    <TabsList className={"h-12 w-full rounded-none bg-background"}>
                         <TabsTrigger
                             className={
                                 "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"

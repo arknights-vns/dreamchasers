@@ -24,7 +24,7 @@ function MemberBox(props: CrewMember) {
             />
             <div className={"text-xl font-extrabold"}>{props.name}</div>
             {/* {props.quote !=P= "" && ( */}
-            {/*    <div className={"text-md text-base-content text-center font-extralight italic"}> */}
+            {/*    <div className={"text-md  text-center font-extralight italic"}> */}
             {/*        &#34;{props.quote}&#34; */}
             {/*    </div> */}
             {/* )} */}

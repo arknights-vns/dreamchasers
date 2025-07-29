@@ -19,8 +19,8 @@
 }
 
 .bg-vns {
-    @apply bg-background/65;
-    @apply dark:bg-[url(/BG_Black.jpg)];
+    /* @apply bg-background; */
+    /* @apply dark:bg-[url(/BG_Black.jpg)]; */
     @apply bg-cover;
     @apply bg-fixed;
     @apply bg-center;

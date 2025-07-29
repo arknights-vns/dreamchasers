@@ -15,11 +15,11 @@ function ClassIcon(props: ClassIconProps) {
         >
             <Image
                 alt={props.operatorClass}
-                className={`w-auto object-contain ${props.active ? "grayscale invert" : ""}`}
-                height={28}
+                className={`object-contain`}
+                height={32}
                 priority
                 src={`/operator/classes/${props.operatorClass}.png`}
-                width={28}
+                width={32}
             />
         </div>
     );

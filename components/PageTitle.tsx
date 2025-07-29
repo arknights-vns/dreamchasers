@@ -9,7 +9,7 @@ type PageTitleProps = {
 
 export default function PageTitle(props: PageTitleProps) {
     return (
-        <div className={"my-8"}>
+        <div className={"mt-6 mb-4"}>
             <div className={`flex items-center justify-center`}>
                 <div className={"hidden pr-4 lg:block dark:invert"}>
                     <TitleDecorLeft height={24} width={115} />

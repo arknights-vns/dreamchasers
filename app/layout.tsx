@@ -51,7 +51,7 @@ export default function RootLayout({
             <body className={`${mainFont.variable} font-[family-name:var(--font-vns)] antialiased`}>
                 <TerraTheme
                     attribute={"class"}
-                    defaultTheme={"system"}
+                    defaultTheme={"light"}
                     disableTransitionOnChange
                     enableSystem
                 >

@@ -83,7 +83,7 @@ function TimelineContent({ events }: TimelineProps) {
                 return (
                     <CarouselItem
                         key={ev.title}
-                        className={"h-full basis-1/2 pt-4 lg:basis-full"}
+                        className={"h-full basis-full pt-4"}
                     >
                         <Card className={"h-full items-center justify-center"}>
                             <CardTitle className={"text-2xl"}>{ev.date}</CardTitle>
@@ -109,9 +109,9 @@ function TimelineContent({ events }: TimelineProps) {
 export default function TimelinePage() {
     return (
         <div className={"h-visible bg-vns flex flex-col"}>
-            <PageTitle favorText={"Những hoạt động tụi mình đã tổ chức trong quá trình thực hiện Offline"} title={"Các mốc sự kiện"} />
+            <PageTitle favorText={"Những hoạt động tụi mình đã tổ chức trong quá trình thực hiện Offline"} title={"Công tác chuẩn bị"} />
 
-            <div className={"mx-4 mt-6 flex flex-col items-center justify-center"}>
+            <div className={"mx-4 mt-8 flex flex-col items-center justify-center"}>
                 <Carousel
                     className={"flex w-full max-w-lg lg:hidden"}
                     opts={{

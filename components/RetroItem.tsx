@@ -22,7 +22,7 @@ export default function RetroItem(props: RetroItemProps) {
                 >
                     {props.title}
                 </Link>
-                <p className={"mx-auto my-3 text-center"}>{props.description}</p>
+                <p className={"m-3 text-center"}>{props.description}</p>
             </div>
         </div>
     );

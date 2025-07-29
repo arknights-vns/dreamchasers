@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import PageTitle from "@/components/PageTitle";
+import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
     const navigation = useRouter();
@@ -11,15 +12,15 @@ export default function NotFoundPage() {
             <PageTitle favorText={"Có vẻ đây là đường cụt."} title={"Well..."} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"}>
-                <div className={"mx-4 text-center text-3xl font-bold text-white"}>
+                <div className={"m-4 text-center text-3xl font-bold"}>
                     Không có gì ở đây hết á, hoặc là tụi mình đang trên đường nấu.
                 </div>
-                <div
-                    className={"cursor-pointer text-lg font-extralight text-white italic hover:underline"}
+                <Button
+                    className={"cursor-pointer text-lg font-extralight"}
                     onClick={() => navigation.back()}
                 >
-                    (bấm vô đây để về trang trước)
-                </div>
+                    Bấm vô đây để về trang trước
+                </Button>
             </div>
         </div>
     );

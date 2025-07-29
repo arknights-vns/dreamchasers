@@ -43,7 +43,7 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"h-visible flex bg-muted/65"}>
+        <div className={"h-visible flex bg-background/70"}>
             {/* Image carousel. */}
             <div ref={emblaRef} className={"embla absolute inset-0 -z-1 size-full"}>
                 <div className={"embla__container size-full"}>

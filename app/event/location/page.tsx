@@ -10,7 +10,7 @@ export default function LocationPage() {
                 favorText={"Một số thông tin hỗ trợ bạn trong quá trình di chuyển đến địa điểm offline."}
                 title={"Địa điểm"}
             />
-            <div className={"mx-4 flex flex-col space-y-8 lg:flex-row"}>
+            <div className={"mx-4 flex flex-col gap-4 lg:flex-row"}>
                 <div className={"flex flex-col justify-center space-y-4 lg:w-1/2"}>
                     <div className={"text-center text-2xl font-extrabold text-primary"}>
                         Cửa chính sẽ giống thế này

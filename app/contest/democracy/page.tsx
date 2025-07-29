@@ -5,9 +5,10 @@ import type { OperatorClass, OperatorRarity } from "@/lib/vns";
 import Fuse from "fuse.js";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import PageTitle from "@/components/PageTitle";
 import ClassIcon from "@/components/tournament/ClassIcon";
 import OperatorIcon from "@/components/tournament/OperatorIcon";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useTimer } from "@/lib/hooks/useTimer";
 import { supabase } from "@/lib/supabase/client";
 import StarSelected from "@/public/tournament/drafting/star-selected.svg";
@@ -232,105 +233,100 @@ export default function DraftingPage() {
     // #endregion data backup
 
     return (
-        <div className={"bg-vns flex h-[100vh] flex-col"}>
-            <PageTitle favorText={""} title={"Ban pick"} />
-
-            <div
-                className={"text-base-content mb-8 flex flex-col items-center justify-center gap-y-4"}
-            >
-                <div className={"flex text-sm font-bold"}>
-                    <div>
-                        PRTS:
-                        {" "}
-                        <span className={`${isRealtimeConnected ? "text-green-300" : "text-red-300"}`}>
-                            {isRealtimeConnected ? "Online" : "Offline"}
-                        </span>
-                    </div>
+        <div className={"bg-vns h-visible mx-2 scrollbar-none flex flex-col"}>
+            <div className={"flex h-[calc(100vh_-_80px)] flex-col items-center justify-evenly space-y-2 py-4"}>
+                {/* Server status */}
+                <div className={"font-bold"}>
+                    PRTS:
+                    {" "}
+                    <span className={`${isRealtimeConnected ? "text-green-500" : "text-red-500"}`}>
+                        {isRealtimeConnected ? "Online" : "Offline"}
+                    </span>
                 </div>
-
-                <div className={"flex flex-col items-center justify-center gap-y-4"}>
-                    <div className={"text-xl text-white"}>
-                        Thời gian còn lại:
-                        {" "}
-                        <span className={`font-extrabold ${
-                            !isTimerLoaded
-                                ? "text-red-400"
-                                : timerData.state === "running"
-                                    ? "text-green-400"
-                                    : timerData.state === "paused"
-                                        ? "text-yellow-400"
-                                        : "text-red-400"
-                        }`}
-                        >
-                            {!isTimerLoaded ? "--:--" : formatTime(getDisplayTime())}
-                        </span>
+                {/* Time */}
+                <div className={"font-bold"}>
+                    Thời gian còn lại:
+                    {" "}
+                    <span className={`font-extrabold ${
+                        !isTimerLoaded
+                            ? "text-red-400"
+                            : timerData.state === "running"
+                                ? "text-green-400"
+                                : timerData.state === "paused"
+                                    ? "text-yellow-400"
+                                    : "text-red-400"
+                    }`}
+                    >
+                        {!isTimerLoaded ? "--:--" : formatTime(getDisplayTime())}
+                    </span>
+                </div>
+                {/* Input */}
+                <div className={"mx-auto flex justify-evenly"}>
+                    <Input placeholder={"Ghi tên op ở đây..."} value={operatorNameSearch} onChange={e => setOperatorNameSearch(e.target.value)} />
+                    <Button
+                        className={"ml-2"}
+                        disabled={operatorNameSearch.trim().length === 0}
+                        onClick={() => setOperatorNameSearch("")}
+                    >
+                        Clear
+                    </Button>
+                </div>
+                {/* Star rating */}
+                <div className={"flex items-center justify-center space-x-1"}>
+                    <Image alt={"Star 1"} height={32} src={maxRarity >= 1 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(1)} />
+                    <Image alt={"Star 2"} height={32} src={maxRarity >= 2 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(2)} />
+                    <Image alt={"Star 3"} height={32} src={maxRarity >= 3 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(3)} />
+                    <Image alt={"Star 4"} height={32} src={maxRarity >= 4 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(4)} />
+                    <Image alt={"Star 5"} height={32} src={maxRarity >= 5 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(5)} />
+                    <Image alt={"Star 6"} height={32} src={maxRarity >= 6 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(6)} />
+                </div>
+                {/* Class */}
+                <div className={"mx-auto flex items-center justify-center"}>
+                    <div className={"pr-4 font-bold"}>Class</div>
+                    <ClassIcon active={selectedClass === "Caster"} operatorClass={"Caster"} onClick={() => handleClassSelection("Caster")} />
+                    <ClassIcon active={selectedClass === "Medic"} operatorClass={"Medic"} onClick={() => handleClassSelection("Medic")} />
+                    <ClassIcon active={selectedClass === "Guard"} operatorClass={"Guard"} onClick={() => handleClassSelection("Guard")} />
+                    <ClassIcon active={selectedClass === "Sniper"} operatorClass={"Sniper"} onClick={() => handleClassSelection("Sniper")} />
+                    <ClassIcon active={selectedClass === "Specialist"} operatorClass={"Specialist"} onClick={() => handleClassSelection("Specialist")} />
+                    <ClassIcon active={selectedClass === "Supporter"} operatorClass={"Supporter"} onClick={() => handleClassSelection("Supporter")} />
+                    <ClassIcon active={selectedClass === "Defender"} operatorClass={"Defender"} onClick={() => handleClassSelection("Defender")} />
+                    <ClassIcon active={selectedClass === "Vanguard"} operatorClass={"Vanguard"} onClick={() => handleClassSelection("Vanguard")} />
+                </div>
+                {/* List */}
+                <div className={"scrollbar-none grid h-[727px] grid-cols-5 gap-6 overflow-y-auto rounded-lg border p-2 md:grid-cols-9"}>
+                    {filteredOperators.map(operator => (
+                        <OperatorIcon
+                            key={operator.charid}
+                            isBanned={(operator.profession as OperatorClass) === "Specialist" || bannedOperators.includes(operator.charid)}
+                            isSelected={selectedOperators.includes(operator.charid)}
+                            operator={{
+                                id: operator.charid,
+                                name: operator.name,
+                                rarity: operator.rarity as OperatorRarity,
+                                class: operator.profession as OperatorClass,
+                            }}
+                            onClickFn={() => handleOperatorSelection(operator.charid)}
+                        />
+                    ))}
+                </div>
+                {/* Selection */}
+                <div className={"w-full"}>
+                    <div className={"mb-2 text-center font-extrabold"}>
+                        Hãy chọn Operator bạn muốn cấm (
+                        {selectedOperators.length}
+                        /6)
                     </div>
-                    <div className={"space-x-5"}>
-                        <input className={"border-1 border-white px-5"} placeholder={"Ghi tên op ở đây..."} value={operatorNameSearch} onChange={e => setOperatorNameSearch(e.target.value)} />
-                        <button
-                            className={"mx-2 border-1 border-white bg-[#2e76a9] px-4 disabled:bg-gray-600 disabled:opacity-50"}
-                            disabled={operatorNameSearch === ""}
-                            type={"button"}
-                            onClick={() => setOperatorNameSearch("")}
-                        >
-                            Clear
-                        </button>
-                    </div>
-                    <div className={"flex items-center justify-center space-x-1"}>
-                        <Image alt={"Star 1"} height={32} src={maxRarity >= 1 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(1)} />
-                        <Image alt={"Star 2"} height={32} src={maxRarity >= 2 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(2)} />
-                        <Image alt={"Star 3"} height={32} src={maxRarity >= 3 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(3)} />
-                        <Image alt={"Star 4"} height={32} src={maxRarity >= 4 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(4)} />
-                        <Image alt={"Star 5"} height={32} src={maxRarity >= 5 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(5)} />
-                        <Image alt={"Star 6"} height={32} src={maxRarity >= 6 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(6)} />
-                    </div>
-                    <div className={"flex items-center justify-center space-x-1"}>
-                        <div className={"pr-4"}>Class</div>
-                        <ClassIcon active={selectedClass === "Caster"} operatorClass={"Caster"} onClick={() => handleClassSelection("Caster")} />
-                        <ClassIcon active={selectedClass === "Medic"} operatorClass={"Medic"} onClick={() => handleClassSelection("Medic")} />
-                        <ClassIcon active={selectedClass === "Guard"} operatorClass={"Guard"} onClick={() => handleClassSelection("Guard")} />
-                        <ClassIcon active={selectedClass === "Sniper"} operatorClass={"Sniper"} onClick={() => handleClassSelection("Sniper")} />
-                        <ClassIcon active={selectedClass === "Specialist"} operatorClass={"Specialist"} onClick={() => handleClassSelection("Specialist")} />
-                        <ClassIcon active={selectedClass === "Supporter"} operatorClass={"Supporter"} onClick={() => handleClassSelection("Supporter")} />
-                        <ClassIcon active={selectedClass === "Defender"} operatorClass={"Defender"} onClick={() => handleClassSelection("Defender")} />
-                        <ClassIcon active={selectedClass === "Vanguard"} operatorClass={"Vanguard"} onClick={() => handleClassSelection("Vanguard")} />
-                    </div>
-                    <div className={"grid h-[25vh] grid-cols-5 content-start space-y-4 space-x-2 overflow-x-hidden overflow-y-auto lg:grid-cols-9"}>
-                        {filteredOperators.map(operator => (
-                            <OperatorIcon
-                                key={operator.charid}
-                                isBanned={(operator.profession as OperatorClass) === "Specialist" || bannedOperators.includes(operator.charid)}
-                                isSelected={selectedOperators.includes(operator.charid)}
-                                operator={{
-                                    id: operator.charid,
-                                    name: operator.name,
-                                    rarity: operator.rarity as OperatorRarity,
-                                    class: operator.profession as OperatorClass,
-                                }}
-                                onClickFn={() => handleOperatorSelection(operator.charid)}
-                            />
-                        ))}
-                    </div>
-                    <div className={"w-[92vw]"}>
-                        <div className={"mb-2 text-center font-extrabold text-red-300 italic"}>
-                            Hãy chọn Operator bạn muốn cấm (
-                            {selectedOperators.length}
-                            /6)
-                        </div>
-                        <div className={"grid grid-cols-6 content-center gap-2"}>
-                            {Array.from({ length: 6 }, (_, index) => {
-                                const selectedCharId = selectedOperators[index];
-                                const selectedOp = selectedCharId ? operators.find(op => op.charid === selectedCharId) : null;
-
-                                return (
-                                    <div
-                                        key={index}
-                                        className={"flex h-32 w-20 items-start justify-center"}
-                                        onClick={() => selectedCharId && removeSelectedOperator(selectedCharId)}
-                                    >
-                                        {selectedOp
+                    <div className={"grid grid-cols-6 gap-7"}>
+                        {Array.from({ length: 6 }, (_, index) => {
+                            const selectedCharId = selectedOperators[index];
+                            const selectedOp = selectedCharId ? operators.find(op => op.charid === selectedCharId) : null;
+                            return (
+                                <div key={index} className={"h-28"}>
+                                    {
+                                        selectedOp
                                             ? (
                                                     <OperatorIcon
+
                                                         isSelected={false}
                                                         operator={{
                                                             id: selectedOp.charid,
@@ -342,28 +338,34 @@ export default function DraftingPage() {
                                                     />
                                                 )
                                             : (
-                                                    <div className={"text-center text-xs text-gray-500"}>
+                                                    <div className={"mt-6 text-center text-xs text-muted-foreground"}>
                                                         Empty
                                                     </div>
-                                                )}
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                                )
+                                    }
+                                </div>
+                            );
+                        })}
                     </div>
-                    <div className={"grid w-[95vw] grid-cols-2 grid-rows-1 space-x-4 px-12"}>
-                        <button
-                            className={"btn bg-red-400"}
-                            disabled={selectedOperators.length === 0 || !isVotingAllowed || getDisplayTime() <= 0}
-                            type={"button"}
-                            onClick={async () => {
-                                await handleBanSubmission();
-                            }}
-                        >
-                            BAN
-                        </button>
-                        <button className={"btn bg-green-400 text-black"} type={"button"} onClick={() => setSelectedOperators([])}>CLEAR</button>
-                    </div>
+                </div>
+                {/* CTA */}
+                <div className={"flex w-full items-center justify-evenly"}>
+                    <Button
+                        className={"w-1/3"}
+                        disabled={selectedOperators.length === 0}
+                        onClick={() => setSelectedOperators([])}
+                    >
+                        CLEAR
+                    </Button>
+                    <Button
+                        className={"w-1/3"}
+                        disabled={selectedOperators.length === 0 || !isVotingAllowed || getDisplayTime() <= 0}
+                        onClick={async () => {
+                            await handleBanSubmission();
+                        }}
+                    >
+                        BAN
+                    </Button>
                 </div>
             </div>
         </div>

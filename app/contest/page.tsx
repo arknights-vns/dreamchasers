@@ -19,14 +19,14 @@ export default function OverviewPage() {
                     buổi chương trình!
                 </div>
                 <div className={"flex flex-wrap items-center justify-center gap-4"}>
-                    <Button asChild className={"w-64 text-lg hover:invert"}>
-                        <Link href={"/contest/rules"} type={"button"}>Tổng quan</Link>
+                    <Button asChild className={"w-64 text-lg"}>
+                        <Link href={"/contest/rules"}>Tổng quan</Link>
                     </Button>
-                    <Button asChild className={"w-64 text-lg hover:invert"}>
-                        <Link href={"/contest/scoring"} type={"button"}>Tính điểm</Link>
+                    <Button asChild className={"w-64 text-lg"}>
+                        <Link href={"/contest/scoring"}>Tính điểm</Link>
                     </Button>
-                    <Button asChild className={"w-64 text-lg hover:invert"}>
-                        <Link href={"/contest/prizes"} type={"button"}>Giải thưởng</Link>
+                    <Button asChild className={"w-64 text-lg"}>
+                        <Link href={"/contest/prizes"}>Giải thưởng</Link>
                     </Button>
                 </div>
                 <Image alt={"Tournament Logo"} className={"mb-4 invert dark:invert-0"} src={TournamentLogo} />

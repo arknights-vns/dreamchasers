@@ -6,6 +6,13 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+type DesktopDropdownProps = {
+    title: string;
+    items: Array<{ href: string; label: string }>;
+    pathname: string;
+    pathPrefix: string;
+};
+
 function MobileDropdown({
     title,
     items,
@@ -25,7 +32,7 @@ function MobileDropdown({
                         className={
                             classNames(
                                 "ml-8 px-3 py-2",
-                                { "bg-primary text-secondary font-bold": pathname === item.href },
+                                { "bg-primary text-secondary font-bold": pathname.startsWith(item.href) },
                             )
                         }
                         href={item.href}
@@ -37,13 +44,6 @@ function MobileDropdown({
         </details>
     );
 }
-
-type DesktopDropdownProps = {
-    title: string;
-    items: Array<{ href: string; label: string }>;
-    pathname: string;
-    pathPrefix: string;
-};
 
 function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdownProps) {
     const active = pathname.startsWith(pathPrefix);
@@ -66,7 +66,7 @@ function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdown
                     {title}
                 </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className={"rounded-box mt-1 w-52 bg-background p-2 shadow-lg"}>
+            <DropdownMenuContent className={"w-52 bg-background shadow-xs shadow-primary/50"}>
                 {items.map(item => (
                     <DropdownMenuItem key={item.href} asChild>
                         <Link
@@ -102,8 +102,8 @@ function NavLink({
                 classNames(
                     "relative rounded-md py-2 transition-all duration-200 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:transform after:transition-transform after:duration-200 after:ease-in-out after:content-['']",
                     {
-                        "font-bold after:scale-x-100 after:bg-primary": pathname === href,
-                        "after:scale-x-0 after:bg-primary hover:after:scale-x-100": pathname !== href,
+                        "font-bold after:scale-x-100 after:bg-primary": pathname.startsWith(href),
+                        "after:scale-x-0 after:bg-primary hover:after:scale-x-100": !pathname.startsWith(href),
                     },
                 )
             }
@@ -126,10 +126,10 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
     ];
 
     const eventItems = [
-        { href: "/event/roadmap", label: "Lịch trình" },
-        { href: "/event/schedule", label: "Timeline sự kiện" },
-        { href: "/event/location", label: "Địa điểm" },
-        { href: "/event/rules", label: "Nội quy" },
+        { href: "/event/roadmap", label: "Công tác chuẩn bị" },
+        { href: "/event/schedule", label: "Hoạt động của Offline" },
+        { href: "/event/location", label: "Địa điểm tổ chức" },
+        { href: "/event/rules", label: "Nội quy tham gia" },
     ];
 
     const pathname = usePathname();
@@ -144,7 +144,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                         className={
                             classNames(
                                 "px-3 py-2",
-                                { "bg-primary text-background font-bold": pathname === link.href },
+                                { "bg-primary text-background font-bold": pathname.startsWith(link.href) },
                             )
                         }
                         href={link.href}
