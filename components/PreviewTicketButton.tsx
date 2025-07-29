@@ -14,7 +14,7 @@ export default function PreviewTicketButton() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className={"rounded-xl bg-black text-xl font-bold text-white hover:invert"} size={"lg"}>
+                <Button className={"rounded-xl text-xl font-bold"} size={"lg"}>
                     Mua vé
                 </Button>
             </DialogTrigger>
@@ -25,7 +25,7 @@ export default function PreviewTicketButton() {
                     </DialogTitle>
                 </DialogHeader>
                 <DialogDescription asChild>
-                    <div className={"space-y-2 text-black!"}>
+                    <div className={"space-y-2"}>
                         <p>
                             Bạn nhớ theo dõi thông tin mới nhất tại page
                             {" "}

@@ -12,8 +12,8 @@ export default function ScoringPage() {
             <PageTitle favorText={"Một số thông tin để giúp bạn lên kế hoạch cho Mini-Tournament"} title={"Tính điểm"} />
             <div className={"m-5 flex flex-col items-center justify-center"}>
                 <section className={"mx-5 mb-8 flex w-full max-w-3xl flex-col items-center justify-center"}>
-                    <div className={"mb-8 text-center text-4xl text-white"}>1. Các yếu tố tham gia</div>
-                    <ul className={"list-disc space-y-2 pl-4 text-lg text-white"}>
+                    <div className={"mb-8 text-center text-4xl"}>1. Các yếu tố tham gia</div>
+                    <ul className={"list-disc space-y-2 pl-4 text-lg"}>
                         <li>Thời gian bạn chọn operator.</li>
                         <li>Thời gian 1 màn chạy.</li>
                         <li>Số địch đánh được - không bao gồm leak.</li>
@@ -22,15 +22,15 @@ export default function ScoringPage() {
                     </ul>
                 </section>
                 <section className={"mb-8 w-full max-w-3xl"}>
-                    <div className={"mb-8 text-center text-4xl text-white"}>2. Cách tính điểm thành phần</div>
+                    <div className={"mb-8 text-center text-4xl"}>2. Cách tính điểm thành phần</div>
                     <div className={"space-y-6"}>
                         {/* Draft time */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-lg text-white"}>
+                                <CardTitle className={"text-lg"}>
                                     Thời gian chọn Operator
                                     {": "}
-                                    <span className={"rounded-sm bg-gray-300/15 px-2 py-1 text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
                                         S
                                         <sub>draft</sub>
                                         {" "}
@@ -43,7 +43,7 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm text-white"}>
+                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
                                     <li>
                                         t
                                         <sub>draft</sub>
@@ -57,12 +57,12 @@ export default function ScoringPage() {
                             </CardContent>
                         </Card>
                         {/* IGT */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-lg text-white"}>
+                                <CardTitle className={"text-lg"}>
                                     Thời gian 1 màn chạy
                                     {": "}
-                                    <span className={"rounded-sm bg-gray-300/15 px-2 py-1 text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
                                         S
                                         <sub>run</sub>
                                         {" "}
@@ -76,7 +76,7 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm text-white"}>
+                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
                                     <li>
                                         t
                                         <sub>run</sub>
@@ -90,12 +90,12 @@ export default function ScoringPage() {
                             </CardContent>
                         </Card>
                         {/* Head count */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-lg text-white"}>
+                                <CardTitle className={"text-lg"}>
                                     Số địch đánh được
                                     {": "}
-                                    <span className={"rounded-sm bg-gray-300/15 px-2 py-1 text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
                                         S
                                         <sub>enemy</sub>
                                         {" "}
@@ -106,26 +106,26 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"mt-2 list-disc space-y-1 pl-4 text-sm text-white"}>
+                                <ul className={"mt-2 list-disc space-y-1 pl-4 text-sm"}>
                                     <li>Không tính leak nha, dĩ nhiên rồi.</li>
                                     <li>Số địch tối đa tụi mình sẽ tính điểm là 25.</li>
                                 </ul>
                             </CardContent>
                         </Card>
                         {/* Progression */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-lg text-white"}>
+                                <CardTitle className={"text-lg"}>
                                     Bạn đánh Theresa tới đâu
                                     {": "}
-                                    <span className={"rounded-sm bg-gray-300/15 px-2 py-1 text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
                                         S
                                         <sub>queen</sub>
                                     </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm text-white"}>
+                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
                                     <li>
                                         Có tham gia tournament:
                                         {" "}
@@ -150,19 +150,19 @@ export default function ScoringPage() {
                             </CardContent>
                         </Card>
                         {/* Comp */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-lg text-white"}>
+                                <CardTitle className={"text-lg"}>
                                     Squad bạn sử dụng
                                     {": "}
-                                    <span className={"rounded-sm bg-gray-300/15 px-2 py-1 text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
                                         S
                                         <sub>comp</sub>
                                     </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm text-white"}>
+                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
                                     <li>
                                         <span className={"font-semibold text-green-300"}>+20</span>
                                         {" "}
@@ -181,7 +181,7 @@ export default function ScoringPage() {
                                         cho mỗi operator trong list dưới đây:
                                     </li>
                                 </ul>
-                                <ul className={"mt-2 list-disc space-y-1 pl-8 text-sm text-white"}>
+                                <ul className={"mt-2 list-disc space-y-1 pl-8 text-sm"}>
                                     <li className={"font-bold"}>Civilight Eterna</li>
                                     <li className={"font-bold"}><span className={"text-red-400"}>Exusiai</span></li>
                                     <li className={"font-bold"}><span className={"text-cyan-400"}>Rosmontis</span></li>
@@ -192,13 +192,13 @@ export default function ScoringPage() {
                             </CardContent>
                         </Card>
                         {/* Total */}
-                        <Card className={"bg-black"}>
+                        <Card>
                             <CardHeader>
-                                <CardTitle className={"text-center text-lg text-white"}>Điểm của 1 màn chạy = tổng các điểm thành phần</CardTitle>
+                                <CardTitle className={"text-center text-lg"}>Điểm của 1 màn chạy = tổng các điểm thành phần</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <div className={"my-4 text-center"}>
-                                    <span className={"rounded-sm bg-gray-300/15 px-4 py-2 font-mono text-lg text-white"}>
+                                    <span className={"rounded-sm bg-secondary px-4 py-2 font-mono text-lg"}>
                                         S
                                         <sub>member</sub>
                                         {" "}
@@ -223,13 +223,13 @@ export default function ScoringPage() {
                     </div>
                 </section>
                 <section className={"mb-8 w-full max-w-3xl"}>
-                    <div className={"mb-8 text-center text-4xl text-white"}>3. Ví dụ</div>
-                    <Card className={"bg-black"}>
+                    <div className={"mb-8 text-center text-4xl"}>3. Ví dụ</div>
+                    <Card>
                         <CardHeader>
-                            <CardTitle className={"text-lg text-white"}>Lấy ví dụ run của Meruko - 1 tester của team:</CardTitle>
+                            <CardTitle className={"text-lg"}>Lấy ví dụ run của Meruko - 1 tester của team:</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <ul className={"mb-4 list-disc space-y-2 pl-4 text-white"}>
+                            <ul className={"mb-4 list-disc space-y-2 pl-4"}>
                                 <li>
                                     Meruko draft trong 50
                                     <strong>s</strong>
@@ -263,8 +263,8 @@ export default function ScoringPage() {
                                 </li>
                             </ul>
                             <div className={"mt-6"}>
-                                <h4 className={"mb-3 text-lg font-semibold text-white"}>Điểm thành phần:</h4>
-                                <div className={"grid grid-cols-2 text-sm text-white"}>
+                                <h4 className={"mb-3 text-lg font-semibold"}>Điểm thành phần:</h4>
+                                <div className={"grid grid-cols-2 text-sm"}>
                                     <ul className={"list-disc space-y-1 pl-4"}>
                                         <li>
                                             Chọn Operator:
@@ -316,10 +316,10 @@ export default function ScoringPage() {
                                     </ul>
                                 </div>
                             </div>
-                            <div className={"mt-4 flex flex-col rounded-sm bg-neutral-700 p-4"}>
-                                <p className={"text-center font-semibold text-white"}>Tổng điểm</p>
+                            <div className={"mt-4 flex flex-col rounded-sm bg-muted p-4"}>
+                                <p className={"text-center font-semibold"}>Tổng điểm</p>
                                 <div className={"mt-2 flex-nowrap text-center"}>
-                                    <span className={"rounded-sm bg-neutral-900 px-4 py-2 font-mono text-white"}>
+                                    <span className={"rounded-sm bg-accent-foreground px-4 py-2 font-mono text-secondary"}>
                                         S
                                         <sub>Meruko</sub>
                                         {" "}

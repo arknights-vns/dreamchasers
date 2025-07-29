@@ -1,22 +1,7 @@
 "use client";
 
+import { Angry, ArrowRightLeft, Baby, BrushCleaning, Dog, Flame, Gavel, Hand, MapPinCheckInside, Scale, Shirt, ShoppingBag, Sword, Syringe, UserRoundX } from "lucide-react";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { FaGun, FaPersonMilitaryRifle } from "react-icons/fa6";
-import { GiSwordsPower } from "react-icons/gi";
-import { IoBag } from "react-icons/io5";
-import {
-    LiaBalanceScaleSolid,
-    LiaBroomSolid,
-    LiaChildSolid,
-    LiaCommentDotsSolid,
-    LiaDogSolid,
-    LiaHammerSolid,
-    LiaStoreAltSolid,
-    LiaSyringeSolid,
-    LiaTshirtSolid,
-    LiaUserFriendsSolid,
-} from "react-icons/lia";
-import { MdDoNotTouch } from "react-icons/md";
 import PageTitle from "@/components/PageTitle";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -30,8 +15,102 @@ type RuleType = {
     icon: IconType;
 };
 
+const rules: RuleType[] = [
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description:
+            "Tất cả các hình thức quấy rối, xâm phạm đến tài sản và quyền riêng tư cá nhân.",
+        icon: Hand,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description:
+            "Mang vũ khí quân sự (s.ú.n.g, d.a.o,...) và các vật dụng nguy hiểm vào trong khu vực sự kiện.",
+        icon: Sword,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description: "Tất cả các loại chất kích thích, cấm các hành vi gây mất trật tự công cộng.",
+        icon: Syringe,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description: "Bàn về chính trị, phân biệt vùng miền, gây mâu thuẫn, và bạo lực.",
+        icon: Scale,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description:
+            "Cấm các trang phục phản cảm, trang phục thuộc quân phục, cảnh phục... không phù hợp với thuần phong mỹ tục hay tính chất của sự kiện.",
+        icon: Shirt,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description: "Cấm mang vật nuôi, thú vật vào sự kiện.",
+        icon: Dog,
+    },
+    {
+        title: "CẤM",
+        titleColor: "red",
+        description:
+            "Những hành vi gây tổn hại đến cơ sở vật chất của khuôn viên sự kiện sẽ phải chịu trách nhiệm và đền bù.",
+        icon: Gavel,
+    },
+    {
+        title: "BẮT BUỘC",
+        titleColor: "red",
+        description: "Trẻ em dưới 13 tuổi cần có sự giám sát và quản lý của người lớn.",
+        icon: Baby,
+    },
+    {
+        title: "HÃY",
+        titleColor: "green",
+        description: "Giữ gìn vệ sinh chung khuôn viên sự kiện",
+        icon: BrushCleaning,
+    },
+    {
+        title: "VUI LÒNG",
+        titleColor: "green",
+        description: "Tự quản tư trang cá nhân. Mọi mất mát BTC sẽ không chịu trách nhiệm. ",
+        icon: ShoppingBag,
+    },
+    {
+        title: "NẾU",
+        titleColor: "green",
+        description: "Nhặt được đồ thất lạc vui lòng liên hệ BTC để nhận hỗ trợ.",
+        icon: MapPinCheckInside,
+    },
+    {
+        title: "KHI",
+        titleColor: "green",
+        description:
+            "Xảy ra sự cố, xung đột hay tranh chấp... tại offline, quyết định của BTC là quyết định tiên quyết.",
+        icon: Angry,
+    },
+    {
+        title: "BTC",
+        titleColor: "yellow",
+        description:
+            "Miễn trách nhiệm đối với các giao dịch cá nhân, ngoại trừ tại khu vực booth của nhà tài trợ.",
+        icon: ArrowRightLeft,
+    },
+    {
+        title: "BTC",
+        titleColor: "red",
+        description:
+            "Không chịu trách nhiệm với những vấn đề giữa các khách hàng với nhau.",
+        icon: Flame,
+    },
+];
+
 function VerticalLine({ height }: { height: number }) {
-    return <div className={"w-0 border-2 border-white"} style={{ height: `${height}px` }}></div>;
+    return <div className={"w-0 border-2 border-primary"} style={{ height: `${height}px` }}></div>;
 }
 
 function RuleSection({
@@ -60,7 +139,7 @@ function RuleSection({
             >
                 <h1 className={`${colorClass} text-2xl font-medium md:text-5xl`}>{title}</h1>
                 <p
-                    className={`${side === "left" ? "text-right" : "text-left"} text-lg font-medium text-white md:text-xl`}
+                    className={`${side === "left" ? "text-right" : "text-left"} text-lg font-medium md:text-xl`}
                 >
                     {description}
                 </p>
@@ -101,7 +180,7 @@ function RulesList({ rules }: { rules: RuleType[] }) {
                                 className={"flex size-25 items-center justify-center"}
                             >
                                 <div className={"relative size-3/4"}>
-                                    <rule.icon className={"size-full text-white"} />
+                                    <rule.icon className={"size-full"} />
                                 </div>
                             </div>
                             {index !== rules.length - 1 ? <VerticalLine height={100} /> : <></>}
@@ -129,120 +208,26 @@ function RulesList({ rules }: { rules: RuleType[] }) {
     );
 }
 
-const rules: RuleType[] = [
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description:
-            "Tất cả các hình thức quấy rối, xâm phạm đến tài sản và quyền riêng tư cá nhân.",
-        icon: MdDoNotTouch,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description:
-            "Mang vũ khí quân sự (s.ú.n.g, d.a.o,...) và các vật dụng nguy hiểm vào trong khu vực sự kiện.",
-        icon: GiSwordsPower,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description: "Tất cả các loại chất kích thích, cấm các hành vi gây mất trật tự công cộng.",
-        icon: LiaSyringeSolid,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description: "Bàn về chính trị, phân biệt vùng miền, gây mâu thuẫn, và bạo lực.",
-        icon: LiaBalanceScaleSolid,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description:
-            "Cấm các trang phục phản cảm, trang phục thuộc quân phục, cảnh phục... không phù hợp với thuần phong mỹ tục hay tính chất của sự kiện.",
-        icon: LiaTshirtSolid,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description: "Cấm mang vật nuôi, thú vật vào sự kiện.",
-        icon: LiaDogSolid,
-    },
-    {
-        title: "CẤM",
-        titleColor: "red",
-        description:
-            "Những hành vi gây tổn hại đến cơ sở vật chất của khuôn viên sự kiện sẽ phải chịu trách nhiệm và đền bù.",
-        icon: LiaHammerSolid,
-    },
-    {
-        title: "BẮT BUỘC",
-        titleColor: "red",
-        description: "Trẻ em dưới 13 tuổi cần có sự giám sát và quản lý của người lớn.",
-        icon: LiaChildSolid,
-    },
-    {
-        title: "HÃY",
-        titleColor: "green",
-        description: "Giữ gìn vệ sinh chung khuôn viên sự kiện",
-        icon: LiaBroomSolid,
-    },
-    {
-        title: "VUI LÒNG",
-        titleColor: "green",
-        description: "Tự quản tư trang cá nhân. Mọi mất mát BTC sẽ không chịu trách nhiệm. ",
-        icon: IoBag,
-    },
-    {
-        title: "NẾU",
-        titleColor: "green",
-        description: "Nhặt được đồ thất lạc vui lòng liên hệ BTC để nhận hỗ trợ.",
-        icon: LiaCommentDotsSolid,
-    },
-    {
-        title: "KHI",
-        titleColor: "green",
-        description:
-            "Xảy ra sự cố, xung đột hay tranh chấp... tại offline, quyết định của BTC là quyết định tiên quyết.",
-        icon: LiaUserFriendsSolid,
-    },
-    {
-        title: "BTC",
-        titleColor: "yellow",
-        description:
-            "Miễn trách nhiệm đối với các giao dịch cá nhân, ngoại trừ tại khu vực booth của nhà tài trợ.",
-        icon: LiaStoreAltSolid,
-    },
-    {
-        title: "BTC",
-        titleColor: "red",
-        description:
-            "Không chịu trách nhiệm với những vấn đề giữa các khách hàng với nhau.",
-        icon: MdDoNotTouch,
-    },
-];
-
 const cosplayRules: RuleType[] = [
     {
         title: "HÃY",
         titleColor: "green",
         description:
             "Mặc sẵn đồ cosplay và trang điểm trước. Vì bên trong quán chúng mình không có chỗ để sửa soạn",
-        icon: LiaTshirtSolid,
+        icon: Shirt,
     },
     {
         title: "NGHIÊM CẤM",
         titleColor: "red",
         description:
             "Hóa trang nhân vật có trang phục thuộc quân phục, cảnh phục, hoặc không phù hợp thuần phong mỹ tục.",
-        icon: FaGun,
+        icon: UserRoundX,
     },
     {
         title: "LƯU Ý",
         titleColor: "yellow",
         description: "Props & Weaps, mô hình vũ khí nhân vật các bạn được phép mang theo. Tuy nhiên vũ khí thật vẫn bị cấm.",
-        icon: FaPersonMilitaryRifle,
+        icon: Sword,
     },
 ];
 
@@ -298,10 +283,10 @@ export default function RulePage() {
                 onTouchStart={handleTouchStart}
             >
                 <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
-                    <TabsList className={"h-12 w-full rounded-none border-b bg-neutral-950 p-1"}>
+                    <TabsList className={"h-12 w-full rounded-none border-b bg-background p-1"}>
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"general"}
                         >
@@ -310,19 +295,19 @@ export default function RulePage() {
                         <Separator orientation={"vertical"} />
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none border-r py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"cosplay"}
                         >
-                            Dành cho cosplayer
+                            Dành cho Cosplayer
                         </TabsTrigger>
                     </TabsList>
 
-                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"general"}>
+                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"general"}>
                         <RulesList rules={rules} />
                     </TabsContent>
 
-                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"cosplay"}>
+                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"cosplay"}>
                         <RulesList rules={cosplayRules} />
                     </TabsContent>
                 </Tabs>

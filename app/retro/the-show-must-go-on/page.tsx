@@ -6,11 +6,8 @@ import TheShowMustGoOnImg from "@/public/retro/the-show-must-go-on/the-show-must
 export default function TheShowMustGoOn() {
     return (
         <div className={"h-visible bg-vns flex flex-col"}>
-            <PageTitle
-                favorText={""}
-                title={"The show must go on!"}
-            />
-            <div className={"mx-auto flex w-150 flex-col items-center justify-center space-y-4 text-white md:w-200 lg:w-250"}>
+            <PageTitle title={"The show must go on!"} />
+            <div className={"mx-auto flex w-150 flex-col items-center justify-center space-y-4 md:w-200 lg:w-250"}>
                 <div className={"font-normal"}>
                     Tuy không dám khẳng định đây là buổi Offline lớn đầu tiên của cộng đồng Arknights
                     tại Việt Nam, nhưng dựa trên những phản hồi từ người tham dự, chúng mình có thể tự

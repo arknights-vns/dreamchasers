@@ -1,4 +1,4 @@
-import { AiFillClockCircle } from "react-icons/ai";
+import { Clock } from "lucide-react";
 
 type TimelineItemProps = {
     date: string;
@@ -40,7 +40,7 @@ export default function TimelineItem(props: TimelineItemProps) {
                 <div className={"leading-relaxed font-light whitespace-pre-line"}>{props.data}</div>
             </div>
             <div className={"timeline-middle"}>
-                <AiFillClockCircle fill={"white"} size={24} />
+                <Clock fill={"white"} size={24} />
             </div>
             <div className={"timeline-end"}>
                 <div className={"mb-1 hidden font-bold md:block"}>{props.date}</div>

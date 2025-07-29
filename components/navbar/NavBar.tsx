@@ -1,15 +1,15 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { LuSparkle } from "react-icons/lu";
+import NavBarItems from "@/components/navbar/NavBarItems";
 import PurchaseTicketButton from "@/components/PreviewTicketButton";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import DRCH_Logo from "@/public/DRCH_Logo.png";
-import NavBarItems from "./NavBarItems";
 
 export default function NavBar() {
     const pathname = usePathname();
@@ -17,7 +17,6 @@ export default function NavBar() {
     const doNotShow = [
         "/contest/banned",
         "/contest/democracy",
-        "/contest/standing",
         "/admin",
     ];
 
@@ -28,31 +27,31 @@ export default function NavBar() {
     }
 
     return (
-        <header className={`sticky top-0 z-50 ${visualStyle} h-20 w-full bg-white pl-4`}>
+        <header className={`sticky top-0 z-50 ${visualStyle} h-20 w-full bg-accent pl-4`}>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button className={"mr-4 self-center lg:hidden"} size={"icon"} variant={"outline"}>
-                        <GiHamburgerMenu />
+                        <Menu />
                     </Button>
                 </SheetTrigger>
                 <SheetTitle />
                 <SheetDescription />
-                <SheetContent side={"bottom"}>
+                <SheetContent className={"max-w-1/2!"} side={"left"}>
                     <div className={"mt-2 ml-4 grid gap-2 py-6"}>
                         <NavBarItems isMobile />
                     </div>
                 </SheetContent>
             </Sheet>
             <Link className={"m-2 flex items-center space-x-4"} href={"/"} prefetch={false}>
-                <Image alt={"DRCH_Logo"} className={"size-[50px]"} src={DRCH_Logo} />
+                <Image alt={"DRCH_Logo"} className={"size-[50px] dark:invert"} src={DRCH_Logo} />
                 <span className={"hidden text-xl font-bold md:inline"}>Dreamchasers</span>
             </Link>
-            <nav className={"ml-auto hidden gap-6 lg:flex"}>
+            <nav className={"mr-2 ml-auto hidden gap-6 lg:flex"}>
                 <NavBarItems />
             </nav>
             <div className={"ml-auto flex items-center space-x-2 lg:ml-0"}>
                 <PurchaseTicketButton />
-                <LuSparkle className={"mr-2 hidden md:block"} fill={"#000000"} />
+                <ThemeSwitcher />
             </div>
         </header>
     );

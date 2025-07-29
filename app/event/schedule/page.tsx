@@ -1,4 +1,4 @@
-import { RiHourglass2Fill } from "react-icons/ri";
+import { Hourglass } from "lucide-react";
 import PageTitle from "@/components/PageTitle";
 import TimelineItem from "@/components/TimelineItem";
 
@@ -23,7 +23,7 @@ export default function SchedulePage() {
                         tail
                     />
                 </ul>
-                <RiHourglass2Fill className={"relative bottom-0 mb-4"} fill={"white"} size={32} />
+                <Hourglass className={"relative bottom-0 mb-4"} fill={"white"} size={32} />
             </div>
         </div>
     );

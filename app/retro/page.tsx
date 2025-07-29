@@ -11,7 +11,7 @@ export default function RetroPage() {
                 title={"Kỷ niệm"}
             />
 
-            <div className={"flex flex-1/2 flex-col items-center justify-center space-y-4 md:mx-32"}>
+            <div className={"mx-auto flex flex-col items-center justify-center space-y-4"}>
                 <RetroItem
                     description={"Offline đầu tiên của VNS, cũng như là tiền đề cho Dreamchasers và VNS Network."}
                     href={"/retro/the-show-must-go-on"}

@@ -8,27 +8,21 @@ type PageTitleProps = {
 };
 
 export default function PageTitle(props: PageTitleProps) {
-    const shouldWhite = props.light === true;
-    const invertStyle = shouldWhite ? "" : "invert";
-    const favorTextStyle = shouldWhite ? "text-black" : "text-white";
-
     return (
-        <div className={"mt-4 mb-2"}>
-            <div
-                className={`mt-4 flex items-center justify-center ${invertStyle}`}
-            >
-                <div className={"hidden pr-4 md:block"}>
+        <div className={"my-8"}>
+            <div className={`flex items-center justify-center`}>
+                <div className={"hidden pr-4 lg:block dark:invert"}>
                     <TitleDecorLeft height={24} width={115} />
                 </div>
-                <div className={"text-center text-5xl font-extrabold lg:text-6xl"}>
+                <div className={"text-center text-4xl font-extrabold md:text-5xl"}>
                     {props.title.toUpperCase()}
                 </div>
-                <div className={"hidden pl-4 md:block"}>
+                <div className={"hidden pl-4 lg:block dark:invert"}>
                     <TitleDecorRight height={24} width={115} />
                 </div>
             </div>
             {props.favorText && (
-                <p className={`mt-4 text-xl font-light ${favorTextStyle} text-center`}>{props.favorText}</p>
+                <p className={`my-2 text-center text-xl`}>{props.favorText}</p>
             )}
         </div>
     );

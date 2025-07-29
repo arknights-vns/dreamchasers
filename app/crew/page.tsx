@@ -1,18 +1,49 @@
 "use client";
 
 import type { CrewMember } from "@/lib/vns";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import MemberBox from "@/components/MemberBox";
 import PageTitle from "@/components/PageTitle";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CrewMembers from "@/public/crew/_crew.json";
 
-type HRListProps = {
+type CrewListProps = {
     members: CrewMember[];
 };
 
-function CrewList(props: HRListProps) {
+function MemberBox(props: CrewMember) {
+    return (
+        <div className={"mb-4 flex max-h-64 min-w-64 flex-col items-center gap-y-2"}>
+            <Image
+                alt={"VNS_Crew"}
+                className={"rounded-full ring ring-primary"}
+                height={100}
+                src={`/crew/${props.name}.jpg`}
+                width={100}
+            />
+            <div className={"text-xl font-extrabold"}>{props.name}</div>
+            {/* {props.quote !=P= "" && ( */}
+            {/*    <div className={"text-md text-base-content text-center font-extralight italic"}> */}
+            {/*        &#34;{props.quote}&#34; */}
+            {/*    </div> */}
+            {/* )} */}
+            <div className={"space-x-2"}>
+                {Array.isArray(props.roles)
+                    && props.roles.map((role: string) => (
+                        <span
+                            key={role}
+                            className={`crew-role-container font-extrabold ${role}`}
+                        >
+                            {role.replaceAll("-", " ")}
+                        </span>
+                    ))}
+            </div>
+        </div>
+    );
+}
+
+function CrewList(props: CrewListProps) {
     const eliteMembers = props.members.slice(0, 3);
     const remainingMembers = props.members.slice(3);
 
@@ -67,7 +98,7 @@ function CrewList(props: HRListProps) {
     );
 }
 
-function PartnerList(props: HRListProps) {
+function PartnerList(props: CrewListProps) {
     return (
         <>
             <div
@@ -143,19 +174,19 @@ export default function CrewPage() {
                 onTouchStart={handleTouchStart}
             >
                 <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
-                    <TabsList className={"h-12 w-full rounded-none border-b bg-neutral-950 p-1"}>
+                    <TabsList className={"h-12 w-full rounded-none border-b bg-background p-1"}>
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"dreamchasers"}
                         >
                             "Dreamchasers"
                         </TabsTrigger>
-                        <Separator orientation={"vertical"} />
+                        <Separator className={"bg-secondary"} orientation={"vertical"} />
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none border-r py-3 text-lg font-semibold text-neutral-300 transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
                             }
                             value={"partners"}
                         >
@@ -163,11 +194,11 @@ export default function CrewPage() {
                         </TabsTrigger>
                     </TabsList>
 
-                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"dreamchasers"}>
+                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"dreamchasers"}>
                         <CrewList members={members} />
                     </TabsContent>
 
-                    <TabsContent className={"mx-4 overflow-y-auto pt-10"} value={"partners"}>
+                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"partners"}>
                         <PartnerList members={partners} />
                     </TabsContent>
                 </Tabs>

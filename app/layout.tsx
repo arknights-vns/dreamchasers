@@ -4,6 +4,7 @@ import { Quicksand as VNS_Font } from "next/font/google";
 import { BASE_URL } from "@/app/web-config";
 
 import NavBar from "@/components/navbar/NavBar";
+import { TerraTheme } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const mainFont = VNS_Font({
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    colorScheme: "dark",
+    colorScheme: "light dark",
     initialScale: 1.0,
 };
 
@@ -46,10 +47,17 @@ export default function RootLayout({
     children: ReactNode;
 }>) {
     return (
-        <html lang={"vn"}>
+        <html lang={"vn"} suppressHydrationWarning>
             <body className={`${mainFont.variable} font-[family-name:var(--font-vns)] antialiased`}>
-                <NavBar />
-                <div>{children}</div>
+                <TerraTheme
+                    attribute={"class"}
+                    defaultTheme={"system"}
+                    disableTransitionOnChange
+                    enableSystem
+                >
+                    <NavBar />
+                    {children}
+                </TerraTheme>
             </body>
         </html>
     );
