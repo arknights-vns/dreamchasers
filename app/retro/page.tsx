@@ -5,13 +5,17 @@ import TheShowMustGoOn from "@/public/retro/the-show-must-go-on/the-show-must-go
 
 export default function RetroPage() {
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle
                 favorText={"Nơi lưu giữ album của những buổi Offline."}
                 title={"Kỷ niệm"}
             />
 
-            <div className={"mx-auto mb-8 flex flex-1/2 flex-col items-center justify-center space-y-4"}>
+            <div className={`
+                mx-auto mb-8 flex flex-1/2 flex-col items-center justify-center
+                space-y-4
+            `}
+            >
                 <RetroItem
                     description={"Offline đầu tiên của VNS, cũng như là tiền đề cho Dreamchasers và VNS Network."}
                     href={"/retro/the-show-must-go-on"}

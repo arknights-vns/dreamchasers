@@ -17,13 +17,13 @@ export async function GET() {
         if (error instanceof Error && error.message === "No votes found") {
             return NextResponse.json(
                 { error: "No votes found" },
-                { status: 412 },
+                { status: 412 }
             );
         }
 
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 },
+            { status: 500 }
         );
     }
 }

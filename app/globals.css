@@ -5,12 +5,12 @@
 
 @plugin "tailwind-scrollbar";
 
-.h-visible {
+@utility h-visible {
     /* Credit: Cerberose @ PR#5 */
     @apply min-h-[calc(100svh_-_80px)];
 }
 
-.crew-role-container {
+@utility crew-role-container {
     @apply rounded-2xl;
     @apply px-2;
     @apply py-1;
@@ -18,7 +18,7 @@
     @apply min-w-12;
 }
 
-.bg-vns {
+@utility bg-vns {
     /* @apply bg-background; */
     /* @apply dark:bg-[url(/BG_Black.jpg)]; */
     @apply bg-cover;
@@ -131,17 +131,19 @@
 }
 
 /* landing page */
-.embla {
-    overflow: hidden;
+@utility embla {
+    @apply overflow-hidden;
 }
 
-.embla__container {
-    display: flex;
+@utility embla__container {
+    @apply flex;
 }
 
-.embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
+@utility embla__slide {
+    @apply shrink-0;
+    @apply grow-0;
+    @apply basis-full;
+    @apply min-w-0;
 }
 
 /* shadcn/ui */

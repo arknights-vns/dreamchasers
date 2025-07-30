@@ -8,7 +8,7 @@ export default function NotFoundPage() {
     const navigation = useRouter();
 
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle favorText={"Có vẻ đây là đường cụt."} title={"Well..."} />
 
             <div className={"flex flex-1/2 flex-col items-center justify-center"}>

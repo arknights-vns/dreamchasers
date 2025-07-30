@@ -24,7 +24,12 @@ function TicketCard(props: TicketCardProps) {
     return (
         <>
             <div
-                className={"m-4 flex min-h-110 min-w-84 flex-col items-center justify-between rounded-3xl border-4 border-white/80 bg-black/70 lg:w-1/3"}
+                className={`
+                    m-4 flex min-h-110 min-w-84 flex-col items-center
+                    justify-between rounded-3xl border-4 border-white/80
+                    bg-black/70
+                    lg:w-1/3
+                `}
             >
                 <div className={"relative mt-4 w-full px-4"}>
                     <Image
@@ -33,7 +38,13 @@ function TicketCard(props: TicketCardProps) {
                         src={props.image}
                     />
                     <div
-                        className={"absolute top-0 left-0 flex h-[64px] w-full items-center justify-center text-center text-2xl font-bold text-black md:text-3xl lg:text-4xl"}
+                        className={`
+                            absolute top-0 left-0 flex h-[64px] w-full
+                            items-center justify-center text-center text-2xl
+                            font-bold text-black
+                            md:text-3xl
+                            lg:text-4xl
+                        `}
                         style={{ textShadow: "0 2px 8px #fff, 0 1px 0 #ffe066" }}
                     >
                         {props.tier.toUpperCase()}
@@ -62,7 +73,11 @@ function TicketCard(props: TicketCardProps) {
                     {props.tier === "Dreamchasers" && (
                         <Image
                             alt={"Áo thun Dreamchasers"}
-                            className={"my-2 cursor-pointer self-center rounded-lg object-cover transition-opacity hover:opacity-80"}
+                            className={`
+                                my-2 cursor-pointer self-center rounded-lg
+                                object-cover transition-opacity
+                                hover:opacity-80
+                            `}
                             height={120}
                             src={ShirtPreview}
                             onClick={() => setImageOverlayOpen(true)}
@@ -78,7 +93,10 @@ function TicketCard(props: TicketCardProps) {
             {/* Image Overlay */}
             {isImageOverlayOpen && (
                 <div
-                    className={"fixed inset-0 z-50 flex cursor-pointer items-center justify-center bg-black/90"}
+                    className={`
+                        fixed inset-0 z-50 flex cursor-pointer items-center
+                        justify-center bg-black/90
+                    `}
                     onClick={() => setImageOverlayOpen(false)}
                 >
                     <Image
@@ -94,17 +112,21 @@ function TicketCard(props: TicketCardProps) {
 
 export default function TicketOverviewPage() {
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle favorText={"(đã bán hết, dành cho các bạn muốn xem lại hạng vé của mình)"} title={"Mua vé"} />
 
             <div className={"flex flex-col items-center justify-center"}>
-                <div className={"flex w-full flex-col items-center justify-center lg:flex-row"}>
+                <div className={`
+                    flex w-full flex-col items-center justify-center
+                    lg:flex-row
+                `}
+                >
                     <TicketCard
                         description={[
                             "Keychain Amiya - Chasing The Dream",
                             "Sticker (ngẫu nhiên 1 trong 4)",
                             "Badge nắp chai by Rei Não Cá",
-                            "Card bo góc by Rei Não Cá",
+                            "Card bo góc by Rei Não Cá"
                         ]}
                         image={PrismaDolphin}
                         price={"119.000"}
@@ -120,7 +142,7 @@ export default function TicketOverviewPage() {
                     <TicketCard
                         description={[
                             "Áo thun Dreamchasers (hình dưới)",
-                            "Badge Logos/Eyja của bibom10",
+                            "Badge Logos/Eyja của bibom10"
                         ]}
                         image={PrismaDRCH}
                         parentTier={"Whale"}

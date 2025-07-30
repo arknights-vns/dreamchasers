@@ -3,15 +3,19 @@ import {
     Card,
     CardContent,
     CardHeader,
-    CardTitle,
+    CardTitle
 } from "@/components/ui/card";
 
 export default function ScoringPage() {
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle favorText={"Một số thông tin để giúp bạn lên kế hoạch cho Mini-Tournament"} title={"Tính điểm"} />
             <div className={"m-5 flex flex-col items-center justify-center"}>
-                <section className={"mx-5 mb-8 flex w-full max-w-3xl flex-col items-center justify-center"}>
+                <section className={`
+                    mx-5 mb-8 flex w-full max-w-3xl flex-col items-center
+                    justify-center
+                `}
+                >
                     <div className={"mb-8 text-center text-4xl"}>1. Các yếu tố tham gia</div>
                     <ul className={"list-disc space-y-2 pl-4 text-lg"}>
                         <li>Thời gian bạn chọn operator.</li>
@@ -30,7 +34,10 @@ export default function ScoringPage() {
                                 <CardTitle className={"text-lg"}>
                                     Thời gian chọn Operator
                                     {": "}
-                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-2 py-1
+                                    `}
+                                    >
                                         S
                                         <sub>draft</sub>
                                         {" "}
@@ -43,7 +50,10 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
+                                <ul className={`
+                                    list-disc space-y-1 pl-4 text-sm
+                                `}
+                                >
                                     <li>
                                         t
                                         <sub>draft</sub>
@@ -62,7 +72,10 @@ export default function ScoringPage() {
                                 <CardTitle className={"text-lg"}>
                                     Thời gian 1 màn chạy
                                     {": "}
-                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-2 py-1
+                                    `}
+                                    >
                                         S
                                         <sub>run</sub>
                                         {" "}
@@ -76,7 +89,10 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
+                                <ul className={`
+                                    list-disc space-y-1 pl-4 text-sm
+                                `}
+                                >
                                     <li>
                                         t
                                         <sub>run</sub>
@@ -95,7 +111,10 @@ export default function ScoringPage() {
                                 <CardTitle className={"text-lg"}>
                                     Số địch đánh được
                                     {": "}
-                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-2 py-1
+                                    `}
+                                    >
                                         S
                                         <sub>enemy</sub>
                                         {" "}
@@ -106,7 +125,10 @@ export default function ScoringPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"mt-2 list-disc space-y-1 pl-4 text-sm"}>
+                                <ul className={`
+                                    mt-2 list-disc space-y-1 pl-4 text-sm
+                                `}
+                                >
                                     <li>Không tính leak nha, dĩ nhiên rồi.</li>
                                     <li>Số địch tối đa tụi mình sẽ tính điểm là 25.</li>
                                 </ul>
@@ -118,33 +140,59 @@ export default function ScoringPage() {
                                 <CardTitle className={"text-lg"}>
                                     Bạn đánh Theresa tới đâu
                                     {": "}
-                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-2 py-1
+                                    `}
+                                    >
                                         S
                                         <sub>queen</sub>
                                     </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
+                                <ul className={`
+                                    list-disc space-y-1 pl-4 text-sm
+                                `}
+                                >
                                     <li>
                                         Có tham gia tournament:
                                         {" "}
-                                        <span className={"font-semibold text-green-300"}>+5</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +5
+                                        </span>
                                     </li>
                                     <li>
                                         Vượt qua phase 1:
                                         {" "}
-                                        <span className={"font-semibold text-green-300"}>+25</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +25
+                                        </span>
                                     </li>
                                     <li>
                                         Vượt qua phase 2:
                                         {" "}
-                                        <span className={"font-semibold text-green-300"}>+50</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +50
+                                        </span>
                                     </li>
-                                    <li className={"font-bold text-red-300"}>
+                                    <li className={"font-bold text-red-500"}>
                                         Để tránh hiểu sai thì xong 2 phase =
                                         {" "}
-                                        <span className={"font-semibold text-green-300"}>+80</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +80
+                                        </span>
                                     </li>
                                 </ul>
                             </CardContent>
@@ -155,39 +203,83 @@ export default function ScoringPage() {
                                 <CardTitle className={"text-lg"}>
                                     Squad bạn sử dụng
                                     {": "}
-                                    <span className={"rounded-sm bg-secondary px-2 py-1"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-2 py-1
+                                    `}
+                                    >
                                         S
                                         <sub>comp</sub>
                                     </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ul className={"list-disc space-y-1 pl-4 text-sm"}>
+                                <ul className={`
+                                    list-disc space-y-1 pl-4 text-sm
+                                `}
+                                >
                                     <li>
-                                        <span className={"font-semibold text-green-300"}>+20</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +20
+                                        </span>
                                         {" "}
                                         cho mỗi slot op để trống.
                                     </li>
                                     <li>
-                                        <span className={"font-semibold text-green-300"}>+2</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +2
+                                        </span>
                                         {" "}
                                         cho mỗi operator không phải 6* (
                                         <strong>không tính Amiya Medic</strong>
                                         ).
                                     </li>
                                     <li>
-                                        <span className={"font-semibold text-green-300"}>+3</span>
+                                        <span className={`
+                                            font-semibold text-green-500
+                                        `}
+                                        >
+                                            +3
+                                        </span>
                                         {" "}
                                         cho mỗi operator trong list dưới đây:
                                     </li>
                                 </ul>
-                                <ul className={"mt-2 list-disc space-y-1 pl-8 text-sm"}>
+                                <ul className={`
+                                    mt-2 list-disc space-y-1 pl-8 text-sm
+                                `}
+                                >
                                     <li className={"font-bold"}>Civilight Eterna</li>
-                                    <li className={"font-bold"}><span className={"text-red-400"}>Exusiai</span></li>
-                                    <li className={"font-bold"}><span className={"text-cyan-400"}>Rosmontis</span></li>
-                                    <li className={"font-bold"}><span className={"text-amber-500"}>Angelina</span></li>
-                                    <li className={"font-bold"}><span className={"text-pink-300"}>Lin</span></li>
-                                    <li className={"font-bold"}><span className={"text-green-300"}>Muelsyse</span></li>
+                                    <li className={"font-bold"}>
+                                        <span className={`text-red-400`}>
+                                            Exusiai
+                                        </span>
+                                    </li>
+                                    <li className={"font-bold"}>
+                                        <span className={`text-cyan-400`}>
+                                            Rosmontis
+                                        </span>
+                                    </li>
+                                    <li className={"font-bold"}>
+                                        <span className={`text-amber-500`}>
+                                            Angelina
+                                        </span>
+                                    </li>
+                                    <li className={"font-bold"}>
+                                        <span className={`text-pink-500`}>
+                                            Lin
+                                        </span>
+                                    </li>
+                                    <li className={"font-bold"}>
+                                        <span className={`text-green-500`}>
+                                            Muelsyse
+                                        </span>
+                                    </li>
                                 </ul>
                             </CardContent>
                         </Card>
@@ -198,7 +290,11 @@ export default function ScoringPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className={"my-4 text-center"}>
-                                    <span className={"rounded-sm bg-secondary px-4 py-2 font-mono text-lg"}>
+                                    <span className={`
+                                        rounded-sm bg-secondary px-4 py-2
+                                        font-mono text-lg
+                                    `}
+                                    >
                                         S
                                         <sub>member</sub>
                                         {" "}
@@ -255,10 +351,10 @@ export default function ScoringPage() {
                                 <li>
                                     Squad của Meruko bao gồm: Eyjafjalla, Reed the Flame Shadow,
                                     {" "}
-                                    <span className={"font-bold text-green-300"}>Muelsyse</span>
+                                    <span className={"font-bold text-green-500"}>Muelsyse</span>
                                     , Shu, Gavial the Invincible,
                                     {" "}
-                                    <span className={"font-bold text-pink-300"}>Lin</span>
+                                    <span className={"font-bold text-pink-500"}>Lin</span>
                                     , Młynar, Amiya (Medic)
                                 </li>
                             </ul>
@@ -295,19 +391,32 @@ export default function ScoringPage() {
                                         </li>
                                         <li>
                                             Squad mang theo:
-                                            <ul className={"list-disc space-y-1 pl-4"}>
+                                            <ul className={`
+                                                list-disc space-y-1 pl-4
+                                            `}
+                                            >
                                                 <li>
                                                     8/8 slot:
                                                     {" "}
                                                     <span className={"font-bold"}>+0</span>
                                                 </li>
                                                 <li>
-                                                    <span className={"font-bold text-pink-300"}>Lin</span>
+                                                    <span className={`
+                                                        font-bold text-pink-500
+                                                    `}
+                                                    >
+                                                        Lin
+                                                    </span>
                                                     {": "}
                                                     <span className={"font-bold"}>+3</span>
                                                 </li>
                                                 <li>
-                                                    <span className={"font-bold text-green-300"}>Muelsyse</span>
+                                                    <span className={`
+                                                        font-bold text-green-500
+                                                    `}
+                                                    >
+                                                        Muelsyse
+                                                    </span>
                                                     {": "}
                                                     <span className={"font-bold"}>+3</span>
                                                 </li>
@@ -316,10 +425,17 @@ export default function ScoringPage() {
                                     </ul>
                                 </div>
                             </div>
-                            <div className={"mt-4 flex flex-col rounded-sm bg-muted p-4"}>
+                            <div className={`
+                                mt-4 flex flex-col rounded-sm bg-muted p-4
+                            `}
+                            >
                                 <p className={"text-center font-semibold"}>Tổng điểm</p>
                                 <div className={"mt-2 flex-nowrap text-center"}>
-                                    <span className={"rounded-sm bg-accent-foreground px-4 py-2 font-mono text-secondary"}>
+                                    <span className={`
+                                        rounded-sm bg-accent-foreground px-4
+                                        py-2 font-mono text-secondary
+                                    `}
+                                    >
                                         S
                                         <sub>Meruko</sub>
                                         {" "}

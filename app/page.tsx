@@ -43,12 +43,18 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"h-visible flex bg-background/70"}>
+        <div className={"flex h-visible bg-background/70"}>
             {/* Image carousel. */}
-            <div ref={emblaRef} className={"embla absolute inset-0 -z-1 size-full"}>
+            <div
+                ref={emblaRef}
+                className={`absolute inset-0 -z-1 size-full embla`}
+            >
                 <div className={"embla__container size-full"}>
                     {[1, 2, 3, 4, 5, 6].map(img => (
-                        <div key={img} className={"embla__slide relative size-full"}>
+                        <div
+                            key={img}
+                            className={`relative size-full embla__slide`}
+                        >
                             <Image
                                 alt={`Banner ${img + 1}`}
                                 className={"object-cover"}
@@ -61,29 +67,62 @@ export default function Home() {
                 </div>
             </div>
             {/* The real shit. */}
-            <div className={"flex flex-1/2 flex-col items-center justify-center space-y-4"}>
-                <Image alt={"DRCH"} className={"invert dark:invert-0"} height={185} src={DRCH_Banner} width={727} />
-                <div className={"flex w-full max-w-lg items-center justify-center px-8"}>
+            <div className={`
+                flex flex-1/2 flex-col items-center justify-center space-y-4
+            `}
+            >
+                <Image
+                    alt={"DRCH"}
+                    className={`
+                        invert
+                        dark:invert-0
+                    `}
+                    height={185}
+                    src={DRCH_Banner}
+                    width={727}
+                />
+                <div className={`
+                    flex w-full max-w-lg items-center justify-center px-8
+                `}
+                >
                     <div className={"text-4xl font-bold"}>
                         {
                             [
                                 { value: timeLeft.days, label: "Ngày" },
                                 { value: timeLeft.hours, label: "Giờ" },
                                 { value: timeLeft.minutes, label: "Phút" },
-                                { value: timeLeft.seconds, label: "Giây" },
+                                { value: timeLeft.seconds, label: "Giây" }
                             ].map(item => (
                                 item.value !== -1 ? item.value.toString().padStart(2, "0") : "--"
                             )).join(":")
                         }
                     </div>
                 </div>
-                <div className={"absolute bottom-5 flex flex-col gap-y-2 text-center"}>
+                <div className={`
+                    absolute bottom-5 flex flex-col gap-y-2 text-center
+                `}
+                >
                     Được mang đến cho bạn bởi
-                    <div className={"flex items-center gap-x-8 gap-y-4 text-white"}>
+                    <div className={`
+                        flex items-center gap-x-8 gap-y-4 text-white
+                    `}
+                    >
                         <OrganizerImage alt={"VNS"} src={VNS_Banner} />
-                        <div className={"hidden text-xl text-primary lg:block"}>•</div>
+                        <div className={`
+                            hidden text-xl text-primary
+                            lg:block
+                        `}
+                        >
+                            •
+                        </div>
                         <OrganizerImage alt={"Mod_Squad"} src={ModSquad_Banner} />
-                        <div className={"hidden text-xl text-primary lg:block"}>•</div>
+                        <div className={`
+                            hidden text-xl text-primary
+                            lg:block
+                        `}
+                        >
+                            •
+                        </div>
                         <OrganizerImage alt={"Jiangles"} src={Jiangles_Banner} />
                     </div>
                 </div>

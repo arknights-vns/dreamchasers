@@ -7,7 +7,7 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
+    DialogTrigger
 } from "@/components/ui/dialog";
 
 export default function PreviewTicketButton() {
@@ -44,7 +44,14 @@ export default function PreviewTicketButton() {
                         <p className={"text-center italic"}>
                             Nếu bạn vẫn muốn xem lại các hạng vé, hãy click vô
                             {" "}
-                            <DialogClose asChild><Link className={"font-bold italic underline"} href={"/tickets"}>đây</Link></DialogClose>
+                            <DialogClose asChild>
+                                <Link
+                                    className={`font-bold italic underline`}
+                                    href={"/tickets"}
+                                >
+                                    đây
+                                </Link>
+                            </DialogClose>
                             !
                         </p>
                         <p className={"text-center italic"}>(bấm ra bên ngoài hoặc dấu 'x' để đóng)</p>

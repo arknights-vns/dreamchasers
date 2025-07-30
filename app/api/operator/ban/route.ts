@@ -17,7 +17,7 @@ export async function DELETE(request: NextRequest) {
         if (!body.token || body.token !== process.env.SECRET_CODE) {
             return NextResponse.json(
                 { error: "Unauthorized" },
-                { status: 401 },
+                { status: 401 }
             );
         }
 
@@ -39,8 +39,9 @@ export async function DELETE(request: NextRequest) {
             .from("member_vote")
             .select("id");
 
-        if (votes)
+        if (votes) {
             await elevatedSupabase.from("old_member_vote").insert(votes);
+        }
 
         await elevatedSupabase
             .from("member_vote")
@@ -54,13 +55,13 @@ export async function DELETE(request: NextRequest) {
         if (error instanceof Error && error.message === "No votes found") {
             return NextResponse.json(
                 { error: "No votes found to ban" },
-                { status: 412 },
+                { status: 412 }
             );
         }
 
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 },
+            { status: 500 }
         );
     }
 }

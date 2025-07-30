@@ -1,14 +1,36 @@
 "use client";
 
-import classNames from "classnames";
+import type { Route } from "next";
+import type { ReactNode } from "react";
+import { clsx } from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
+import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
+function underlineStyle(currentPath: string, targetPathPrefx: string) {
+    const active = currentPath.startsWith(targetPathPrefx);
+
+    return clsx(
+        `
+            relative cursor-pointer rounded-md py-1 text-lg transition-all
+            duration-200 ease-in-out
+            after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full
+            after:transform after:transition-transform after:duration-200
+            after:ease-in-out after:content-['']
+            hover:font-bold
+        `,
+        {
+            "font-bold after:scale-x-100 after:bg-primary": active,
+            "after:scale-x-0 hover:after:scale-x-100": !active
+        }
+    );
+}
 
 type DesktopDropdownProps = {
     title: string;
-    items: Array<{ href: string; label: string }>;
+    items: Array<{ href: Route; label: string }>;
     pathname: string;
     pathPrefix: string;
 };
@@ -16,10 +38,10 @@ type DesktopDropdownProps = {
 function MobileDropdown({
     title,
     items,
-    pathname,
+    pathname
 }: {
     title: string;
-    items: Array<{ href: string; label: string }>;
+    items: Array<{ href: Route; label: string }>;
     pathname: string;
 }) {
     return (
@@ -30,9 +52,9 @@ function MobileDropdown({
                     <Link
                         key={item.href}
                         className={
-                            classNames(
+                            clsx(
                                 "ml-8 px-3 py-2",
-                                { "bg-primary text-secondary font-bold": pathname.startsWith(item.href) },
+                                { "bg-primary font-bold text-secondary": pathname.startsWith(item.href) }
                             )
                         }
                         href={item.href}
@@ -46,34 +68,38 @@ function MobileDropdown({
 }
 
 function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdownProps) {
-    const active = pathname.startsWith(pathPrefix);
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button
-                    className={
-                        classNames(
-                            "relative cursor-pointer rounded-md py-1 text-lg transition-all duration-200 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:transform after:transition-transform after:duration-200 after:ease-in-out after:content-['']",
-                            {
-                                "font-bold after:scale-x-100 after:bg-primary": active,
-                                "after:scale-x-0 hover:after:scale-x-100": !active,
-                            },
-                        )
-                    }
-                    type={"button"}
+                <Button
+                    className={clsx(`
+                        px-0
+                        hover:bg-transparent!
+                        data-[state=closed]:ring-0
+                        data-[state=open]:font-bold data-[state=open]:underline
+                        data-[state=open]:decoration-2
+                        data-[state=open]:underline-offset-8
+                    `, underlineStyle(pathname, pathPrefix))}
+                    variant={"ghost"}
                 >
                     {title}
-                </button>
+                </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className={"w-52 bg-background shadow-xs shadow-primary/50"}>
+            <DropdownMenuContent className={`
+                w-52 bg-background shadow-xs shadow-primary/50
+            `}
+            >
                 {items.map(item => (
                     <DropdownMenuItem key={item.href} asChild>
                         <Link
                             className={
-                                classNames("block w-full px-2 my-1 rounded-md text-center cursor-pointer focus:bg-secondary", {
-                                    "bg-primary text-secondary font-extrabold": pathname === item.href,
-                                    "text-primary": pathname !== item.href,
+                                clsx(`
+                                    my-1 block w-full cursor-pointer rounded-md
+                                    px-2 text-center
+                                    focus:bg-secondary focus:font-extrabold
+                                `, {
+                                    "bg-primary font-extrabold text-secondary": pathname === item.href,
+                                    "text-primary": pathname !== item.href
                                 })
                             }
                             href={item.href}
@@ -88,26 +114,18 @@ function DesktopDropdown({ title, items, pathname, pathPrefix }: DesktopDropdown
 }
 
 function NavLink({
-    href,
+    pathPrefix,
     children,
-    pathname,
+    pathname
 }: {
-    href: string;
-    children: React.ReactNode;
+    pathPrefix: Route;
+    children: ReactNode;
     pathname: string;
 }) {
     return (
         <Link
-            className={
-                classNames(
-                    "relative rounded-md py-2 transition-all duration-200 ease-in-out after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:transform after:transition-transform after:duration-200 after:ease-in-out after:content-['']",
-                    {
-                        "font-bold after:scale-x-100 after:bg-primary": pathname.startsWith(href),
-                        "after:scale-x-0 after:bg-primary hover:after:scale-x-100": !pathname.startsWith(href),
-                    },
-                )
-            }
-            href={href}
+            className={underlineStyle(pathname, pathPrefix)}
+            href={pathPrefix}
         >
             <div className={"text-lg"}>{children}</div>
         </Link>
@@ -115,21 +133,23 @@ function NavLink({
 }
 
 function NavDivider({ width = "w-8" }: { width?: string }) {
-    return <div className={`h-0.5 ${width} bg-primary`} />;
+    return (
+        <div className={clsx("h-0.5 bg-primary", width)} />
+    );
 }
 
 export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }) {
-    const links = [
-        { name: "Tổ chức", href: "/crew" },
-        { name: "Kỷ niệm", href: "/retro" },
-        { name: "Tournament", href: "/contest" },
+    const links: { label: string; href: Route }[] = [
+        { label: "Tổ chức", href: "/crew" },
+        { label: "Kỷ niệm", href: "/retro" },
+        { label: "Tournament", href: "#" }
     ];
 
-    const eventItems = [
+    const eventItems: { label: string; href: Route }[] = [
         { href: "/event/roadmap", label: "Công tác chuẩn bị" },
         { href: "/event/schedule", label: "Hoạt động của Offline" },
         { href: "/event/location", label: "Địa điểm tổ chức" },
-        { href: "/event/rules", label: "Nội quy tham gia" },
+        { href: "/event/rules", label: "Nội quy tham gia" }
     ];
 
     const pathname = usePathname();
@@ -140,16 +160,16 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                 <MobileDropdown items={eventItems} pathname={pathname} title={"Sự kiện"} />
                 {links.map(link => (
                     <Link
-                        key={link.name}
+                        key={link.label}
                         className={
-                            classNames(
+                            clsx(
                                 "px-3 py-2",
-                                { "bg-primary text-background font-bold": pathname.startsWith(link.href) },
+                                { "bg-primary font-bold text-background": pathname.startsWith(link.href) }
                             )
                         }
                         href={link.href}
                     >
-                        {link.name}
+                        {link.label}
                     </Link>
                 ))}
             </div>
@@ -157,7 +177,11 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
     }
 
     return (
-        <div className={"mr-1 hidden cursor-pointer items-center gap-3 lg:flex"}>
+        <div className={`
+            mr-1 hidden cursor-pointer items-center gap-3
+            lg:flex
+        `}
+        >
             <DesktopDropdown
                 items={eventItems}
                 pathPrefix={"/event"}
@@ -166,10 +190,10 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
             />
             <NavDivider />
             {links.map((link, index) => (
-                <Fragment key={link.name}>
+                <Fragment key={link.label}>
                     {index !== 0 && <NavDivider />}
-                    <NavLink href={link.href} pathname={pathname}>
-                        {link.name}
+                    <NavLink pathPrefix={link.href} pathname={pathname}>
+                        {link.label}
                     </NavLink>
                 </Fragment>
             ))}

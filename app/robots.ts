@@ -12,13 +12,13 @@ export default function robots(): MetadataRoute.Robots {
                 "/favicon.ico",
                 "/opengraph-image.jpg",
                 "/sitemap.xml",
-                "/robots.txt",
+                "/robots.txt"
             ],
             disallow: [
                 "/api/*",
                 "/tickets",
-                "/admin",
-            ],
-        },
+                "/admin"
+            ]
+        }
     };
 }

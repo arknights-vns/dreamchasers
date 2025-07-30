@@ -7,18 +7,35 @@ import Ines from "@/public/tournament/prizes/Ines.png";
 
 export default function PrizePage() {
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle title={"Giải thưởng"} />
 
             <div className={"mb-8 flex flex-col"}>
                 <div className={"text-center text-xl font-light italic"}>
                     Với các bạn TOP 3, ngoài việc nhận thêm giấy khen từ BTC:
                 </div>
-                <div className={"flex w-screen flex-col items-center justify-center md:flex-row"}>
+                <div className={`
+                    flex w-screen flex-col items-center justify-center
+                    md:flex-row
+                `}
+                >
                     {/* 3rd */}
-                    <Card className={"border-none bg-transparent shadow-none md:w-1/3"}>
-                        <CardHeader className={"flex flex-col items-center justify-center space-y-2"}>
-                            <div className={"text-center text-4xl font-extrabold text-amber-700"}>Giải Ba</div>
+                    <Card className={`
+                        border-none bg-transparent shadow-none
+                        md:w-1/3
+                    `}
+                    >
+                        <CardHeader className={`
+                            flex flex-col items-center justify-center space-y-2
+                        `}
+                        >
+                            <div className={`
+                                text-center text-4xl font-extrabold
+                                text-amber-700
+                            `}
+                            >
+                                Giải Ba
+                            </div>
                         </CardHeader>
                         <CardContent className={"flex h-72 justify-center"}>
                             <Image
@@ -27,14 +44,30 @@ export default function PrizePage() {
                                 src={Artbook}
                             />
                         </CardContent>
-                        <CardFooter className={"flex flex-col items-center justify-between space-y-2"}>
+                        <CardFooter className={`
+                            flex flex-col items-center justify-between space-y-2
+                        `}
+                        >
                             Arknights Artbook VOL 1, 4, 5
                         </CardFooter>
                     </Card>
                     {/* 2nd */}
-                    <Card className={"border-none bg-transparent shadow-none md:w-1/3"}>
-                        <CardHeader className={"flex flex-col items-center justify-center space-y-2"}>
-                            <div className={"text-center text-4xl font-extrabold text-gray-500"}>Giải Nhì</div>
+                    <Card className={`
+                        border-none bg-transparent shadow-none
+                        md:w-1/3
+                    `}
+                    >
+                        <CardHeader className={`
+                            flex flex-col items-center justify-center space-y-2
+                        `}
+                        >
+                            <div className={`
+                                text-center text-4xl font-extrabold
+                                text-gray-500
+                            `}
+                            >
+                                Giải Nhì
+                            </div>
                         </CardHeader>
                         <CardContent className={"flex h-72 justify-center"}>
                             <Image
@@ -43,14 +76,30 @@ export default function PrizePage() {
                                 src={Amiyi}
                             />
                         </CardContent>
-                        <CardFooter className={"flex flex-col items-center justify-between space-y-2"}>
+                        <CardFooter className={`
+                            flex flex-col items-center justify-between space-y-2
+                        `}
+                        >
                             Razer X Arknights - Chuột không dây - Amiya theme
                         </CardFooter>
                     </Card>
                     {/* 1st */}
-                    <Card className={"border-none bg-transparent shadow-none md:w-1/3"}>
-                        <CardHeader className={"flex flex-col items-center justify-center space-y-2"}>
-                            <div className={"text-center text-4xl font-extrabold text-amber-300"}>Giải Nhất</div>
+                    <Card className={`
+                        border-none bg-transparent shadow-none
+                        md:w-1/3
+                    `}
+                    >
+                        <CardHeader className={`
+                            flex flex-col items-center justify-center space-y-2
+                        `}
+                        >
+                            <div className={`
+                                text-center text-4xl font-extrabold
+                                text-amber-300
+                            `}
+                            >
+                                Giải Nhất
+                            </div>
                         </CardHeader>
                         <CardContent className={"flex h-72 justify-center"}>
                             <Image
@@ -61,7 +110,10 @@ export default function PrizePage() {
                                 width={200}
                             />
                         </CardContent>
-                        <CardFooter className={"flex flex-col items-center justify-between space-y-2"}>
+                        <CardFooter className={`
+                            flex flex-col items-center justify-between space-y-2
+                        `}
+                        >
                             Figure Ines SIÊU MÚP RỤP.
                         </CardFooter>
                     </Card>

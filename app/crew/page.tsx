@@ -1,6 +1,7 @@
 "use client";
 
 import type { CrewMember } from "@/lib/vns";
+import { clsx } from "clsx";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import PageTitle from "@/components/PageTitle";
@@ -14,7 +15,10 @@ type CrewListProps = {
 
 function MemberBox(props: CrewMember) {
     return (
-        <div className={"mb-4 flex max-h-64 min-w-64 flex-col items-center gap-y-2"}>
+        <div className={`
+            mb-4 flex max-h-64 min-w-64 flex-col items-center gap-y-2
+        `}
+        >
             <Image
                 alt={"VNS_Crew"}
                 className={"rounded-full ring ring-primary"}
@@ -33,7 +37,7 @@ function MemberBox(props: CrewMember) {
                     && props.roles.map((role: string) => (
                         <span
                             key={role}
-                            className={`crew-role-container font-extrabold ${role}`}
+                            className={clsx(`crew-role-container font-extrabold`, role)}
                         >
                             {role.replaceAll("-", " ")}
                         </span>
@@ -51,9 +55,16 @@ function CrewList(props: CrewListProps) {
         <>
             {/* The reason for the horrible code is that the CEO want to have 4-5-5 layout. */}
             {/* But it looks utterly dogshit on mobile, so falling back to the default one on that. */}
-            <div className={"hidden place-content-center-safe lg:block"}>
+            <div className={`
+                hidden place-content-center-safe
+                lg:block
+            `}
+            >
                 <div
-                    className={"mx-12 mb-4 flex flex-col flex-wrap place-content-evenly md:flex-row"}
+                    className={`
+                        flex flex-col flex-wrap place-content-evenly
+                        md:flex-row
+                    `}
                 >
                     {eliteMembers.map((member) => {
                         return (
@@ -67,11 +78,22 @@ function CrewList(props: CrewListProps) {
                     })}
                 </div>
                 <div
-                    className={"grid place-content-center-safe sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5"}
+                    className={`
+                        grid place-content-center-safe
+                        sm:grid-cols-1
+                        md:grid-cols-3
+                        lg:grid-cols-5
+                    `}
                 >
                     {remainingMembers.map((member) => {
                         return (
-                            <div key={member.name} className={"w-full md:w-auto"}>
+                            <div
+                                key={member.name}
+                                className={`
+                                    w-full
+                                    md:w-auto
+                                `}
+                            >
                                 <MemberBox
                                     name={member.name}
                                     quote={member.quote}
@@ -84,11 +106,21 @@ function CrewList(props: CrewListProps) {
             </div>
             {/* The other-than-hell layout. */}
             <div
-                className={"grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:hidden"}
+                className={`
+                    grid grid-cols-1 place-content-center-safe
+                    md:grid-cols-3
+                    lg:hidden
+                `}
             >
                 {props.members.map((member) => {
                     return (
-                        <div key={member.name} className={"w-full md:w-auto"}>
+                        <div
+                            key={member.name}
+                            className={`
+                                w-full
+                                md:w-auto
+                            `}
+                        >
                             <MemberBox name={member.name} quote={member.quote} roles={member.roles} />
                         </div>
                     );
@@ -102,7 +134,11 @@ function PartnerList(props: CrewListProps) {
     return (
         <>
             <div
-                className={"grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:grid-cols-4"}
+                className={`
+                    grid grid-cols-1 place-content-center-safe
+                    md:grid-cols-3
+                    lg:grid-cols-4
+                `}
             >
                 {props.members.map((member) => {
                     return (
@@ -147,8 +183,9 @@ export default function CrewPage() {
     };
 
     function handleTouchEnd() {
-        if (touchStartX.current === null || touchEndX.current === null)
+        if (touchStartX.current === null || touchEndX.current === null) {
             return;
+        }
         const deltaX = touchEndX.current - touchStartX.current;
         if (Math.abs(deltaX) > 50) {
             if (deltaX < 0 && tab === "dreamchasers") {
@@ -162,22 +199,34 @@ export default function CrewPage() {
     };
 
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle
                 favorText={"Những người đã góp hết sức mình để mang đến cho các bạn những cái event cực cháy."}
                 title={"Tổ chức"}
             />
             <div
-                className={"sticky top-[80px] z-0 h-[calc(100vh-80px)] place-content-center-safe"}
+                className={`
+                    sticky top-[80px] z-0 h-[calc(100vh-80px)]
+                    place-content-center-safe
+                `}
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
                 onTouchStart={handleTouchStart}
             >
                 <Tabs className={"size-full"} value={tab} onValueChange={setTab}>
-                    <TabsList className={"h-12 w-full rounded-none border-b bg-background p-1"}>
+                    <TabsList className={`
+                        h-12 w-full rounded-none border-b bg-background p-1
+                    `}
+                    >
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                `
+                                    w-1/2 rounded-none py-3 text-lg
+                                    font-semibold transition-colors
+                                    data-[state=active]:bg-neutral-800
+                                    data-[state=active]:text-white
+                                    data-[state=inactive]:hover:bg-neutral-800/60
+                                `
                             }
                             value={"dreamchasers"}
                         >
@@ -186,7 +235,13 @@ export default function CrewPage() {
                         <Separator className={"bg-secondary"} orientation={"vertical"} />
                         <TabsTrigger
                             className={
-                                "w-1/2 rounded-none py-3 text-lg font-semibold transition-colors data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=inactive]:hover:bg-neutral-800/60"
+                                `
+                                    w-1/2 rounded-none py-3 text-lg
+                                    font-semibold transition-colors
+                                    data-[state=active]:bg-neutral-800
+                                    data-[state=active]:text-white
+                                    data-[state=inactive]:hover:bg-neutral-800/60
+                                `
                             }
                             value={"partners"}
                         >
@@ -194,11 +249,17 @@ export default function CrewPage() {
                         </TabsTrigger>
                     </TabsList>
 
-                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"dreamchasers"}>
+                    <TabsContent
+                        className={`scrollbar-none overflow-y-auto pt-10`}
+                        value={"dreamchasers"}
+                    >
                         <CrewList members={members} />
                     </TabsContent>
 
-                    <TabsContent className={"scrollbar-none overflow-y-auto pt-10"} value={"partners"}>
+                    <TabsContent
+                        className={`scrollbar-none overflow-y-auto pt-10`}
+                        value={"partners"}
+                    >
                         <PartnerList members={partners} />
                     </TabsContent>
                 </Tabs>

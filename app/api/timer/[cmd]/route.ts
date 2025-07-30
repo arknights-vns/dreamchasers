@@ -35,14 +35,14 @@ function calculateRemainingTime(timer: TimerData): number {
 
 export async function POST(
     request: NextRequest,
-    { params }: { params: Promise<{ cmd: string }> },
+    { params }: { params: Promise<{ cmd: string }> }
 ) {
     const body = await request.json() as TimerRequest;
 
     if (!body.token || body.token !== process.env.SECRET_CODE) {
         return NextResponse.json(
             { error: "Unauthorized" },
-            { status: 401 },
+            { status: 401 }
         );
     }
 
@@ -52,7 +52,7 @@ export async function POST(
         if (!["start", "stop", "reset", "continue"].includes(cmd)) {
             return NextResponse.json(
                 { error: "Invalid command. Use: start, stop, reset, or continue." },
-                { status: 400 },
+                { status: 400 }
             );
         }
 
@@ -78,7 +78,7 @@ export async function POST(
                 if (currentTimer && (currentTimer as TimerData).state === "running") {
                     return NextResponse.json(
                         { error: "Timer is already running" },
-                        { status: 412 },
+                        { status: 412 }
                     );
                 }
                 timerData = {
@@ -87,7 +87,7 @@ export async function POST(
                     remaining_time: customTime,
                     started_at: now,
                     paused_at: null,
-                    updated_at: now,
+                    updated_at: now
                 };
                 break;
 
@@ -95,13 +95,13 @@ export async function POST(
                 if (!currentTimer) {
                     return NextResponse.json(
                         { error: "No timer to stop" },
-                        { status: 404 },
+                        { status: 404 }
                     );
                 }
                 if ((currentTimer as TimerData).state !== "running") {
                     return NextResponse.json(
                         { error: "Timer is not running" },
-                        { status: 412 },
+                        { status: 412 }
                     );
                 }
                 const currentRemaining = calculateRemainingTime(currentTimer as TimerData);
@@ -110,7 +110,7 @@ export async function POST(
                     remaining_time: currentRemaining,
                     started_at: null,
                     paused_at: now,
-                    updated_at: now,
+                    updated_at: now
                 };
                 break;
             }
@@ -119,7 +119,7 @@ export async function POST(
                 if (!currentTimer || (currentTimer as TimerData).state !== "paused") {
                     return NextResponse.json(
                         { error: "No paused timer to continue" },
-                        { status: 412 },
+                        { status: 412 }
                     );
                 }
                 timerData = {
@@ -127,7 +127,7 @@ export async function POST(
                     remaining_time: (currentTimer as TimerData).remaining_time,
                     started_at: now,
                     paused_at: null,
-                    updated_at: now,
+                    updated_at: now
                 };
                 break;
 
@@ -138,7 +138,7 @@ export async function POST(
                     remaining_time: customTime,
                     started_at: null,
                     paused_at: null,
-                    updated_at: now,
+                    updated_at: now
                 };
                 break;
         }
@@ -156,7 +156,7 @@ export async function POST(
 
         const timerResult = {
             ...data,
-            calculated_remaining_time: calculateRemainingTime(data as TimerData),
+            calculated_remaining_time: calculateRemainingTime(data as TimerData)
         };
 
         return NextResponse.json(timerResult, { status: 200 });
@@ -164,21 +164,21 @@ export async function POST(
         console.error("Timer API error:", error);
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 },
+            { status: 500 }
         );
     }
 }
 
 export async function GET(
     _request: NextRequest,
-    { params }: { params: Promise<{ cmd: string }> },
+    { params }: { params: Promise<{ cmd: string }> }
 ) {
     const { cmd } = await params;
 
     if (cmd !== "status") {
         return NextResponse.json(
             { error: "Method not allowed" },
-            { status: 405 },
+            { status: 405 }
         );
     }
 
@@ -202,7 +202,7 @@ export async function GET(
                 started_at: null,
                 paused_at: null,
                 updated_at: new Date().toISOString(),
-                calculated_remaining_time: DEFAULT_DURATION,
+                calculated_remaining_time: DEFAULT_DURATION
             };
             return NextResponse.json(defaultTimer, { status: 200 });
         }
@@ -212,7 +212,7 @@ export async function GET(
 
         const timerWithCalculatedTime = {
             ...currentTimer,
-            calculated_remaining_time: calculatedRemainingTime,
+            calculated_remaining_time: calculatedRemainingTime
         };
 
         return NextResponse.json(timerWithCalculatedTime, { status: 200 });
@@ -220,7 +220,7 @@ export async function GET(
         console.error("Timer status error:", error);
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 },
+            { status: 500 }
         );
     }
 }

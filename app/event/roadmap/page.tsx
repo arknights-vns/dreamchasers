@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import Link from "next/link";
 import PageTitle from "@/components/PageTitle";
@@ -10,65 +11,65 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 type Event = {
     date: string;
     title: string;
-    href: string;
+    href: Route;
 };
 
 const events: Event[] = [
     {
         date: "14/01/2024",
         title: "Offline #1: The show must go on!",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2035816776811242/",
+        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2035816776811242/"
     },
     {
         date: "31/12/2024",
         title: "Thông báo ra mắt Offline #2: Dreamchasers.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2299747417084842/",
+        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2299747417084842/"
     },
     {
         date: "12/01/2025",
         title: "Khảo sát 'Dreamchasers' lần 1.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2308946422831608/",
+        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2308946422831608/"
     },
     {
         date: "04/05/2025",
         title: "Khảo sát 'Dreamchasers' lần 2.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2409448572781392/",
+        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2409448572781392/"
     },
     {
         date: "06/07/2025",
         title: "Mở bán vé Offline #2: Dreamchasers",
-        href: "https://www.facebook.com/share/p/19DVK1nNFb/",
+        href: "https://www.facebook.com/share/p/19DVK1nNFb/"
     },
     {
         date: "06/07/2025",
         title: "Công bố design áo Offline",
-        href: "https://www.facebook.com/share/p/177CfFuZ5v/",
+        href: "https://www.facebook.com/share/p/177CfFuZ5v/"
     },
     {
         date: "07/07/2025",
         title: "Công bố đối tác: Vietnam Community League",
-        href: "https://www.facebook.com/share/p/1Zzx29JxMH/",
+        href: "https://www.facebook.com/share/p/1Zzx29JxMH/"
     },
     {
         date: "08/07/2025",
         title: "Công bố hình ảnh địa điểm offline",
-        href: "https://www.facebook.com/share/p/16ZN6cWbuG/",
+        href: "https://www.facebook.com/share/p/16ZN6cWbuG/"
     },
     {
         date: "11/07/2025",
         title: "Bán hết vé tier Dreamchasers",
-        href: "https://www.facebook.com/share/p/18xjxnkdxo/",
+        href: "https://www.facebook.com/share/p/18xjxnkdxo/"
     },
     {
         date: "??/??/2025",
         title: "???",
-        href: "",
+        href: "#"
     },
     {
         date: "10/08/2025",
         title: "Offline #2: Dreamchasers",
-        href: "",
-    },
+        href: "#"
+    }
 ];
 
 type TimelineProps = {
@@ -87,8 +88,13 @@ function TimelineContent({ events }: TimelineProps) {
                     >
                         <Card className={"h-full items-center justify-center"}>
                             <CardTitle className={"text-2xl"}>{ev.date}</CardTitle>
-                            <CardContent className={"text-center text-2xl font-light"}>{ev.title}</CardContent>
-                            {ev.href !== "" && (
+                            <CardContent className={`
+                                text-center text-2xl font-light
+                            `}
+                            >
+                                {ev.title}
+                            </CardContent>
+                            {ev.href !== "#" && (
                                 <Button asChild className={"w-fit self-center"}>
                                     <Link
                                         className={"text-sm font-extralight"}
@@ -108,19 +114,25 @@ function TimelineContent({ events }: TimelineProps) {
 
 export default function TimelinePage() {
     return (
-        <div className={"h-visible bg-vns flex flex-col"}>
+        <div className={"flex h-visible flex-col bg-vns"}>
             <PageTitle favorText={"Những hoạt động tụi mình đã tổ chức trong quá trình thực hiện Offline"} title={"Công tác chuẩn bị"} />
 
-            <div className={"mx-4 mt-8 flex flex-col items-center justify-center"}>
+            <div className={`
+                mx-4 mt-8 flex flex-col items-center justify-center
+            `}
+            >
                 <Carousel
-                    className={"flex w-full max-w-lg lg:hidden"}
+                    className={`
+                        flex w-full max-w-lg
+                        lg:hidden
+                    `}
                     opts={{
                         align: "start",
-                        skipSnaps: true,
+                        skipSnaps: true
                     }}
                     orientation={"vertical"}
                     plugins={[
-                        WheelGesturesPlugin(),
+                        WheelGesturesPlugin()
                     ]}
                 >
                     <TimelineContent events={events} />
@@ -128,14 +140,17 @@ export default function TimelinePage() {
                     <CarouselNext />
                 </Carousel>
                 <Carousel
-                    className={"hidden w-full max-w-2xl lg:flex"}
+                    className={`
+                        hidden w-full max-w-2xl
+                        lg:flex
+                    `}
                     opts={{
                         align: "center",
-                        skipSnaps: true,
+                        skipSnaps: true
                     }}
                     orientation={"horizontal"}
                     plugins={[
-                        WheelGesturesPlugin(),
+                        WheelGesturesPlugin()
                     ]}
                 >
                     <TimelineContent events={events} />

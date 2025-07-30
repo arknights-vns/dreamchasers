@@ -4,39 +4,39 @@ import eslintParserTypeScript from "@typescript-eslint/parser";
 import eslintPluginBetterTailwindcss from "eslint-plugin-better-tailwindcss";
 
 export default antfu(
+    // anthony fu
     {
         type: "app",
         stylistic: {
             indent: 4,
             quotes: "double",
-            semi: true,
-            trailingComma: "true",
-            arrowParens: "always",
+            semi: true
         },
-        formatters: true,
         typescript: true,
         react: true,
-        imports: true,
-    },
-    {
+        jsx: true,
+        yaml: false,
+        jsonc: false,
+        lessOpinionated: true,
         ignores: [
             ".next",
             "node_modules",
-            "components/ui/*.tsx",
-            "components/svg/*.tsx",
-            "lib/utils.ts",
-            "lib/supabase/terra.d.ts",
-        ],
+            "public",
+            // let shadcn cook on his own.
+            "components/ui/**/*.tsx",
+            // generated
+            "lib/supabase/terra.d.ts"
+        ]
     },
     // Next.js
     {
         plugins: {
-            "@next/next": nextjs,
+            "@next/next": nextjs
         },
         rules: {
             ...nextjs.configs.recommended.rules,
-            ...nextjs.configs["core-web-vitals"].rules,
-        },
+            ...nextjs.configs["core-web-vitals"].rules
+        }
     },
     // TailwindCSS
     {
@@ -44,36 +44,34 @@ export default antfu(
         languageOptions: {
             parser: eslintParserTypeScript,
             parserOptions: {
-                project: true,
-            },
-        },
+                project: true
+            }
+        }
     },
     {
         files: ["**/*.{jsx,tsx}"],
         languageOptions: {
             parserOptions: {
                 ecmaFeatures: {
-                    jsx: true,
-                },
-            },
+                    jsx: true
+                }
+            }
         },
         plugins: {
-            "better-tailwindcss": eslintPluginBetterTailwindcss,
+            "better-tailwindcss": eslintPluginBetterTailwindcss
         },
         rules: {
-            "better-tailwindcss/enforce-consistent-class-order": ["error", { order: "improved" }],
-            "better-tailwindcss/enforce-consistent-important-position": ["error", { position: "recommended" }],
-            "better-tailwindcss/enforce-consistent-variable-syntax": "error",
-            "better-tailwindcss/enforce-shorthand-classes": "error",
-            "better-tailwindcss/no-deprecated-classes": "error",
-            "better-tailwindcss/no-duplicate-classes": "error",
-            "better-tailwindcss/no-unnecessary-whitespace": ["error", { allowMultiline: true }],
+            ...eslintPluginBetterTailwindcss.configs["recommended-warn"].rules,
+            "better-tailwindcss/enforce-consistent-line-wrapping": ["warn", {
+                group: "newLine",
+                indent: 4
+            }]
         },
         settings: {
             "better-tailwindcss": {
-                entryPoint: "./app/globals.css",
-            },
-        },
+                entryPoint: "./app/globals.css"
+            }
+        }
     },
     // Custom rules for antfu.
     {
@@ -85,15 +83,34 @@ export default antfu(
             "@eslint-react/prefer-shorthand-fragment": "error",
             "@eslint-react/prefer-shorthand-boolean": "error",
             "style/brace-style": ["error", "1tbs"],
+            "style/comma-dangle": ["error", "never"],
             "style/jsx-sort-props": ["warn", {
                 callbacksLast: true,
-                reservedFirst: true,
+                reservedFirst: true
             }],
             "style/jsx-curly-brace-presence": ["warn", {
                 props: "always",
                 children: "never",
-                propElementValues: "always",
+                propElementValues: "always"
             }],
-        },
-    },
+            "no-restricted-syntax": [
+                "error",
+                {
+                    selector: "JSXAttribute[name.name='className'] JSXExpressionContainer > TemplateLiteral[expressions.length > 0]",
+                    message: "Haiya please use clsx bro..."
+                }
+            ],
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: ["./*", "../*"],
+                            message: "Haiya please use @ import bro..."
+                        }
+                    ]
+                }
+            ]
+        }
+    }
 );

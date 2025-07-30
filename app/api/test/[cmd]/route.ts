@@ -12,13 +12,13 @@ type TestCommand = "auth" | "ping";
  */
 export async function POST(
     request: NextRequest,
-    { params }: { params: Promise<{ cmd: string }> },
+    { params }: { params: Promise<{ cmd: string }> }
 ) {
     const body = await request.json() as ApiElevatedBody;
     if (!body.token || body.token !== process.env.SECRET_CODE) {
         return NextResponse.json(
             { error: "Unauthorized" },
-            { status: 401 },
+            { status: 401 }
         );
     }
     try {
@@ -26,7 +26,7 @@ export async function POST(
         if (!["auth", "ping"].includes(cmd)) {
             return NextResponse.json(
                 { error: "Invalid command. Use: auth or ping" },
-                { status: 400 },
+                { status: 400 }
             );
         }
         const command = cmd as TestCommand;
@@ -34,13 +34,13 @@ export async function POST(
             case "auth":
                 return NextResponse.json(
                     { authStatus: "ok" },
-                    { status: 200 },
+                    { status: 200 }
                 );
 
             case "ping":
                 return NextResponse.json(
                     { pingStatus: "ok" },
-                    { status: 200 },
+                    { status: 200 }
                 );
         }
     } catch (error) {

@@ -1,5 +1,5 @@
 import type { Operator } from "@/lib/vns";
-import classNames from "classnames";
+import { clsx } from "clsx";
 import Image from "next/image";
 import Arene from "@/public/tournament/drafting/Arene.png";
 
@@ -29,7 +29,7 @@ type OperatorIconProps = {
     onClickFn?: () => void;
 };
 
-function OperatorIcon(props: OperatorIconProps) {
+export default function OperatorIcon(props: OperatorIconProps) {
     const rarityColor = getRarityColor(props.operator.rarity);
     // everchanging, the knowing feelings,
     // could make you fall from the dreamy skies
@@ -41,13 +41,15 @@ function OperatorIcon(props: OperatorIconProps) {
 
     return (
         <div
-            className={`flex max-h-28 w-full flex-col items-center justify-start`}
+            className={`
+                flex max-h-28 w-full flex-col items-center justify-start
+            `}
             onClick={props.isBanned ? () => {} : props.onClickFn}
         >
             <div
                 className={
-                    classNames("flex items-center px-1 self-center", {
-                        "opacity-25 grayscale": props.isBanned,
+                    clsx("flex items-center self-center px-1", {
+                        "opacity-25 grayscale": props.isBanned
                     })
                 }
                 style={{
@@ -57,7 +59,7 @@ function OperatorIcon(props: OperatorIconProps) {
                         ${props.isSelected ? selectedColor : rarityColor}70 25%,
                         ${props.isSelected ? selectedColor : rarityColor}00 100%
                     )`,
-                    borderBottom: `4px solid ${props.isSelected ? selectedColor : rarityColor}`,
+                    borderBottom: `4px solid ${props.isSelected ? selectedColor : rarityColor}`
                 }}
             >
                 <Image
@@ -68,11 +70,12 @@ function OperatorIcon(props: OperatorIconProps) {
                     width={48}
                 />
             </div>
-            <div className={"mt-1 flex w-12 items-center justify-center text-center text-xs"}>
+            <div className={`
+                mt-1 flex w-12 items-center justify-center text-center text-xs
+            `}
+            >
                 {props.operator.name}
             </div>
         </div>
     );
 }
-
-export default OperatorIcon;

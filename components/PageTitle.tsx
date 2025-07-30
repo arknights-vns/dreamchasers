@@ -11,13 +11,27 @@ export default function PageTitle(props: PageTitleProps) {
     return (
         <div className={"mt-6 mb-4"}>
             <div className={`flex items-center justify-center`}>
-                <div className={"hidden pr-4 lg:block dark:invert"}>
+                <div className={`
+                    hidden pr-4
+                    lg:block
+                    dark:invert
+                `}
+                >
                     <TitleDecorLeft height={24} width={115} />
                 </div>
-                <div className={"text-center text-4xl font-extrabold md:text-5xl"}>
+                <div className={`
+                    text-center text-4xl font-extrabold
+                    md:text-5xl
+                `}
+                >
                     {props.title.toUpperCase()}
                 </div>
-                <div className={"hidden pl-4 lg:block dark:invert"}>
+                <div className={`
+                    hidden pl-4
+                    lg:block
+                    dark:invert
+                `}
+                >
                     <TitleDecorRight height={24} width={115} />
                 </div>
             </div>

@@ -29,7 +29,7 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
         remaining_time: 60,
         started_at: null,
         paused_at: null,
-        updated_at: Date.now(),
+        updated_at: Date.now()
     });
     const [isRealtimeConnected, setIsRealtimeConnected] = useState(false);
     const [isTimerLoaded, setIsTimerLoaded] = useState(false);
@@ -42,8 +42,6 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
             try {
                 const response = await fetch("/api/timer/status");
                 const result = await response.json();
-                // console.info(result);
-                // console.info(result.timer);
 
                 if (response.ok && result) {
                     const timerFromAPI = {
@@ -52,7 +50,7 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
                         started_at: result.started_at ? new Date(result.started_at).getTime() : null,
                         paused_at: result.paused_at ? new Date(result.paused_at).getTime() : null,
                         updated_at: new Date(result.updated_at).getTime(),
-                        calculated_remaining_time: result.calculated_remaining_time,
+                        calculated_remaining_time: result.calculated_remaining_time
                     };
 
                     setTimerData(timerFromAPI);
@@ -68,7 +66,7 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
                 event: "*",
                 schema: "public",
                 table: "timer_state",
-                filter: "id=eq.main_timer",
+                filter: "id=eq.main_timer"
             }, (payload) => {
                 console.info(`${channelName} received timer state change:`, payload);
                 if (payload.new && typeof payload.new === "object") {
@@ -100,7 +98,7 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
                         started_at: newTimer.started_at ? new Date(newTimer.started_at).getTime() : null,
                         paused_at: newTimer.paused_at ? new Date(newTimer.paused_at).getTime() : null,
                         updated_at: new Date(newTimer.updated_at).getTime(),
-                        calculated_remaining_time: calculatedRemainingTime,
+                        calculated_remaining_time: calculatedRemainingTime
                     };
 
                     setTimerData(updatedTimerData);
@@ -121,13 +119,15 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
 
     // Timer update loop
     useEffect(() => {
-        if (timerData.state !== "running")
+        if (timerData.state !== "running") {
             return;
+        }
 
         const interval = setInterval(() => {
             setTimerData((prev) => {
-                if (prev.state !== "running" || !prev.started_at)
+                if (prev.state !== "running" || !prev.started_at) {
                     return prev;
+                }
 
                 const elapsed = Math.floor((Date.now() - prev.started_at) / 1000);
                 const newRemainingTime = Math.max(0, prev.remaining_time - elapsed);
@@ -141,7 +141,7 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
 
                 return {
                     ...prev,
-                    calculated_remaining_time: newRemainingTime,
+                    calculated_remaining_time: newRemainingTime
                 };
             });
         }, 1000);
@@ -170,6 +170,6 @@ export function useTimer(channelName: string = "timer-state-changes"): TimerHook
         isTimerLoaded,
         isRealtimeConnected,
         formatTime,
-        getDisplayTime,
+        getDisplayTime
     };
 }
