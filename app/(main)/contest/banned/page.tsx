@@ -120,10 +120,7 @@ export default function ContestBannedPage() {
                             return (
                                 <Card
                                     key={charcode}
-                                    className={clsx(`
-                                        h-115 w-57 border-neutral-500
-                                        bg-gradient-to-t transition-all
-                                    `, {
+                                    className={clsx("h-115 w-57 border-neutral-50 bg-gradient-to-t transition-all", {
                                         "from-orange-400/75": rarity === 6,
                                         "from-amber-400/75": rarity === 5,
                                         "from-purple-500/75": rarity === 4,
