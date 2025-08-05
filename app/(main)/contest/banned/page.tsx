@@ -144,7 +144,7 @@ export default function ContestBannedPage() {
                                                             alt={charcode}
                                                             className="h-full w-full object-contain"
                                                             height={360}
-                                                            src={`/operator/portraits/${charcode}_${suffix}.png`}
+                                                            src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/portraits/${charcode}_${suffix}.png`}
                                                             width={180}
                                                         />
                                                     )
