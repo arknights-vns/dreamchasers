@@ -6,7 +6,7 @@ services:
     hostname: dreamchasers
     # for future me: change in the dockerfile too.
     ports:
-      - "7270:7270"
+      - "443:7270"
     restart: unless-stopped
     env_file:
       - .env
