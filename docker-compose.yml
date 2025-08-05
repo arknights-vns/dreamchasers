@@ -4,9 +4,8 @@ services:
     build: .
     container_name: dreamchasers
     hostname: dreamchasers
-    # for future me: change in the dockerfile too.
     ports:
-      - "443:7270"
+      - "3000:7270"
     restart: unless-stopped
     env_file:
       - .env
