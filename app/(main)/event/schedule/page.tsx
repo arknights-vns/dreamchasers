@@ -40,7 +40,7 @@ const items = [
     },
     {
         date: "15:25",
-        title: "Give-Away & Bế mạc"
+        title: "Give-Away"
     },
     {
         date: "16:00",

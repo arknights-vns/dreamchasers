@@ -29,4 +29,5 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # deploy
 USER nextjs
+ENV PORT=7270
 CMD ["node", "server.js"]
