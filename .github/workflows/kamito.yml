@@ -15,7 +15,7 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            cd ~/the-web
+            cd ~/dreamchasers
             git pull --rebase
             docker compose down
             docker compose build
