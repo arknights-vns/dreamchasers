@@ -37,7 +37,7 @@ export default function OperatorIcon(props: OperatorIconProps) {
 
     const imageSource = props.operator.name === "Arene"
         ? Arene
-        : `/operator/icons/${props.operator.id}.png`;
+        : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/icons/${props.operator.id}.png`;
 
     return (
         <div

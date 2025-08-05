@@ -23,7 +23,7 @@ function ClassIcon(props: ClassIconProps) {
                 className="size-auto object-contain"
                 height={32}
                 priority
-                src={`/operator/classes/${props.operatorClass}.png`}
+                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/classes/${props.operatorClass}.png`}
                 width={32}
             />
         </div>
