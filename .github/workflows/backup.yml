@@ -1,0 +1,26 @@
+name: VNS full storage dump (midnight daily)
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Supabase Backup
+        uses: zerodays/supabase-storage-backup@v1
+        with:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+          OUTPUT_ZIP_FILE_NAME: terrastationvn.zip
+
+      - name: Save Backup
+        uses: actions/upload-artifact@v2
+        with:
+          name: backup
+          path: terrastationvn.zip

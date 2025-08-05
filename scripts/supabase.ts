@@ -1,5 +1,5 @@
 import { readdir, readFile } from "node:fs/promises";
-import * as path from "node:path";eat
+import * as path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 // FIXME: In case you can't run, replace yourself.
