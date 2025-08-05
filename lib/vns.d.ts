@@ -1,5 +1,6 @@
 export type CrewMember = {
     name: string;
+    internal_name: string?;
     quote: string;
     roles: string[];
 };

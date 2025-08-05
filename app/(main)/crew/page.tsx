@@ -6,23 +6,22 @@ import Link from "next/link";
 import { createLoader, parseAsStringLiteral } from "nuqs/server";
 import PageTitle from "@/components/PageTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CrewMembers from "@/public/crew/_crew.json";
+import { createSupabase } from "@/lib/supabase/client";
 
 type CrewListProps = {
     members: CrewMember[];
 };
 
-const members = CrewMembers.members;
-const partners = CrewMembers.partners;
-
 function MemberBox(props: CrewMember) {
+    const assetName = props.internal_name ?? props.name;
+
     return (
         <div className="mb-4 flex max-h-64 min-w-64 flex-col items-center gap-y-2">
             <Image
-                alt="VNS_Crew"
+                alt={assetName}
                 className="rounded-full ring ring-primary"
                 height={100}
-                src={`/crew/${props.name}.jpg`}
+                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/crew/${assetName}.jpg`}
                 width={100}
             />
             <div className="text-xl font-extrabold">{props.name}</div>
@@ -63,6 +62,7 @@ function CrewList(props: CrewListProps) {
                             <MemberBox
                                 key={member.name}
                                 name={member.name}
+                                internal_name={member.internal_name}
                                 quote={member.quote}
                                 roles={member.roles}
                             />
@@ -82,6 +82,8 @@ function CrewList(props: CrewListProps) {
                                     name={member.name}
                                     quote={member.quote}
                                     roles={member.roles}
+                                    key={member.name}
+                                    internal_name={member.internal_name}
                                 />
                             </div>
                         );
@@ -98,7 +100,13 @@ function CrewList(props: CrewListProps) {
                             key={member.name}
                             className="w-full md:w-auto"
                         >
-                            <MemberBox name={member.name} quote={member.quote} roles={member.roles} />
+                            <MemberBox
+                                name={member.name}
+                                quote={member.quote}
+                                roles={member.roles}
+                                key={member.name}
+                                internal_name={member.internal_name}
+                            />
                         </div>
                     );
                 })}
@@ -120,6 +128,7 @@ function PartnerList(props: CrewListProps) {
                             name={member.name}
                             quote={member.quote}
                             roles={member.roles}
+                            internal_name={member.internal_name}
                         />
                     );
                 })}
@@ -141,7 +150,39 @@ type PageProps = {
 };
 
 export default async function CrewPage({ searchParams }: PageProps) {
+    const supabase = createSupabase();
     const { tab } = await loadParams(searchParams);
+
+    const { data, error } = await supabase
+        .from("crew_members")
+        .select(`
+            name,
+            internal_name,
+            quote,
+            type,
+            crew_person_to_role (
+                crew_roles (
+                    name
+                )
+            )
+        `);
+
+    if (error) {
+        console.error(error);
+        return (<></>);
+    }
+
+    const members = data?.filter(x => x.type === "member").map(x => ({
+        name: x.name,
+        internal_name: x.internal_name,
+        roles: x.crew_person_to_role.map(rel => rel.crew_roles.name)
+    }));
+
+    const partners = data?.filter(x => x.type === "partner").map(x => ({
+        name: x.name,
+        internal_name: x.internal_name,
+        roles: x.crew_person_to_role.map(rel => rel.crew_roles.name)
+    }));
 
     return (
         <div className="flex h-visible flex-col bg-vns">
@@ -180,6 +221,7 @@ export default async function CrewPage({ searchParams }: PageProps) {
                         className="scrollbar-none overflow-y-auto bg-background pt-10"
                         value="dreamchasers"
                     >
+                        {/* @ts-expect-error thrown by the console.error */}
                         <CrewList members={members} />
                     </TabsContent>
 
@@ -187,6 +229,7 @@ export default async function CrewPage({ searchParams }: PageProps) {
                         className="scrollbar-none overflow-y-auto bg-background pt-10"
                         value="partners"
                     >
+                        {/* @ts-expect-error thrown by the console.error */}
                         <PartnerList members={partners} />
                     </TabsContent>
                 </Tabs>
