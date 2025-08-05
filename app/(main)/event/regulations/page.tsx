@@ -98,14 +98,14 @@ const rules: RuleType[] = [
         title: "BTC",
         titleColor: "yellow",
         description:
-            "Miễn trách nhiệm đối với các giao dịch cá nhân, ngoại trừ tại khu vực booth của nhà tài trợ.",
+            "BTC không chịu trách nhiệm với các giao dịch giữa khách hàng với nhau trừ các booth của sponsor",
         icon: ArrowRightLeft
     },
     {
         title: "BTC",
         titleColor: "red",
         description:
-            "Không chịu trách nhiệm với những vấn đề giữa các khách hàng với nhau.",
+            "BTC không chịu trách nhiệm với các xung đột giữa những người tham dự với nhau. Nhưng, nếu gây ảnh hướng tới trật tự và an ninh của sự kiện, BTC sẽ can thiệp và quyết định của BTC sẽ là quyết định tiên quyết",
         icon: Flame
     }
 ];
