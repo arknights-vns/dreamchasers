@@ -138,7 +138,7 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
     const links: { label: string; href: string }[] = [
         { label: "Tổ chức", href: "/crew" },
         { label: "Kỷ niệm", href: "/retro" },
-        { label: "Tournament", href: "/contest" }
+        { label: "Tournament", href: "#" }
     ];
 
     const eventItems: { label: string; href: string }[] = [

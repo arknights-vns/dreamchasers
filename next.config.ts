@@ -21,20 +21,20 @@ const nextConfig: NextConfig = {
                 ]
             }
         ];
-    },
-
-    async rewrites() {
-        return [
-            {
-                source: "/contest/democracy",
-                destination: "/contest/voting"
-            },
-            {
-                source: "/contest/podium",
-                destination: "/contest/standing"
-            }
-        ];
     }
+
+    // async rewrites() {
+    //     return [
+    //         {
+    //             source: "/contest/democracy",
+    //             destination: "/contest/voting"
+    //         },
+    //         {
+    //             source: "/contest/podium",
+    //             destination: "/contest/standing"
+    //         }
+    //     ];
+    // }
 };
 
 export default nextConfig;
