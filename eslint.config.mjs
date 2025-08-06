@@ -29,6 +29,7 @@ export default antfu(
             ".next",
             "node_modules",
             "public",
+            "scripts/**/*.ts",
             // let shadcn cook on his own.
             "components/ui/**/*.tsx",
             "components/shadcn/**/*.tsx",

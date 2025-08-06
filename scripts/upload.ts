@@ -1,8 +1,10 @@
 import { readdir, readFile } from "node:fs/promises";
 import * as path from "node:path";
 import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
 
-// FIXME: In case you can't run, replace yourself.
+dotenv.config();
+
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 

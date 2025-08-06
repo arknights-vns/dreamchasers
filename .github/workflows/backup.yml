@@ -1,4 +1,4 @@
-name: VNS full storage dump (midnight daily)
+name: VNS storage dump (midnight daily)
 
 on:
   workflow_dispatch:
@@ -7,20 +7,32 @@ on:
 
 jobs:
   backup-storage:
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      DOWNLOAD_DIR: downloads
+
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Supabase Backup
-        uses: zerodays/supabase-storage-backup@v1
+      - uses: actions/setup-node@v4
         with:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-          OUTPUT_ZIP_FILE_NAME: terrastationvn.zip
+          node-version: "24.x"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
 
-      - name: Save Backup
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run download script
+        run: npx tsx scripts/download.ts
+
+      - name: Zip downloaded files
+        run: zip -r downloaded_buckets.zip ${{ env.DOWNLOAD_DIR }}
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: backup
-          path: terrastationvn.zip
+          name: supabase-buckets
+          path: downloaded_buckets.zip
