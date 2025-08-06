@@ -268,7 +268,7 @@ export default function VotingPage() {
                 {
                     operators.length > 0
                         ? (
-                                <div className="scrollbar-none grid h-[727px] w-[90vw] grid-cols-5 gap-6 overflow-y-auto rounded-lg border bg-background p-6 md:grid-cols-9">
+                                <div className="grid h-1/2 w-[100vw] grid-cols-5 gap-4 overflow-y-auto rounded-lg bg-background p-5 md:grid-cols-9 lg:grid-cols-12">
                                     {filteredOperators.map(operator => (
                                         <OperatorIcon
                                             key={operator.charid}
@@ -286,7 +286,7 @@ export default function VotingPage() {
                                 </div>
                             )
                         : (
-                                <Skeleton className="h-full w-[80vw] rounded-lg border" />
+                                <Skeleton className="h-full w-[90vw] rounded-lg border" />
                             )
                 }
                 {/* Selection */}

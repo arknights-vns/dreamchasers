@@ -66,7 +66,6 @@ export default function OperatorIcon(props: OperatorIconProps) {
                     height={48}
                     src={imageSource}
                     width={48}
-                    priority
                 />
             </div>
             <div className="mt-1 flex w-12 items-center justify-center text-center text-xs">
