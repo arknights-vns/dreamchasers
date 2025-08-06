@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Supabase Backup
         uses: zerodays/supabase-storage-backup@v1
@@ -20,7 +20,7 @@ jobs:
           OUTPUT_ZIP_FILE_NAME: terrastationvn.zip
 
       - name: Save Backup
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: backup
           path: terrastationvn.zip

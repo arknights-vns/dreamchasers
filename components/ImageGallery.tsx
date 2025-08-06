@@ -15,8 +15,6 @@ export default async function ImageGallery({
         .from("events")
         .list(`${albumPath}/album`);
 
-    console.info(data);
-
     const images = data?.map(x => (
         `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/${albumPath}/album/${x.name}`
     ));
