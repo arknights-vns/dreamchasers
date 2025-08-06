@@ -1,10 +1,10 @@
 "use client";
 
+import type { StaticImageData } from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import OrganizerImage from "@/components/OrganizerImage";
 import DRCH_Banner from "@/public/DRCH_Banner_Group.png";
 import Jiangles_Banner from "@/public/organizers/jiangles_banner.png";
 import ModSquad_Banner from "@/public/organizers/mod_squad_banner.png";
@@ -17,16 +17,31 @@ type TimeLeft = {
     seconds: number;
 };
 
+type OrganizerImageProps = {
+    src: StaticImageData;
+    alt: string;
+};
+
+function OrganizerImage(props: OrganizerImageProps) {
+    return (
+        <Image
+            alt={props.alt}
+            className="h-[40px] w-auto object-contain invert dark:invert-0"
+            src={props.src}
+        />
+    );
+}
+
 export default function Home() {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 4000 })]);
     const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: -1, hours: -1, minutes: -1, seconds: -1 });
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            const now = new Date();
-            const targetDate = new Date("2025-08-10T09:15:00+07:00");
-            const difference = targetDate.getTime() - now.getTime();
+        const targetDate = Date.parse("2025-08-10T09:15:00+07:00");
+        const now = Date.now();
+        let difference = targetDate - now;
 
+        const interval = setInterval(() => {
             if (difference > 0) {
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -37,13 +52,15 @@ export default function Home() {
             } else {
                 setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
             }
+
+            difference -= 1000;
         }, 1000);
 
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="flex h-visible bg-background/70">
+        <div className="flex h-visible bg-background/50">
             {/* Image carousel. */}
             <div
                 ref={emblaRef}
@@ -79,13 +96,8 @@ export default function Home() {
                 <div className="flex w-full max-w-lg items-center justify-center px-8">
                     <div className="text-2xl font-bold md:text-4xl">
                         {
-                            [
-                                { value: timeLeft.days, label: "Ngày" },
-                                { value: timeLeft.hours, label: "Giờ" },
-                                { value: timeLeft.minutes, label: "Phút" },
-                                { value: timeLeft.seconds, label: "Giây" }
-                            ].map(item => (
-                                item.value !== -1 ? item.value.toString().padStart(2, "0") : "--"
+                            Object.entries(timeLeft).map(item => (
+                                item[1] !== -1 ? item[1].toString().padStart(2, "0") : "--"
                             )).join(":")
                         }
                     </div>

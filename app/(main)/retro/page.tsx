@@ -1,7 +1,5 @@
 import PageTitle from "@/components/PageTitle";
 import RetroItem from "@/components/RetroItem";
-import Dreamchasers from "@/public/retro/dreamchasers/dreamchasers.jpg";
-import TheShowMustGoOn from "@/public/retro/the-show-must-go-on/the-show-must-go-on.jpg";
 
 export default function RetroPage() {
     return (
@@ -11,17 +9,18 @@ export default function RetroPage() {
                 title="Kỷ niệm"
             />
             <div className="mx-auto mb-8 flex flex-1/2 flex-col items-center justify-center space-y-4">
+
                 <RetroItem
                     description="Offline đầu tiên của VNS, cũng như là tiền đề cho Dreamchasers và VNS Network."
-                    href="/retro/the-show-must-go-on"
-                    imageSrc={TheShowMustGoOn}
+                    year={2024}
+                    eventId="the-show-must-go-on"
                     title="Arknights VNS Offline 2024: The Show Must Go On!"
                 />
 
                 <RetroItem
                     description="COMING SOON!"
-                    href="#"
-                    imageSrc={Dreamchasers}
+                    year={2025}
+                    eventId="dreamchasers"
                     title="Arknights VNS Offline 2025: Dreamchasers"
                 />
             </div>

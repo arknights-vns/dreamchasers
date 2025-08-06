@@ -1,21 +1,25 @@
 import Image from "next/image";
+import { createSupabase } from "@/lib/supabase/client";
 
 type ImageGalleryProps = {
     albumPath: string;
-    imageCount: number;
-    extension?: string;
-    className?: string;
 };
 
-export default function ImageGallery({
-    albumPath,
-    imageCount,
-    extension = "jpg"
+export default async function ImageGallery({
+    albumPath
 }: ImageGalleryProps) {
-    const images = Array.from(
-        { length: imageCount },
-        (_, i) => `${albumPath}/${i + 1}.${extension}`
-    );
+    const supabase = createSupabase();
+
+    const { data } = await supabase
+        .storage
+        .from("events")
+        .list(`${albumPath}/album`);
+
+    console.info(data);
+
+    const images = data?.map(x => (
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/${albumPath}/album/${x.name}`
+    ));
 
     return (
         <div
@@ -24,7 +28,7 @@ export default function ImageGallery({
             <div
                 className="max-w-full [column-gap:1.12rem] [column-count:2] md:[column-count:3] lg:[column-count:4]"
             >
-                {images.map(src => (
+                {images!.map(src => (
                     <div
                         key={src}
                         className="mb-[1.12rem] w-full break-inside-avoid overflow-hidden rounded-xl shadow-lg"
@@ -41,5 +45,6 @@ export default function ImageGallery({
                 ))}
             </div>
         </div>
+        // <></>
     );
 }

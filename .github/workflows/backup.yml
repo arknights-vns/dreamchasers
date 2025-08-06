@@ -1,13 +1,13 @@
 name: VNS full storage dump (midnight daily)
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
 
 jobs:
-  backup:
+  backup-storage:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

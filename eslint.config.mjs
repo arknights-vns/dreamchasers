@@ -57,6 +57,13 @@ export default antfu(
             "@eslint-react/prefer-shorthand-boolean": "error",
             "style/brace-style": ["error", "1tbs"],
             "style/comma-dangle": ["error", "never"],
+            "style/max-len": ["error", {
+                code: 120,
+                tabWidth: 4,
+                ignoreStrings: true,
+                ignoreComments: true,
+                ignoreTemplateLiterals: true
+            }],
             "style/jsx-curly-brace-presence": [
                 "warn",
                 {
@@ -81,6 +88,13 @@ export default antfu(
                             message: "Haiya please use @ import bro..."
                         }
                     ]
+                }
+            ],
+            "react-refresh/only-export-components": [
+                "error",
+                {
+                    allowExportNames: ["metadata", "viewport"],
+                    allowConstantExport: true
                 }
             ]
         }

@@ -299,7 +299,9 @@ export default function VotingPage() {
                     <div className="grid grid-cols-6 gap-7">
                         {Array.from({ length: 6 }, (_, index) => {
                             const selectedCharId = selectedOperators[index];
-                            const selectedOp = selectedCharId ? operators.find(op => op.charid === selectedCharId) : null;
+                            const selectedOp = selectedCharId
+                                ? operators.find(op => op.charid === selectedCharId)
+                                : null;
                             return (
                                 <div key={index} className="h-28">
                                     {

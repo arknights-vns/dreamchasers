@@ -1,24 +1,25 @@
-import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 
 type RetroItemProps = {
     title: string;
     description: string;
-    imageSrc: StaticImageData | string;
-    href: string;
+    year: 2024 | 2025;
+    eventId: string;
 };
 
 export default function RetroItem(props: RetroItemProps) {
+    const bannerImage = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/${props.year}/${props.eventId}/banner.jpg`;
+
     return (
         <div className="flex max-w-[80vw] flex-col border-2 border-primary/25 lg:flex-row">
             <figure className="flex max-h-48 w-full overflow-hidden lg:w-1/2">
-                <Image alt="retro_image" className="self-center border-2" src={props.imageSrc} />
+                <Image alt="retro_image" className="self-center border-2" src={bannerImage} width={3000} height={1000} />
             </figure>
             <div className="flex w-full flex-col items-center justify-center bg-background lg:w-1/2">
                 <Link
                     className="m-2 text-center text-xl font-extrabold hover:underline"
-                    href={props.href}
+                    href={`/retro/${props.eventId}`}
                 >
                     {props.title}
                 </Link>

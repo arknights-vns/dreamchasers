@@ -11,9 +11,7 @@ type ClassIconProps = {
 function ClassIcon(props: ClassIconProps) {
     return (
         <div
-            className={clsx(`
-                flex size-9 items-center justify-center border border-white/50
-            `, props.active
+            className={clsx("flex size-9 items-center justify-center border border-white/50", props.active
                 ? "bg-blue-400"
                 : "bg-black")}
             onClick={props.onClick}

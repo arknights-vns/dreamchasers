@@ -1,7 +1,6 @@
 import Image from "next/image";
 import ImageGallery from "@/components/ImageGallery";
 import PageTitle from "@/components/PageTitle";
-import TheShowMustGoOnImg from "@/public/retro/the-show-must-go-on/the-show-must-go-on.jpg";
 
 export default function TheShowMustGoOn() {
     return (
@@ -18,7 +17,7 @@ export default function TheShowMustGoOn() {
                     Với tổng số vé bán ra lên đến 150 và chi phí vận hành lên đến chục triệu đồng, mặc
                     dù không tránh khỏi những trục trặc kỹ thuật, trì hoãn, và khiếm khuyết, nhưng sự
                     kiện đã diễn ra thành công ngoài mong đợi. Để đạt được điều này, team ban tổ chức đã
-                    không ngại hi sinh, thậm chí &quot;ăn mì gói qua ngày&quot; trong vài tháng sau đó –
+                    không ngại hi sinh, thậm chí &quot;ăn mì gói qua ngày&quot; trong vài tháng sau đó -
                     tất cả vì đam mê và sự gắn kết của cộng đồng.
                 </div>
                 <div className="font-normal">
@@ -31,9 +30,9 @@ export default function TheShowMustGoOn() {
                 </div>
                 <Image
                     alt="VNS_The_Show_Must_Go_On"
-                    className="place-content-center-safe"
+                    className="object-contain"
                     height={1000}
-                    src={TheShowMustGoOnImg}
+                    src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/2024/the-show-must-go-on/banner.jpg`}
                     width={3000}
                 />
                 <div className="items-center text-center font-bold italic">
@@ -43,7 +42,9 @@ export default function TheShowMustGoOn() {
                 </div>
                 <div className="text-center text-3xl font-extrabold">Gallery</div>
                 <div className="my-8">
-                    <ImageGallery albumPath="/retro/the-show-must-go-on/album" imageCount={31} />
+                    <ImageGallery
+                        albumPath="2024/the-show-must-go-on"
+                    />
                 </div>
             </div>
         </div>
