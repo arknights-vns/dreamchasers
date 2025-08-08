@@ -88,24 +88,17 @@ const rules: RuleType[] = [
         icon: MapPinCheckInside
     },
     {
-        title: "KHI",
-        titleColor: "green",
-        description:
-            "Xảy ra sự cố, xung đột hay tranh chấp... tại offline, quyết định của BTC là quyết định tiên quyết.",
-        icon: Angry
-    },
-    {
         title: "BTC",
         titleColor: "yellow",
         description:
-            "BTC không chịu trách nhiệm với các giao dịch giữa khách hàng với nhau trừ các booth của sponsor",
+            "Không chịu trách nhiệm với các giao dịch giữa khách hàng với nhau trừ các booth của sponsor",
         icon: ArrowRightLeft
     },
     {
         title: "BTC",
         titleColor: "red",
         description:
-            "BTC không chịu trách nhiệm với các xung đột giữa những người tham dự với nhau. Nhưng, nếu gây ảnh hướng tới trật tự và an ninh của sự kiện, BTC sẽ can thiệp và quyết định của BTC sẽ là quyết định tiên quyết",
+            "Không chịu trách nhiệm với các xung đột giữa những người tham dự với nhau. Nhưng, nếu gây ảnh hướng tới trật tự và an ninh của sự kiện, BTC sẽ can thiệp và quyết định của BTC sẽ là quyết định tiên quyết",
         icon: Flame
     }
 ];
