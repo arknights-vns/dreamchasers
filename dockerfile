@@ -1,15 +1,18 @@
 # syntax=docker/dockerfile:1
+FROM node:24-alpine AS base
 
 # install dependencies
-FROM node:24-alpine AS builder
+FROM base AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # setup
-FROM node:24-alpine AS runner
+FROM base AS runner
 WORKDIR /app
 COPY --from=builder /app/public             ./public
 COPY --from=builder /app/.next/standalone   ./
@@ -17,5 +20,4 @@ COPY --from=builder /app/.next/static       ./.next/static
 
 # deploy
 ENV PORT=7270
-ENV NODE_ENV=production
 CMD ["node", "server.js"]

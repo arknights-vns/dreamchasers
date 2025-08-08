@@ -41,7 +41,7 @@ export default function OperatorIcon(props: OperatorIconProps) {
 
     return (
         <div
-            className="flex max-h-28 w-full flex-col items-center justify-start"
+            className="flex max-h-28 flex-col items-center justify-start"
             onClick={props.isBanned ? () => {} : props.onClickFn}
         >
             <div

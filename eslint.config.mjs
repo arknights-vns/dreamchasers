@@ -97,7 +97,8 @@ export default antfu(
                     allowExportNames: ["metadata", "viewport"],
                     allowConstantExport: true
                 }
-            ]
+            ],
+            "react-hooks/react-compiler": "error"
         }
     }
 );

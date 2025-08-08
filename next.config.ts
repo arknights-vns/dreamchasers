@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
             new URL(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/**`)
         ]
     },
+    experimental: {
+        reactCompiler: true
+    },
 
     async headers() {
         return [
