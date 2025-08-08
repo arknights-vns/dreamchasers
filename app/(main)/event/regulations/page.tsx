@@ -1,6 +1,6 @@
 import type { SearchParams } from "nuqs/server";
 import { clsx } from "clsx";
-import { Angry, ArrowRightLeft, Baby, BrushCleaning, Dog, Flame, Gavel, Hand, MapPinCheckInside, Scale, Shirt, ShoppingBag, Sword, Syringe, UserRoundX } from "lucide-react";
+import { ArrowRightLeft, Baby, BrushCleaning, Dog, Flame, Gavel, Hand, MapPinCheckInside, Scale, Shirt, ShoppingBag, Sword, Syringe, UserRoundX } from "lucide-react";
 import Link from "next/link";
 import { createLoader, parseAsStringLiteral } from "nuqs/server";
 import { Fragment } from "react";
@@ -126,10 +126,7 @@ function RuleSection({
         }[titleColor] || "text-default";
     return (
         <div
-            className={clsx(`
-                grid h-50 w-full content-center
-                md:max-w-100
-            `, side === "left"
+            className={clsx("grid h-50 w-full content-center md:max-w-100", side === "left"
                 ? "justify-items-end"
                 : "justify-items-start")}
         >
@@ -138,18 +135,11 @@ function RuleSection({
                     ? "items-end text-right"
                     : "items-start text-left")}
             >
-                <h1 className={clsx(colorClass, `
-                    text-2xl font-medium
-                    md:text-5xl
-                `)}
-                >
+                <h1 className={clsx(colorClass, "text-2xl font-medium md:text-5xl")}>
                     {title}
                 </h1>
                 <p
-                    className={clsx(`
-                        text-lg font-medium
-                        md:text-xl
-                    `, side === "left"
+                    className={clsx("text-lg font-medium md:text-xl", side === "left"
                         ? "text-right"
                         : "text-left")}
                 >
