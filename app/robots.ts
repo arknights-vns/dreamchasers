@@ -9,15 +9,14 @@ export default function robots(): MetadataRoute.Robots {
                 "/crew",
                 "/event/*",
                 "/retro/*",
+                "/contest/*",
                 "/favicon.ico",
                 "/opengraph-image.jpg",
                 "/sitemap.xml",
                 "/robots.txt"
             ],
             disallow: [
-                "/api/*",
-                "/tickets",
-                "/admin"
+                "/api/*"
             ]
         }
     };

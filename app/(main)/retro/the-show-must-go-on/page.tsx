@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ImageGallery from "@/components/ImageGallery";
 import PageTitle from "@/components/PageTitle";
+import supabaseLoader from "@/lib/supabase/image";
 
 export default function TheShowMustGoOn() {
     return (
@@ -32,8 +33,9 @@ export default function TheShowMustGoOn() {
                     alt="VNS_The_Show_Must_Go_On"
                     className="object-contain"
                     height={1000}
-                    src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/2024/the-show-must-go-on/banner.jpg`}
+                    src="/events/2024/the-show-must-go-on/banner.jpg"
                     width={3000}
+                    loader={supabaseLoader}
                 />
                 <div className="items-center text-center font-bold italic">
                     Until next time, Doctors!

@@ -7,6 +7,7 @@ import { createLoader, parseAsStringLiteral } from "nuqs/server";
 import PageTitle from "@/components/PageTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createSupabase } from "@/lib/supabase/client";
+import supabaseLoader from "@/lib/supabase/image";
 
 type CrewListProps = {
     members: CrewMember[];
@@ -21,8 +22,9 @@ function MemberBox(props: CrewMember) {
                 alt={assetName}
                 className="rounded-full ring ring-primary"
                 height={100}
-                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/crew/${assetName}.jpg`}
+                src={`/crew/${assetName}.jpg`}
                 width={100}
+                loader={supabaseLoader}
             />
             <div className="text-xl font-extrabold">{props.name}</div>
             {/* {props.quote !== "" && (

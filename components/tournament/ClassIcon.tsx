@@ -1,6 +1,7 @@
 import type { OperatorClass } from "@/lib/vns";
 import { clsx } from "clsx";
 import Image from "next/image";
+import supabaseLoader from "@/lib/supabase/image";
 
 type ClassIconProps = {
     operatorClass: OperatorClass;
@@ -21,8 +22,9 @@ function ClassIcon(props: ClassIconProps) {
                 className="size-auto object-contain"
                 height={32}
                 priority
-                src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/classes/${props.operatorClass}.png`}
+                src={`/operator/classes/${props.operatorClass}.png`}
                 width={32}
+                loader={supabaseLoader}
             />
         </div>
     );

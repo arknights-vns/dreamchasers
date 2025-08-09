@@ -1,6 +1,10 @@
+"use client";
+
+import clsx from "clsx";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import NavBarItems from "@/components/navbar/NavBarItems";
 import PurchaseTicketButton from "@/components/PreviewTicketButton";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
@@ -9,8 +13,21 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from 
 import DRCH_Logo from "@/public/DRCH_Logo.png";
 
 export default function NavBar() {
+    const pathName = usePathname();
+
+    const shouldHidden = [
+        "/contest/standing",
+        "/contest/voting"
+    ].includes(pathName);
+
     return (
-        <header className="sticky top-0 z-50 flex h-20 w-full bg-background/75 shadow-xs/50 shadow-primary backdrop-blur-lg">
+        <header className={
+            clsx("sticky top-0 z-50 h-20 w-full bg-background/75 shadow-xs/50 shadow-primary backdrop-blur-lg", {
+                flex: !shouldHidden,
+                hidden: shouldHidden
+            })
+        }
+        >
             <Sheet>
                 <SheetTrigger asChild>
                     <Button

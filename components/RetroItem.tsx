@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import supabaseLoader from "@/lib/supabase/image";
 
 type RetroItemProps = {
     title: string;
@@ -9,12 +10,19 @@ type RetroItemProps = {
 };
 
 export default function RetroItem(props: RetroItemProps) {
-    const bannerImage = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/${props.year}/${props.eventId}/banner.jpg`;
+    const bannerImage = `/events/${props.year}/${props.eventId}/banner.jpg`;
 
     return (
         <div className="flex max-w-[80vw] flex-col border-2 border-primary/25 lg:flex-row">
             <figure className="flex max-h-48 w-full overflow-hidden lg:w-1/2">
-                <Image alt="retro_image" className="self-center border-2" src={bannerImage} width={3000} height={1000} />
+                <Image
+                    alt={props.eventId}
+                    className="self-center border-2"
+                    src={bannerImage}
+                    width={3000}
+                    height={1000}
+                    loader={supabaseLoader}
+                />
             </figure>
             <div className="flex w-full flex-col items-center justify-center bg-background lg:w-1/2">
                 <Link

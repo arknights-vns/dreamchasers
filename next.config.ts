@@ -3,10 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     reactStrictMode: true,
     output: "standalone",
-    images: {
-        remotePatterns: [
-            new URL(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/**`)
-        ]
+    experimental: {
+        reactCompiler: true,
+        optimizePackageImports: ["@supabase/supabase-js", "@supabase/ssr"]
     },
 
     async headers() {
@@ -21,20 +20,22 @@ const nextConfig: NextConfig = {
                 ]
             }
         ];
-    }
+    },
 
-    // async rewrites() {
-    //     return [
-    //         {
-    //             source: "/contest/democracy",
-    //             destination: "/contest/voting"
-    //         },
-    //         {
-    //             source: "/contest/podium",
-    //             destination: "/contest/standing"
-    //         }
-    //     ];
-    // }
+    async redirects() {
+        return [
+            {
+                source: "/contest/democracy",
+                destination: "/contest/voting",
+                permanent: false
+            },
+            {
+                source: "/contest/podium",
+                destination: "/contest/standing",
+                permanent: false
+            }
+        ];
+    }
 };
 
 export default nextConfig;

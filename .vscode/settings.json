@@ -40,6 +40,16 @@
         ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
     ],
 
+    "files.readonlyInclude": {
+        "lib/supabase/terra.d.ts": true
+    },
+    "files.watcherExclude": {
+        "lib/supabase/terra.d.ts": true
+    },
+    "search.exclude": {
+        "lib/supabase/terra.d.ts": true
+    },
+
     // Silent the stylistic rules in you IDE, but still auto fix them
     "eslint.rules.customizations": [
         { "rule": "style/*", "severity": "off", "fixable": true },

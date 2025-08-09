@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { createSupabase } from "@/lib/supabase/client";
+import supabaseLoader from "@/lib/supabase/image";
 
 type ImageGalleryProps = {
     albumPath: string;
@@ -16,16 +17,12 @@ export default async function ImageGallery({
         .list(`${albumPath}/album`);
 
     const images = data?.map(x => (
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/events/${albumPath}/album/${x.name}`
+        `/events/${albumPath}/album/${x.name}`
     ));
 
     return (
-        <div
-            className="max-w-screen"
-        >
-            <div
-                className="max-w-full [column-gap:1.12rem] [column-count:2] md:[column-count:3] lg:[column-count:4]"
-            >
+        <div className="max-w-screen">
+            <div className="max-w-full [column-gap:1.12rem] [column-count:2] md:[column-count:3] lg:[column-count:4]">
                 {images!.map(src => (
                     <div
                         key={src}
@@ -38,11 +35,11 @@ export default async function ImageGallery({
                             priority
                             src={src}
                             width={854}
+                            loader={supabaseLoader}
                         />
                     </div>
                 ))}
             </div>
         </div>
-        // <></>
     );
 }

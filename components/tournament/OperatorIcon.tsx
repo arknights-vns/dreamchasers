@@ -1,6 +1,7 @@
 import type { Operator } from "@/lib/vns";
 import { clsx } from "clsx";
 import Image from "next/image";
+import supabaseLoader from "@/lib/supabase/image";
 import Arene from "@/public/tournament/drafting/Arene.png";
 
 function getRarityColor(rarity: number) {
@@ -37,11 +38,11 @@ export default function OperatorIcon(props: OperatorIconProps) {
 
     const imageSource = props.operator.name === "Arene"
         ? Arene
-        : `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/icons/${props.operator.id}.png`;
+        : `/operator/icons/${props.operator.id}.png`;
 
     return (
         <div
-            className="flex max-h-28 w-full flex-col items-center justify-start"
+            className="flex max-h-28 flex-col items-center justify-start"
             onClick={props.isBanned ? () => {} : props.onClickFn}
         >
             <div
@@ -66,6 +67,7 @@ export default function OperatorIcon(props: OperatorIconProps) {
                     height={48}
                     src={imageSource}
                     width={48}
+                    loader={supabaseLoader}
                 />
             </div>
             <div className="mt-1 flex w-12 items-center justify-center text-center text-xs">

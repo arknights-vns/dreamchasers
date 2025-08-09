@@ -45,10 +45,8 @@ export async function DELETE(request: NextRequest) {
             );
         }
 
-        // Get the operator with highest vote count
         const highestVoted = await getHighestVotedOperator();
 
-        // Add to banned_operators table
         const { data: bannedOperator, error: banError } = await elevatedSupabase
             .from("banned_operators")
             .insert({ id: highestVoted.charid })
@@ -59,13 +57,13 @@ export async function DELETE(request: NextRequest) {
             throw banError;
         }
 
-        const { data: votes } = await elevatedSupabase
-            .from("member_vote")
-            .select("id");
+        // const { data: votes } = await elevatedSupabase
+        //     .from("member_vote")
+        //     .select("id");
 
-        if (votes) {
-            await elevatedSupabase.from("old_member_vote").insert(votes);
-        }
+        // if (votes) {
+        //     await elevatedSupabase.from("old_member_vote").insert(votes);
+        // }
 
         await elevatedSupabase
             .from("member_vote")
@@ -89,7 +87,7 @@ export async function DELETE(request: NextRequest) {
 }
 
 /**
- * Ban operators by IDs.
+ * Submit operators ban, by IDs.
  *
  * @param request A list of operator IDs (char_[number]_[callsign]).
  */
@@ -102,7 +100,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "No operator IDs provided" }, { status: 400 });
         }
 
-        // Insert all provided IDs into banned_operators
         const { error } = await elevatedSupabase
             .from("member_vote")
             .insert(ids.map(id => ({ id })));

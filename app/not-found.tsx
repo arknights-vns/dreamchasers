@@ -1,12 +1,8 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import PageTitle from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
-    const navigation = useRouter();
-
     return (
         <div className="flex h-visible flex-col bg-vns">
             <PageTitle favorText="Có vẻ đây là đường cụt." title="Well..." />
@@ -16,10 +12,10 @@ export default function NotFoundPage() {
                     Không có gì ở đây hết á, hoặc là tụi mình đang trên đường nấu.
                 </div>
                 <Button
+                    asChild
                     className="cursor-pointer text-lg font-extralight"
-                    onClick={() => navigation.back()}
                 >
-                    Bấm vô đây để về trang trước
+                    <Link href="/">Bấm vô đây để về trang chính</Link>
                 </Button>
             </div>
         </div>

@@ -6,14 +6,18 @@ import { usePathname } from "next/navigation";
 
 export function TerraTheme({ children }: ComponentProps<typeof ThemeProvider>) {
     const pathname = usePathname();
-    const isLanding = pathname === "/";
+
+    const forcedThemeMap: { [route: string]: "dark" | "light" } = {
+        "/": "dark",
+        "/contest/standing": "light"
+    };
 
     return (
         <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
-            forcedTheme={isLanding ? "dark" : undefined}
+            forcedTheme={forcedThemeMap[pathname]}
         >
             {children}
         </ThemeProvider>
