@@ -1,5 +1,5 @@
-import { clsx } from "clsx";
 import { google } from "googleapis";
+import PageTitle from "@/components/PageTitle";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 type ContestantInfo = {
@@ -45,13 +45,13 @@ export default async function PodiumPage() {
     data = data.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
     const currentFilledCount = data.length;
-    data.length = 10;
+    data.length = 9;
     data = data.fill({}, currentFilledCount);
 
     return (
-        <div className="flex h-visible flex-col">
+        <div className="flex h-screen flex-col">
             <div className="mx-16 flex flex-1/2 flex-col items-center justify-center">
-
+                <PageTitle title="Bảng xếp hạng" favorText="Ye, chúng ta có 1 cái Podium cho Mini-Tournament :D" />
                 <Table className="w-full">
                     <TableHeader>
                         <TableRow className="bg-muted data-[state=selected]:bg-muted">
@@ -92,11 +92,13 @@ export default async function PodiumPage() {
 
                             return (
                                 <TableRow
-                                    key={row.name}
-                                    className={clsx("hover:bg-background hover:text-primary", style)}
+                                    // justification: we F5 every play.
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    key={position + 1}
+                                    className={style}
                                 >
                                     <TableCell className="border border-primary p-1 text-center text-3xl font-bold">
-                                        {row.name ? position + 1 : "..."}
+                                        {position + 1}
                                     </TableCell>
                                     <TableCell className="border border-primary p-1 text-center text-3xl">
                                         {row.name ?? "..."}
