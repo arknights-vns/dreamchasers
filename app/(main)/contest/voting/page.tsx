@@ -5,7 +5,8 @@ import type { OperatorClass, OperatorRarity } from "@/lib/vns";
 import { clsx } from "clsx";
 import Fuse from "fuse.js";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 import { toast } from "sonner";
 import ClassIcon from "@/components/tournament/ClassIcon";
 import OperatorIcon from "@/components/tournament/OperatorIcon";
@@ -30,8 +31,10 @@ export default function VotingPage() {
     const [isVotingAllowed, setIsVotingAllowed] = useState(false);
     const { isRealtimeConnected, isTimerLoaded, timerData, getDisplayTime, formatTime } = useTimer();
     const [operators, setOperators] = useState<SelectedOperator[]>([]);
+    const [displayedOperatorsCount, setDisplayedOperatorsCount] = useState(25);
+    const [hasNextPage, setHasNextPage] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // #region operator selection
     const fuse = useMemo(() => {
         if (operators.length === 0) {
             return null;
@@ -39,11 +42,11 @@ export default function VotingPage() {
 
         return new Fuse(operators, {
             keys: ["name"],
-            threshold: 0.5,
+            threshold: 0.1,
             includeScore: true,
-            minMatchCharLength: 1
+            minMatchCharLength: operatorNameSearch.length
         });
-    }, [operators]);
+    }, [operators, operatorNameSearch]);
 
     const filteredOperators = useMemo(() => {
         let filtered = operators;
@@ -68,6 +71,60 @@ export default function VotingPage() {
         });
     }, [operators, operatorNameSearch, maxRarity, selectedClass, fuse]);
 
+    const operatorStates = useMemo(() => {
+        const bannedSet = new Set(bannedOperators);
+        const selectedSet = new Set(selectedOperators);
+
+        return {
+            isBanned: (charId: string, profession: OperatorClass, name: string) =>
+                profession === "Specialist" || bannedSet.has(charId) || name === "Amiya",
+            isSelected: (charId: string) => selectedSet.has(charId)
+        };
+    }, [bannedOperators, selectedOperators]);
+
+    const displayedOperators = useMemo(() => {
+        return filteredOperators.slice(0, displayedOperatorsCount);
+    }, [filteredOperators, displayedOperatorsCount]);
+
+    const operatorData = useMemo(() => {
+        return displayedOperators.map(operator => ({
+            key: operator.charid,
+            charid: operator.charid,
+            name: operator.name,
+            rarity: operator.rarity as OperatorRarity,
+            class: operator.profession as OperatorClass
+        }));
+    }, [displayedOperators]);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setHasNextPage(displayedOperatorsCount < filteredOperators.length);
+    }, [displayedOperatorsCount, filteredOperators.length]);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setDisplayedOperatorsCount(25);
+    }, [operatorNameSearch, maxRarity, selectedClass]);
+
+    const loadMore = useCallback(async () => {
+        if (isLoading || !hasNextPage) {
+            return;
+        }
+
+        setIsLoading(true);
+        setDisplayedOperatorsCount(prev => prev + 25);
+        setIsLoading(false);
+    }, [isLoading, hasNextPage]);
+
+    const [sentryRef] = useInfiniteScroll({
+        loading: isLoading,
+        hasNextPage,
+        onLoadMore: loadMore,
+        disabled: false,
+        rootMargin: "0px 0px 100px 0px"
+    });
+
+    // #region operator selection
     async function handleBanSubmission() {
         // I guess I watched too much Balatro University...
         console.info("Shipping it:", selectedOperators);
@@ -87,35 +144,48 @@ export default function VotingPage() {
         }
     }
 
-    function handleOperatorSelection(charId: string) {
+    const handleOperatorSelection = useCallback((charId: string) => {
         if (bannedOperators.includes(charId)) {
             return;
         }
 
         setSelectedOperators((prev) => {
             if (prev.includes(charId)) {
-                // already selected
+                // already selected - remove it
                 return prev.filter(id => id !== charId);
             } else if (prev.length < 6) {
-                // not at capacity
+                // not at capacity - add it
                 return [...prev, charId];
             }
-            return prev; // we are full, bail tf out
+            // we are full, bail tf out
+            return prev;
         });
-    }
+    }, [bannedOperators]);
 
-    function removeSelectedOperator(charId: string) {
+    const removeSelectedOperator = useCallback((charId: string) => {
         setSelectedOperators(prev => prev.filter(id => id !== charId));
-    }
+    }, []);
 
-    function handleClassSelection(classType: OperatorClassSelection) {
+    const handleClassSelection = useCallback((classType: OperatorClassSelection) => {
         // basically toggle the class selection
         if (selectedClass === classType) {
             setSelectedClass("ALL");
         } else {
             setSelectedClass(classType);
         }
-    }
+    }, [selectedClass]);
+
+    const handleRaritySelection = useCallback((rarity: number) => {
+        setMaxRarity(rarity);
+    }, []);
+
+    const handleClearSearch = useCallback(() => {
+        setOperatorNameSearch("");
+    }, []);
+
+    const handleClearSelection = useCallback(() => {
+        setSelectedOperators([]);
+    }, []);
     // #endregion operator selection
 
     useEffect(() => {
@@ -139,11 +209,10 @@ export default function VotingPage() {
         const supabase = createSupabase();
 
         (async () => {
-            const { data: operators } = await supabase
-                .from("operators_v2")
-                .select("name,charid,rarity,profession");
+            const data = await fetch("/api/operator");
+            const operators = await data.json();
 
-            setOperators(operators!);
+            setOperators(operators.message);
         })();
 
         const channel = supabase
@@ -203,8 +272,8 @@ export default function VotingPage() {
     }, [timerData.state]);
 
     return (
-        <div className="mx-2 scrollbar-none flex h-visible flex-col bg-vns">
-            <div className="flex h-[calc(100vh_-_80px)] flex-col items-center justify-evenly space-y-2 py-4">
+        <div className="mx-2 scrollbar-none flex h-screen flex-col bg-vns">
+            <div className="flex h-full flex-col items-center justify-evenly space-y-2 py-4">
                 {/* Server status */}
                 <div className="font-bold">
                     PRTS:
@@ -235,22 +304,64 @@ export default function VotingPage() {
                 </div>
                 {/* Input */}
                 <div className="flex w-[80vw] justify-evenly">
-                    <Input className="w-2/3" placeholder="Ghi tên op ở đây..." value={operatorNameSearch} onChange={e => setOperatorNameSearch(e.target.value)} />
+                    <Input
+                        className="w-2/3"
+                        placeholder="Ghi tên op ở đây..."
+                        value={operatorNameSearch}
+                        onChange={e => setOperatorNameSearch(e.target.value)}
+                    />
                     <Button
                         className="ml-2 w-1/3"
-                        onClick={() => setOperatorNameSearch("")}
+                        disabled={operatorNameSearch.trim().length === 0}
+                        onClick={handleClearSearch}
                     >
                         Clear
                     </Button>
                 </div>
                 {/* Star rating */}
                 <div className="flex items-center justify-center space-x-1">
-                    <Image alt="Star 1" priority height={32} src={maxRarity >= 1 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(1)} />
-                    <Image alt="Star 2" priority height={32} src={maxRarity >= 2 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(2)} />
-                    <Image alt="Star 3" priority height={32} src={maxRarity >= 3 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(3)} />
-                    <Image alt="Star 4" priority height={32} src={maxRarity >= 4 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(4)} />
-                    <Image alt="Star 5" priority height={32} src={maxRarity >= 5 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(5)} />
-                    <Image alt="Star 6" priority height={32} src={maxRarity >= 6 ? StarSelected : StarUnSelected} onClick={() => setMaxRarity(6)} />
+                    <Image
+                        alt="Star 1"
+                        priority
+                        height={32}
+                        src={maxRarity >= 1 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(1)}
+                    />
+                    <Image
+                        alt="Star 2"
+                        priority
+                        height={32}
+                        src={maxRarity >= 2 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(2)}
+                    />
+                    <Image
+                        alt="Star 3"
+                        priority
+                        height={32}
+                        src={maxRarity >= 3 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(3)}
+                    />
+                    <Image
+                        alt="Star 4"
+                        priority
+                        height={32}
+                        src={maxRarity >= 4 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(4)}
+                    />
+                    <Image
+                        alt="Star 5"
+                        priority
+                        height={32}
+                        src={maxRarity >= 5 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(5)}
+                    />
+                    <Image
+                        alt="Star 6"
+                        priority
+                        height={32}
+                        src={maxRarity >= 6 ? StarSelected : StarUnSelected}
+                        onClick={() => handleRaritySelection(6)}
+                    />
                 </div>
                 {/* Class */}
                 <div className="mx-auto flex items-center justify-center">
@@ -268,21 +379,43 @@ export default function VotingPage() {
                 {
                     operators.length > 0
                         ? (
-                                <div className="grid h-1/2 w-[100vw] grid-cols-5 gap-4 overflow-y-auto rounded-lg bg-background p-5 md:grid-cols-9 lg:grid-cols-12">
-                                    {filteredOperators.map(operator => (
-                                        <OperatorIcon
-                                            key={operator.charid}
-                                            isBanned={(operator.profession as OperatorClass) === "Specialist" || bannedOperators.includes(operator.charid)}
-                                            isSelected={selectedOperators.includes(operator.charid)}
-                                            operator={{
-                                                id: operator.charid,
-                                                name: operator.name,
-                                                rarity: operator.rarity as OperatorRarity,
-                                                class: operator.profession as OperatorClass
-                                            }}
-                                            onClickFn={() => handleOperatorSelection(operator.charid)}
-                                        />
-                                    ))}
+                                <div className="h-1/3 w-[100vw] overflow-y-scroll rounded-lg bg-background p-5">
+                                    <div className="grid auto-rows-min grid-cols-5 gap-4">
+                                        {operatorData.map((operator) => {
+                                            const isBanned = operatorStates.isBanned(
+                                                operator.charid,
+                                                operator.class,
+                                                operator.name
+                                            );
+                                            const isSelected = operatorStates.isSelected(operator.charid);
+
+                                            return (
+                                                <OperatorIcon
+                                                    key={operator.key}
+                                                    isBanned={isBanned}
+                                                    isSelected={isSelected}
+                                                    operator={{
+                                                        id: operator.charid,
+                                                        name: operator.name,
+                                                        rarity: operator.rarity,
+                                                        class: operator.class
+                                                    }}
+                                                    onClickFn={() => handleOperatorSelection(operator.charid)}
+                                                />
+                                            );
+                                        })}
+                                    </div>
+                                    {hasNextPage && (
+                                        <div ref={sentryRef} className="mt-4 w-full p-4 text-center">
+                                            {isLoading
+                                                ? (
+                                                        <div className="text-muted-foreground">Đang load thêm, bạn chờ tí nhé!</div>
+                                                    )
+                                                : (
+                                                        <div className="text-muted-foreground">Hãy kéo xuống để load thêm.</div>
+                                                    )}
+                                        </div>
+                                    )}
                                 </div>
                             )
                         : (
@@ -334,13 +467,18 @@ export default function VotingPage() {
                     <Button
                         className="w-1/3 bg-green-600 text-white"
                         disabled={selectedOperators.length === 0}
-                        onClick={() => setSelectedOperators([])}
+                        onClick={handleClearSelection}
                     >
                         CLEAR
                     </Button>
                     <Button
                         className="w-1/3 bg-red-600 text-white"
-                        disabled={selectedOperators.length === 0 || !isVotingAllowed || getDisplayTime() <= 0}
+                        disabled={
+                            selectedOperators.length === 0
+                            || !isVotingAllowed
+                            || !isRealtimeConnected
+                            || getDisplayTime() <= 0
+                        }
                         onClick={async () => {
                             await handleBanSubmission();
                         }}

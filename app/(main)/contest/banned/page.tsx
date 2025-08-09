@@ -13,6 +13,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTimer } from "@/lib/hooks/use-timer";
 import { createSupabase } from "@/lib/supabase/client";
+import supabaseLoader from "@/lib/supabase/image";
 import StarSelected from "@/public/tournament/drafting/star-selected.svg";
 import StarUnSelected from "@/public/tournament/drafting/star-unselected.svg";
 
@@ -27,13 +28,10 @@ export default function ContestBannedPage() {
     // prefetch everything
     useEffect(() => {
         (async () => {
-            const supabase = createSupabase();
+            const data = await fetch("/api/operator");
+            const operators = await data.json();
 
-            const { data: operators } = await supabase
-                .from("operators_v2")
-                .select("name,charid,rarity,profession");
-
-            setOperators(operators!);
+            setOperators(operators.message);
         })();
 
         (async () => {
@@ -95,14 +93,11 @@ export default function ContestBannedPage() {
                 className="flex flex-1/2 flex-col items-center justify-evenly"
             >
                 <div className="text-xl text-white">
-                    <span className={clsx(
-                        "text-6xl font-extrabold",
-                        isTimerLoaded && {
-                            "text-green-400": timerData.state === "running",
-                            "text-yellow-400": timerData.state === "paused",
-                            "text-red-400": timerData.state === "stopped"
-                        }
-                    )}
+                    <span className={clsx("text-6xl font-extrabold", isTimerLoaded && {
+                        "text-green-400": timerData.state === "running",
+                        "text-yellow-400": timerData.state === "paused",
+                        "text-red-400": timerData.state === "stopped"
+                    })}
                     >
                         {!isTimerLoaded ? "--:--" : formatTime(getDisplayTime())}
                     </span>
@@ -111,7 +106,7 @@ export default function ContestBannedPage() {
                     {
                         [0, 1, 2, 3, 4, 5].map((i) => {
                             const entryExist = bannedOperators.at(i) !== undefined;
-                            const charcode = bannedOperators.at(i) ?? `[redacted_${i}]`;
+                            const charcode = bannedOperators.at(i) ?? `char_${i}_redacted`;
                             const operator = operators.find(x => x.charid === charcode);
                             const name = operator?.name ?? "[REDACTED]";
                             const rarity = operator?.rarity ?? 0;
@@ -119,6 +114,8 @@ export default function ContestBannedPage() {
 
                             return (
                                 <Card
+                                    // in case of someone reading: this is my hacky way to *not* do 5-n padding.
+                                    // yes I know this is bad, but I am tired.
                                     key={charcode}
                                     className={clsx("h-115 w-57 border-neutral-50 bg-gradient-to-t transition-all", {
                                         "from-orange-400/75": rarity === 6,
@@ -144,15 +141,13 @@ export default function ContestBannedPage() {
                                                             alt={charcode}
                                                             className="h-full w-full object-contain"
                                                             height={360}
-                                                            src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/operator/portraits/${charcode}_${suffix}.png`}
+                                                            src={`/operator/portraits/${charcode}_${suffix}.png`}
                                                             width={180}
+                                                            loader={supabaseLoader}
                                                         />
                                                     )
                                                 : (
-                                                        <Skeleton className={clsx(`
-                                                            h-full w-full
-                                                        `)}
-                                                        />
+                                                        <Skeleton className={clsx("h-full w-full")} />
                                                     )
                                         }
 
@@ -179,7 +174,7 @@ export default function ContestBannedPage() {
                     }
                 </div>
                 <div className="pb-8 font-extrabold text-primary">
-                    Terra #1:
+                    PRTS:
                     {" "}
                     <span className={clsx({
                         "text-green-500": isRealtimeConnected,

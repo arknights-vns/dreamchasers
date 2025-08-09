@@ -11,7 +11,10 @@ export default function PrizePage() {
             <PageTitle title="Giải thưởng" />
             <div className="mb-8 flex flex-col">
                 <div className="text-center text-xl font-light italic">
-                    Với các bạn TOP 3, ngoài việc nhận thêm giấy khen từ BTC:
+                    Với các bạn TOP 3, ngoài việc nhận thêm
+                    {" "}
+                    <span className="font-bold text-orange-400">giấy khen từ BTC</span>
+                    , các bạn còn nhận được món quà sau theo thứ hạng của mình.
                 </div>
                 <div className="flex w-screen flex-col items-center justify-center md:flex-row">
                     {/* 3rd */}
@@ -30,13 +33,13 @@ export default function PrizePage() {
                             />
                         </CardContent>
                         <CardFooter className="flex flex-col items-center justify-between space-y-2">
-                            Arknights Artbook VOL 1, 4, 5
+                            Arknights Artbook VOL 1 (bản MSR) và VOL 5
                         </CardFooter>
                     </Card>
                     {/* 2nd */}
                     <Card className="border-none bg-transparent shadow-none md:w-1/3">
                         <CardHeader className="flex flex-col items-center justify-center space-y-2">
-                            <div className="text-center text-4xl font-extrabold text-gray-500">
+                            <div className="text-center text-4xl font-extrabold text-neutral-400">
                                 Giải Nhì
                             </div>
                         </CardHeader>
@@ -48,7 +51,7 @@ export default function PrizePage() {
                                 priority
                             />
                         </CardContent>
-                        <CardFooter className="flex flex-col items-center justify-between space-y-2">
+                        <CardFooter className="flex flex-col items-center justify-between space-y-2 text-center">
                             Razer X Arknights - Chuột không dây - Amiya theme
                         </CardFooter>
                     </Card>

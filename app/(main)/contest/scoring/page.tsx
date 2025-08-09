@@ -108,7 +108,7 @@ export default function ScoringPage() {
                             <CardContent>
                                 <ul className="mt-2 list-disc space-y-1 pl-4 text-sm">
                                     <li>Không tính leak nha, dĩ nhiên rồi.</li>
-                                    <li>Số địch tối đa tụi mình sẽ tính điểm là 25.</li>
+                                    <li>Số địch tối đa tụi mình sẽ tính điểm là 20.</li>
                                 </ul>
                             </CardContent>
                         </Card>
