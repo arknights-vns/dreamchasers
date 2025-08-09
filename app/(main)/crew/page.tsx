@@ -160,7 +160,6 @@ export default async function CrewPage({ searchParams }: PageProps) {
         .select(`
             name,
             internal_name,
-            quote,
             type,
             crew_person_to_role (
                 crew_roles (

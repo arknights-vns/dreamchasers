@@ -5,14 +5,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_KEY;
 
+// FIXME: adjust this.
+const LOCAL_FOLDER_PATH = "./public/operator/";
 const BUCKET_NAME = "operator";
-const LOCAL_FOLDER_PATH = "./public/operator/portraits";
-const SUPABASE_FOLDER_PATH = "/portraits";
+const SUPABASE_FOLDER_PATH = "/";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = createClient(SUPABASE_URL!, SUPABASE_KEY!);
 
 let fail = 0;
 let pass = 0;
