@@ -1,51 +1,15 @@
 import type { SearchParams } from "nuqs/server";
 import type { CrewMember } from "@/lib/vns";
-import { clsx } from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { createLoader, parseAsStringLiteral } from "nuqs/server";
+import CrewMemberBox from "@/components/CrewMemberBox";
 import PageTitle from "@/components/PageTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { createSupabase } from "@/lib/supabase/client";
-import supabaseLoader from "@/lib/supabase/image";
+import data from "@/public/crew.json";
 
 type CrewListProps = {
     members: CrewMember[];
 };
-
-function MemberBox(props: CrewMember) {
-    const assetName = props.internal_name ?? props.name;
-
-    return (
-        <div className="mb-4 flex max-h-64 min-w-64 flex-col items-center gap-y-2">
-            <Image
-                alt={assetName}
-                className="rounded-full ring ring-primary"
-                height={100}
-                src={`/crew/${assetName}.jpg`}
-                width={100}
-                loader={supabaseLoader}
-            />
-            <div className="text-xl font-extrabold">{props.name}</div>
-            {/* {props.quote !== "" && (
-                <div className={"text-md  text-center font-extralight italic"}>
-                    &#34;{props.quote}&#34;
-                </div>
-            )} */}
-            <div className="space-x-2">
-                {Array.isArray(props.roles)
-                    && props.roles.map((role: string) => (
-                        <span
-                            key={role}
-                            className={clsx("crew-role-container font-extrabold", role)}
-                        >
-                            {role.replaceAll("-", " ")}
-                        </span>
-                    ))}
-            </div>
-        </div>
-    );
-}
 
 function CrewList(props: CrewListProps) {
     const eliteMembers = props.members.slice(0, 3);
@@ -53,15 +17,13 @@ function CrewList(props: CrewListProps) {
 
     return (
         <>
-            {/* The reason for the horrible code is that the CEO want to have 4-5-5 layout. */}
+            {/* The reason for this horrible code is that the CEO want to have 3-4-4 layout. */}
             {/* But it looks utterly dogshit on mobile, so falling back to the default one on that. */}
             <div className="hidden place-content-center-safe lg:block">
-                <div
-                    className="flex flex-col flex-wrap place-content-evenly md:flex-row"
-                >
+                <div className="flex flex-col flex-wrap place-content-evenly md:flex-row">
                     {eliteMembers.map((member) => {
                         return (
-                            <MemberBox
+                            <CrewMemberBox
                                 key={member.name}
                                 name={member.name}
                                 internal_name={member.internal_name}
@@ -71,16 +33,14 @@ function CrewList(props: CrewListProps) {
                         );
                     })}
                 </div>
-                <div
-                    className="grid place-content-center-safe sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5"
-                >
+                <div className="grid grid-cols-4 place-content-center-safe">
                     {remainingMembers.map((member) => {
                         return (
                             <div
                                 key={member.name}
                                 className="w-full md:w-auto"
                             >
-                                <MemberBox
+                                <CrewMemberBox
                                     name={member.name}
                                     quote={member.quote}
                                     roles={member.roles}
@@ -93,16 +53,14 @@ function CrewList(props: CrewListProps) {
                 </div>
             </div>
             {/* The other-than-hell layout. */}
-            <div
-                className="grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:hidden"
-            >
+            <div className="grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:hidden">
                 {props.members.map((member) => {
                     return (
                         <div
                             key={member.name}
                             className="w-full md:w-auto"
                         >
-                            <MemberBox
+                            <CrewMemberBox
                                 name={member.name}
                                 quote={member.quote}
                                 roles={member.roles}
@@ -119,23 +77,19 @@ function CrewList(props: CrewListProps) {
 
 function PartnerList(props: CrewListProps) {
     return (
-        <>
-            <div
-                className="grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:grid-cols-4"
-            >
-                {props.members.map((member) => {
-                    return (
-                        <MemberBox
-                            key={member.name}
-                            name={member.name}
-                            quote={member.quote}
-                            roles={member.roles}
-                            internal_name={member.internal_name}
-                        />
-                    );
-                })}
-            </div>
-        </>
+        <div className="grid grid-cols-1 place-content-center-safe md:grid-cols-3 lg:grid-cols-4">
+            {props.members.map((member) => {
+                return (
+                    <CrewMemberBox
+                        key={member.name}
+                        name={member.name}
+                        quote={member.quote}
+                        roles={member.roles}
+                        internal_name={member.internal_name}
+                    />
+                );
+            })}
+        </div>
     );
 }
 
@@ -152,38 +106,7 @@ type PageProps = {
 };
 
 export default async function CrewPage({ searchParams }: PageProps) {
-    const supabase = createSupabase();
     const { tab } = await loadParams(searchParams);
-
-    const { data, error } = await supabase
-        .from("crew_members")
-        .select(`
-            name,
-            internal_name,
-            type,
-            crew_person_to_role (
-                crew_roles (
-                    name
-                )
-            )
-        `);
-
-    if (error) {
-        console.error(error);
-        return (<></>);
-    }
-
-    const members = data?.filter(x => x.type === "member").map(x => ({
-        name: x.name,
-        internal_name: x.internal_name,
-        roles: x.crew_person_to_role.map(rel => rel.crew_roles.name)
-    }));
-
-    const partners = data?.filter(x => x.type === "partner").map(x => ({
-        name: x.name,
-        internal_name: x.internal_name,
-        roles: x.crew_person_to_role.map(rel => rel.crew_roles.name)
-    }));
 
     return (
         <div className="flex h-visible flex-col bg-vns">
@@ -223,7 +146,7 @@ export default async function CrewPage({ searchParams }: PageProps) {
                         value="dreamchasers"
                     >
                         {/* @ts-expect-error thrown by the console.error */}
-                        <CrewList members={members} />
+                        <CrewList members={data.members} />
                     </TabsContent>
 
                     <TabsContent
@@ -231,7 +154,7 @@ export default async function CrewPage({ searchParams }: PageProps) {
                         value="partners"
                     >
                         {/* @ts-expect-error thrown by the console.error */}
-                        <PartnerList members={partners} />
+                        <PartnerList members={data.partners} />
                     </TabsContent>
                 </Tabs>
             </div>

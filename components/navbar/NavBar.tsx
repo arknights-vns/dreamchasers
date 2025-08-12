@@ -5,8 +5,8 @@ import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LandingCTAButton from "@/components/LandingCTAButton";
 import NavBarItems from "@/components/navbar/NavBarItems";
-import PurchaseTicketButton from "@/components/PreviewTicketButton";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -60,7 +60,7 @@ export default function NavBar() {
                 <NavBarItems />
             </nav>
             <div className="ml-auto flex items-center space-x-2 lg:ml-1">
-                <PurchaseTicketButton />
+                <LandingCTAButton />
                 <ThemeSwitcher />
             </div>
         </header>

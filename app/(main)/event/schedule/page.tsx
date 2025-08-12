@@ -49,24 +49,17 @@ const items = [
 ];
 
 export default function SchedulePage() {
-    const now = new Date();
-
-    const completed = items.filter((item) => {
-        return now >= new Date(`2025-08-10T${item.date}:00+07:00`);
-    });
-
     return (
         <div className="flex h-visible flex-col bg-vns">
             <PageTitle favorText="Các hoạt động sẽ diễn ra trong offline" title="Hoạt động" />
 
-            <div className="mx-14 flex flex-col items-center justify-center">
+            <div className="mx-14 flex flex-col items-center justify-center lg:flex-1/2">
                 <div className="text-center italic">(*) Kế hoạch & thời gian có thể sẽ thay đổi tùy vào tình hình thực tế.</div>
-                <div className="text-center italic">(**) Cái này cập nhật theo thời gian thực.</div>
 
                 <Timeline
-                    className="mx-auto mt-32 hidden md:flex"
+                    className="mx-auto mt-10 hidden md:flex"
                     orientation="horizontal"
-                    value={completed.length + 1}
+                    value={9}
                 >
                     {items.map((item, index) => (
                         <TimelineItem
@@ -78,7 +71,7 @@ export default function SchedulePage() {
                                 <TimelineSeparator className="group-data-[orientation=horizontal]/timeline:top-12" />
                                 <TimelineIndicator className="group-data-[orientation=horizontal]/timeline:top-12" />
                                 <TimelineDate className="mb-8 text-2xl">{item.date}</TimelineDate>
-                                <TimelineTitle>{item.title}</TimelineTitle>
+                                <TimelineTitle className="text-xl">{item.title}</TimelineTitle>
                             </TimelineHeader>
                         </TimelineItem>
                     ))}
@@ -86,7 +79,7 @@ export default function SchedulePage() {
 
                 <Timeline
                     className="m-8 flex max-h-[30svh] md:hidden"
-                    value={completed.length + 1}
+                    value={9}
                 >
                     {items.map((item, index) => (
                         <TimelineItem

@@ -1,5 +1,8 @@
+> [!NOTE]
+> Offline đã kết thúc tốt đẹp, team IT xin cảm ơn các bạn đã tham gia <3
+
 <div align="center">
-    <img src="https://raw.githubusercontent.com/arknights-vns/the-web/refs/heads/main/app/opengraph-image.jpg" />
+    <img src="https://raw.githubusercontent.com/arknights-vns/the-web/refs/heads/main/app/opengraph-image.jpg?token=GHSAT0AAAAAADH7VB5L532TIWVALZB5MI5S2EZOC5Q" />
     <br />
     <i>For the Doctors, by the Doctors!</i>
 </div>
@@ -16,10 +19,3 @@
   - [**shadcn/ui**](https://ui.shadcn.com/) làm UI tookit chính.
   - [**Supabase**](https://supabase.com/) cho backend.
   - [**Docker**](https://www.docker.com/) để "đóng thùng" cái web đi deploy ra server riêng của team.
-
-### 💀 Web có bug kìa...
-
-- Ừ thì, bạn có thể tạo [issue](https://github.com/arknights-vns/the-web/issues) hoặc [pull request](https://github.com/arknights-vns/the-web/pulls) và tụi mình sẽ xem qua khi có thể.
-
-> [!IMPORTANT]
-> Nhớ dùng search nha, gửi trùng bị close ráng chịu.

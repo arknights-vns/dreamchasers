@@ -25,7 +25,6 @@ export default function ContestBannedPage() {
     const [bannedOperators, setBannedOperators] = useState<string[]>([]);
     const [operators, setOperators] = useState<SelectedOperator[]>([]);
 
-    // prefetch everything
     useEffect(() => {
         (async () => {
             const data = await fetch("/api/operator");
@@ -45,10 +44,7 @@ export default function ContestBannedPage() {
                 console.error("Failed to fetch banned operators", e);
             }
         })();
-    }, []);
 
-    // update operator list
-    useEffect(() => {
         const supabase = createSupabase();
 
         const channel = supabase
@@ -58,27 +54,7 @@ export default function ContestBannedPage() {
                 schema: "public",
                 table: "banned_operators"
             }, (payload) => {
-                console.info("New ban added:", payload.new.id);
                 setBannedOperators(prev => [...prev, payload.new.id]);
-            })
-            .on("postgres_changes", {
-                event: "UPDATE",
-                schema: "public",
-                table: "banned_operators"
-            }, (payload) => {
-                setBannedOperators((prev) => {
-                    console.info(`New ban updated: ${payload.old.id} to ${payload.new.id}`);
-                    const filtered = prev.filter(id => id !== payload.old.id);
-                    return [...filtered, payload.new.id];
-                });
-            })
-            .on("postgres_changes", {
-                event: "DELETE",
-                schema: "public",
-                table: "banned_operators"
-            }, (payload) => {
-                console.info("New ban nuked:", payload.old.id);
-                setBannedOperators(prev => prev.filter(id => id !== payload.old.id));
             })
             .subscribe();
 
@@ -89,9 +65,7 @@ export default function ContestBannedPage() {
 
     return (
         <div className="flex h-visible flex-col bg-vns">
-            <div
-                className="flex flex-1/2 flex-col items-center justify-evenly"
-            >
+            <div className="flex flex-1/2 flex-col items-center justify-evenly">
                 <div className="text-xl text-white">
                     <span className={clsx("text-6xl font-extrabold", isTimerLoaded && {
                         "text-green-400": timerData.state === "running",
@@ -116,8 +90,9 @@ export default function ContestBannedPage() {
                                 <Card
                                     // in case of someone reading: this is my hacky way to *not* do 5-n padding.
                                     // yes I know this is bad, but I am tired.
+                                    // - Bashame advocator.
                                     key={charcode}
-                                    className={clsx("h-115 w-57 border-neutral-50 bg-gradient-to-t transition-all", {
+                                    className={clsx("h-128 w-57 border-neutral-50 bg-gradient-to-t transition-all", {
                                         "from-orange-400/75": rarity === 6,
                                         "from-amber-400/75": rarity === 5,
                                         "from-purple-500/75": rarity === 4,
@@ -152,7 +127,7 @@ export default function ContestBannedPage() {
                                         }
 
                                     </CardContent>
-                                    <CardFooter className="flex h-24 flex-col text-xl">
+                                    <CardFooter className="flex h-24 flex-col gap-y-2 text-xl">
                                         <div className="flex items-center space-x-1">
                                             {
                                                 [1, 2, 3, 4, 5, 6].map((x) => {

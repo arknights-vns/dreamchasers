@@ -10,7 +10,7 @@ import "@/app/globals.css";
 
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
-    title: "Dreamchasers @ 2025",
+    title: "Thank you from VNS 💖",
     description: "For the Doctors, by the Doctors.",
     authors: [
         {
@@ -51,8 +51,8 @@ export default function RootLayout({
         <html lang="vn" suppressHydrationWarning>
             <body
                 className={clsx(
-                    "font-[family-name:var(--font-vns)] antialiased",
-                    mainFont.variable
+                    "antialiased",
+                    mainFont.className
                 )}
             >
                 <TerraTheme>

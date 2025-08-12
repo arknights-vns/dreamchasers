@@ -189,7 +189,6 @@ export default function VotingPage() {
     // #endregion operator selection
 
     useEffect(() => {
-        // get initial banned operators
         (async () => {
             try {
                 const response = await fetch("/api/operator/ban");
@@ -222,30 +221,8 @@ export default function VotingPage() {
                 schema: "public",
                 table: "banned_operators"
             }, (payload) => {
-                console.info("New ban added:", payload.new.id);
                 setBannedOperators(prev => [...prev, payload.new.id]);
                 toast.error("Đã có operator bị ban!");
-            })
-            .on("postgres_changes", {
-                event: "UPDATE",
-                schema: "public",
-                table: "banned_operators"
-            }, (payload) => {
-                setBannedOperators((prev) => {
-                    console.info(`New ban updated: ${payload.old.id} to ${payload.new.id}`);
-                    const filtered = prev.filter(id => id !== payload.old.id);
-                    return [...filtered, payload.new.id];
-                });
-                toast.warning("Đã có thay đổi operator bị ban!");
-            })
-            .on("postgres_changes", {
-                event: "DELETE",
-                schema: "public",
-                table: "banned_operators"
-            }, (payload) => {
-                console.info("New ban nuked:", payload.old.id);
-                setBannedOperators(prev => prev.filter(id => id !== payload.old.id));
-                toast.warning("Đã có operator bị gỡ ban!");
             })
             .subscribe();
 

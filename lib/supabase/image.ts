@@ -6,7 +6,7 @@ type ImageProps = {
     quality?: number;
 };
 
-// Docs: https://supabase.com/docs/guides/storage/image-transformations#nextjs-loader
+// https://supabase.com/docs/guides/storage/image-transformations#nextjs-loader
 export default function supabaseLoader({ src, width, quality }: ImageProps) {
     const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_CDN_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
     const directory = supabaseHost!.endsWith("supabase.co") ? "object" : "render/image";

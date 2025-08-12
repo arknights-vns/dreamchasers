@@ -32,7 +32,7 @@
 }
 
 @utility bg-vns {
-    @apply dark:bg-[url(/BG_Black.jpg)] dark:bg-gray-500;
+    @apply dark:bg-[url(/BG_Black.jpg)] dark:bg-neutral-400;
     @apply bg-cover;
     @apply bg-fixed;
     @apply bg-center;
@@ -69,7 +69,7 @@
 .Đa-Thê {
     @apply bg-gradient-to-r;
     @apply from-amber-300;
-    @apply to-red-600;
+    @apply to-white;
     @apply text-black;
 }
 .IT {
@@ -146,21 +146,19 @@
     @apply to-red-400;
     @apply text-black;
 }
-
-/* landing page */
-@utility embla {
-    @apply overflow-hidden;
+.Cosplayers-Inviter {
+    @apply bg-gradient-to-r;
+    @apply from-indigo-400;
+    @apply to-pink-400;
+    @apply text-black;
 }
-
-@utility embla__container {
-    @apply flex;
+.Tournament-Caster {
+    @apply bg-orange-500;
+    @apply text-black;
 }
-
-@utility embla__slide {
-    @apply shrink-0;
-    @apply grow-0;
-    @apply basis-full;
-    @apply min-w-0;
+.Videographer {
+    @apply bg-teal-400;
+    @apply text-black;
 }
 
 /* shadcn/ui */
@@ -275,7 +273,6 @@
     * {
         @apply border-border outline-ring/50;
         @apply scrollbar-thin scrollbar-thumb-neutral-400 scrollbar-track-accent;
-        /* @apply scrollbar-none; */
     }
     body {
         @apply bg-background text-foreground;

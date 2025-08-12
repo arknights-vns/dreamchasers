@@ -1,10 +1,12 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
+import { FaDiscord } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -137,8 +139,7 @@ function NavDivider({ width = "w-8" }: { width?: string }) {
 export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }) {
     const links: { label: string; href: string }[] = [
         { label: "Tổ chức", href: "/crew" },
-        { label: "Kỷ niệm", href: "/retro" },
-        { label: "Tournament", href: "/contest" }
+        { label: "Kỷ niệm", href: "/retro" }
     ];
 
     const eventItems: { label: string; href: string }[] = [
@@ -147,7 +148,6 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
         { href: "/event/location", label: "Địa điểm tổ chức" },
         { href: "/event/regulations", label: "Nội quy tham gia" }
     ];
-
     const pathname = usePathname();
 
     if (isMobile) {
@@ -168,6 +168,26 @@ export default function NavBarItems({ isMobile = false }: { isMobile?: boolean }
                         {link.label}
                     </Link>
                 ))}
+                {/* <MobileDropdown items={tournamentItems} pathname={pathname} title="Tournament" /> */}
+                <Separator className="mx-3 my-2 h-[2px] bg-muted" />
+                <Link
+                    className="px-3 py-2"
+                    href="https://discord.gg/arknights-vns"
+                >
+                    <div className="flex items-center gap-2">
+                        <FaDiscord />
+                        Arknights VNS
+                    </div>
+                </Link>
+                <Link
+                    className="px-3 py-2"
+                    href="https://discord.gg/JrZaEVu5Hz"
+                >
+                    <div className="flex items-center gap-2">
+                        <FaDiscord />
+                        Dreamchasers
+                    </div>
+                </Link>
             </div>
         );
     }

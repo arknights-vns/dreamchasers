@@ -1,7 +1,9 @@
 "use client";
 
+import type { CarouselApi } from "@/components/ui/carousel";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
@@ -17,22 +19,22 @@ const events: Event[] = [
     {
         date: "14/01/2024",
         title: "Offline #1: The show must go on!",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2035816776811242/"
+        href: "https://www.facebook.com/share/p/1Ht7g65tji/"
     },
     {
         date: "31/12/2024",
         title: "Thông báo ra mắt Offline #2: Dreamchasers.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2299747417084842/"
+        href: "https://www.facebook.com/share/p/1D97KtPN7A/"
     },
     {
         date: "12/01/2025",
         title: "Khảo sát 'Dreamchasers' lần 1.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2308946422831608/"
+        href: "https://www.facebook.com/share/p/173shjVVPN/"
     },
     {
         date: "04/05/2025",
         title: "Khảo sát 'Dreamchasers' lần 2.",
-        href: "https://www.facebook.com/groups/arknights.vietnam.station/posts/2409448572781392/"
+        href: "https://www.facebook.com/share/p/16pGsaUXow/"
     },
     {
         date: "06/07/2025",
@@ -60,26 +62,41 @@ const events: Event[] = [
         href: "https://www.facebook.com/share/p/18xjxnkdxo/"
     },
     {
-        date: "??/??/2025",
-        title: "???",
-        href: "#"
+        date: "16/07/2025",
+        title: "Công bố nhà tài trợ Vàng: Rei Não Cá",
+        href: "https://www.facebook.com/share/p/1B82SaA6Cr/"
+    },
+    {
+        date: "17/07/2025",
+        title: "Công bố nhà tài trợ Vàng: bibom10",
+        href: "https://www.facebook.com/share/p/1CLST23sa8/"
+    },
+    {
+        date: "20/07/2025",
+        title: "Công bố nhà tài trợ Kim Cương: Phổ Lang",
+        href: "https://www.facebook.com/share/p/16SXEM5dm1/"
     },
     {
         date: "10/08/2025",
         title: "Offline #2: Dreamchasers",
+        href: "https://www.facebook.com/share/p/1JP9SrMb6m/"
+    },
+    {
+        date: "??/??/????",
+        title: "???",
         href: "#"
     }
 ];
 
-type TimelineProps = {
+type RoadmapProps = {
     events: Event[];
     isMobile?: boolean;
 };
 
-function TimelineContent({ events }: TimelineProps) {
+function EventRoadmapContent(props: RoadmapProps) {
     return (
         <CarouselContent className="-mt-1 h-[400px]">
-            {events.map((ev) => {
+            {props.events.map((ev) => {
                 return (
                     <CarouselItem
                         key={ev.title}
@@ -108,28 +125,45 @@ function TimelineContent({ events }: TimelineProps) {
     );
 }
 
-export default function TimelinePage() {
+export default function EventRoadmap() {
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(0);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setCount(api.scrollSnapList().length);
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
+
     return (
         <div className="flex h-visible flex-col bg-vns">
             <PageTitle favorText="Những hoạt động tụi mình đã tổ chức trong quá trình thực hiện Offline" title="Công tác chuẩn bị" />
-            <div className="block self-center font-extrabold lg:hidden">
+            <div className="flex self-center font-extrabold lg:hidden">
                 Bạn có thể scroll dọc để xem các nội dung.
             </div>
-            <div className="mx-4 mt-8 flex flex-col items-center justify-center">
+            <div className="mx-8 flex flex-1/2 flex-col items-center justify-center">
                 {/* The vertical one. */}
                 <Carousel
-                    className="flex w-full max-w-lg lg:hidden"
+                    className="flex w-full max-w-lg gap-8 lg:hidden"
                     opts={{
                         align: "start",
                         skipSnaps: true,
                         dragFree: true
                     }}
                     orientation="vertical"
-                    plugins={[
-                        WheelGesturesPlugin()
-                    ]}
+                    setApi={setApi}
                 >
-                    <TimelineContent events={events} />
+                    <EventRoadmapContent events={events} />
                     {/* <CarouselPrevious />
                     <CarouselNext /> */}
                 </Carousel>
@@ -145,11 +179,18 @@ export default function TimelinePage() {
                     plugins={[
                         WheelGesturesPlugin({ forceWheelAxis: "y" })
                     ]}
+                    setApi={setApi}
                 >
-                    <TimelineContent events={events} />
+                    <EventRoadmapContent events={events} />
                     <CarouselPrevious />
                     <CarouselNext />
                 </Carousel>
+
+                <div className="mt-2 hidden text-lg lg:flex">
+                    {current}
+                    /
+                    {count}
+                </div>
             </div>
         </div>
     );

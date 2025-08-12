@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     output: "standalone",
     experimental: {
         reactCompiler: true,
-        optimizePackageImports: ["@supabase/supabase-js", "@supabase/ssr"]
+        optimizePackageImports: ["@supabase/supabase-js"]
     },
 
     async headers() {
@@ -29,11 +29,6 @@ const nextConfig: NextConfig = {
                 destination: "/contest/voting",
                 permanent: false
             },
-            {
-                source: "/contest/podium",
-                destination: "/contest/standing",
-                permanent: false
-            }
         ];
     }
 };
