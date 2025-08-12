@@ -19,6 +19,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd ~/dreamchasers
+            git reset --hard HEAD
             git pull --rebase
             docker compose down
             docker compose build
