@@ -146,7 +146,7 @@
     @apply to-red-400;
     @apply text-black;
 }
-.Cosplayers-Inviter {
+.Cosplayers-Manager {
     @apply bg-gradient-to-r;
     @apply from-indigo-400;
     @apply to-pink-400;
