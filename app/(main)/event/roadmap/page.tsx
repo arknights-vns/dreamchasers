@@ -77,14 +77,44 @@ const events: Event[] = [
         href: "https://www.facebook.com/share/p/16SXEM5dm1/"
     },
     {
+        date: "22/07/2025",
+        title: "Ra mắt Trailer chính thức",
+        href: "https://www.youtube.com/watch?v=I3mO0Racx8c"
+    },
+    {
+        date: "25/07/2025",
+        title: "Chính thức bán hết vé!",
+        href: "https://www.facebook.com/share/p/1NGKsKzsN3/"
+    },
+    {
+        date: "28/7/2025",
+        title: "Hướng dẫn cách check-in vào offline (Cả vé Online lẫn Offline)",
+        href: "https://www.facebook.com/share/p/1B14BgUNxF/"
+    },
+    {
+        date: "3/8/2025",
+        title: "Cẩm nang hướng dẫn đi đến địa điểm offline",
+        href: "https://www.facebook.com/share/v/19yugz8jVq/"
+    },
+    {
+        date: "6/8/2025",
+        title: "Layout sự kiện",
+        href: "https://www.facebook.com/share/p/1AyKPDFdgn/"
+    },
+    {
+        date: "7/8/2025",
+        title: "Timeline sự kiện",
+        href: "https://www.facebook.com/share/p/16wg9n3LWF/"
+    },
+    {
+        date: "8/8/2025",
+        title: "Tổng hợp một số điều cần lưu ý khi tham gia offline",
+        href: "https://www.facebook.com/share/p/19vMLp1nf2/"
+    },
+    {
         date: "10/08/2025",
         title: "Offline #2: Dreamchasers",
         href: "https://www.facebook.com/share/p/1JP9SrMb6m/"
-    },
-    {
-        date: "??/??/????",
-        title: "???",
-        href: "#"
     }
 ];
 
